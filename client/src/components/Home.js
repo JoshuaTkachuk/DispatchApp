@@ -9,7 +9,7 @@ const Home=()=>{
     
     return(
         <div>
-            <h1>USKO truck board is green</h1>
+            <h1>USKO truck board is Red</h1>
             <Link to={"/myTrucks"}>My Trucks</Link>
         </div>
     );
