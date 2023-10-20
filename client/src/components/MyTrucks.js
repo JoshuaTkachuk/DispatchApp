@@ -33,6 +33,7 @@ const MyTrucks=()=>{
                                     <td>{itm.trailerNum}</td>
                                 </tr>
                             </table>
+                            <button>add to list</button>
                         </div>
                     })
                     :<></>
