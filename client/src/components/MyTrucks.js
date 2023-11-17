@@ -17,6 +17,16 @@ const MyTrucks=()=>{
         })
     },[])
 
+    const addToBoard =(id)=>{
+        axios.put("http://localhost:8000/api/addToBoard",{id})
+        .then((result)=>{
+            console.log(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
     return(
         <div>
             <h1>My Trucks</h1>
@@ -33,7 +43,7 @@ const MyTrucks=()=>{
                                     <td>{itm.trailerNum}</td>
                                 </tr>
                             </table>
-                            <button>add to list</button>
+                            <button onClick={(e)=> addToBoard(itm._id)}>add to list</button>
                         </div>
                     })
                     :<></>
