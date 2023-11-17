@@ -1,0 +1,27 @@
+h1 {
+  color: red;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* 100% of the viewport height */
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  border: 1px solid #aaaaaa;
+  margin-top: 10px;
+}
+
+.calendar-day {
+  flex: 1;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Additional styles for better visualization */
