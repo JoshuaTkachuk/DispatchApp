@@ -41,5 +41,23 @@ module.exports={
             console.log(err)
             res.json(err)
         })
+    },
+    addToBoard:(req,res)=>{
+        Truck.findByIdAndUpdate({_id: req.body.id}, {onBoard: true})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    },
+    removeFromBoard:(req,res)=>{
+        Truck.findByIdAndUpdate({_id: req.body.id}, {onBoard: false})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 }

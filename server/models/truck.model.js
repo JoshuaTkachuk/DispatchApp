@@ -27,7 +27,8 @@ const TruckSchema = new mongoose.Schema({
         type:String
     },
     onBoard:{
-        type: Boolean
+        type: Boolean,
+        default : false
     },
     emptyLocation:{
         type: String,
