@@ -5,8 +5,8 @@ import "../styles/Home.css";
 import "../scripts/HomeScripts.js";
 
 const Home=()=>{
-    
-    const [trucks,setTrucks] = useState([]);
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const numRows = daysOfWeek.length;
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/allTrucks")
@@ -54,5 +54,5 @@ const Home=()=>{
             }
         </div>
     );
-}
+    }
 export default Home
