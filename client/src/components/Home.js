@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import "../styles/Home.css";
-import "../scripts/HomeScripts.js";
+import TopBox from "./TopBox";
+import Dnd from "./Dnd"
+import "../styles/Home.css"
 
 const Home=()=>{
-  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const numRows = daysOfWeek.length;
+
+    const [trucks,setTrucks] = useState([]);
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/allTrucks")
@@ -33,9 +34,11 @@ const Home=()=>{
 
     
     return(
-        <div>
-            <h1>USKO truck board is Red</h1>
+        <div className="mainheader">
+            <h1>USKO Truck Board</h1>
             <Link to={"/myTrucks"}>My Trucks</Link>
+            <TopBox/>
+            <Dnd/>
             {
                 trucks.length > 0?
                     trucks.map((itm, idx)=>{
@@ -54,5 +57,5 @@ const Home=()=>{
             }
         </div>
     );
-    }
+}
 export default Home
