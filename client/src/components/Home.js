@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import TopBox from "./TopBox";
 import Dnd from "./Dnd"
 import "../styles/Home.css"
 
@@ -37,7 +36,6 @@ const Home=()=>{
         <div className="mainheader">
             <h1>USKO Truck Board</h1>
             <Link to={"/myTrucks"}>My Trucks</Link>
-            <TopBox/>
             <Dnd/>
             {
                 trucks.length > 0?

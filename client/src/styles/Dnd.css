@@ -19,16 +19,17 @@ body {
   min-height: 100vh;
 }
 
-.layout__wrapper {
-  border-radius: 3px;
-  max-width: 370px;
-  margin: 3rem 10px;
-}
 
 .card {
   background-color: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 5px;
+  justify-content: center;
+  border-radius: 3px;
+  margin: 3rem 50px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
 }
 
 .header {
@@ -55,7 +56,6 @@ body {
 .box-container {
   display: flex;
   justify-content: center;
-  height: 100vh;
   position: relative;
  }
  

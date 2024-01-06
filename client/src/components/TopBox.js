@@ -8,7 +8,8 @@ const Dnd=()=>{
     return(  
         <div className="top-box">
           <div className="topbox">
-            <h2>Truck#</h2>
+            <h2>Truck # </h2>
+            
           </div>
         </div>
     );
