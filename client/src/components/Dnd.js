@@ -36,26 +36,31 @@ const CARD = [
   {
     id:"11",
     name: "Monday",
+    trucks:[]
   },
 
   {
     id:"12",
     name: "Tuesday",
+    trucks:[]
   },
 
   {
     id:"13",
     name: "Wednesday",
+    trucks:[]
   },
 
   {
     id:"14",
     name: "Thursday",
+    trucks:[]
   },
 
   {
     id:"15",
     name: "Friday",
+    trucks:[]
   },
 
 ]
@@ -113,6 +118,42 @@ const removeFromBoard =(id)=>{
 
                 return setTrucks(reorderedTrucks);
             }
+            if(source.droppableId === "ROOT"){
+
+            const truckSourceIndex = source.index;
+            const truckDestinationIndex = destination.index;
+            console.log(truckSourceIndex)
+            console.log(truckDestinationIndex)
+            
+            const daySourceIndex = days.findIndex(
+              (day) => day.id === source.droppableId
+            );
+            const dayDestinationIndex = days.findIndex(
+              (day) => day.id === destination.droppableId
+            );
+        
+            const newSourceTrucks = [...days[daySourceIndex].trucks];
+            const newDestinationTrucks =
+              source.droppableId !== destination.droppableId
+                ? [...days[dayDestinationIndex].trucks]
+                : newSourceTrucks;
+        
+            const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
+            newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
+        
+            const newDays = [...days];
+        
+            newDays[daySourceIndex] = {
+              ...days[daySourceIndex],
+              trucks: newSourceTrucks,
+            };
+            newDays[dayDestinationIndex] = {
+              ...days[dayDestinationIndex],
+              trucks: newDestinationTrucks,
+            };
+        
+            setDays(newDays);
+          }
             
 
       
@@ -164,6 +205,7 @@ const removeFromBoard =(id)=>{
         <div className="card">
           <div className="header">
            <h1>{day.name}</h1>
+            <TruckList {...day} />
          </div>
         </div>
         {provided.placeholder}
@@ -185,6 +227,38 @@ const removeFromBoard =(id)=>{
     
   );
 }
+function TruckList({ name, trucks, id }) {
+  return (
+    <Droppable droppableId={id} type="group">
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="truck-container">
+          </div>
+          <div className="truucks-container">
+            {
+            trucks.map((item, index) => (
+              <Draggable draggableId={item.id} index={index} key={item.id}>
+                {(provided) => (
+                  <div
+                    className="truck-container"
+                    {...provided.dragHandleProps}
+                    {...provided.draggableProps}
+                    ref={provided.innerRef}
+                  >
+                    <h4>{item.name}</h4>
+                  </div>
+                )}
+              </Draggable>
+            ))
+          }
+            {provided.placeholder}
+          </div>
+        </div>
+      )}
+    </Droppable>
+  );
+}
+
 
 
 
