@@ -163,42 +163,84 @@ const removeFromBoard =(id)=>{
 
                 return setTrucks(reorderedTrucks);
             }
-            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
+          //   if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
 
-            const truckSourceIndex = source.index;
-            const truckDestinationIndex = destination.index;
-            console.log(truckSourceIndex)
-            console.log(truckDestinationIndex)
+          //   const truckSourceIndex = source.index;
+          //   const truckDestinationIndex = destination.index;
+          //   console.log(truckSourceIndex)
+          //   console.log(truckDestinationIndex)
             
-            const dayDestinationIndex = days.findIndex(
-              (day) => day.id === destination.droppableId
-            );
+          //   const dayDestinationIndex = days.findIndex(
+          //     (day) => day.id === destination.droppableId
+          //   );
         
-            const newSourceTrucks = trucks;
-            const newDestinationTrucks =
-              source.droppableId !== destination.droppableId
-                ? [...days[dayDestinationIndex].trucks]
-                : newSourceTrucks;
+          //   const newSourceTrucks = trucks;
+          //   const newDestinationTrucks =
+          //     source.droppableId !== destination.droppableId
+          //       ? [...days[dayDestinationIndex].trucks]
+          //       : newSourceTrucks;
         
-            const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
-            newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
+          //   const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
+          //   newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
         
-            const newDays = [...days];
+          //   const newDays = [...days];
         
-            newDays[dayDestinationIndex] = {
-              ...days[dayDestinationIndex],
-              trucks: newDestinationTrucks,
-            };
+          //   newDays[dayDestinationIndex] = {
+          //     ...days[dayDestinationIndex],
+          //     trucks: newDestinationTrucks,
+          //   };
         
-            setDays(newDays);
-            console.log(newSourceTrucks, "new source trucks")
-            console.log(newDays, "updated Days")
-          }
+          //   setDays(newDays);
+          //   console.log(newSourceTrucks, "new source trucks")
+          //   console.log(newDays, "updated Days")
+          // }
 
 
-          if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
+          // if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
+          //   const truckSourceIndex = source.index;
+          //   const truckDestinationIndex = destination.index;
+
+          //   const daySourceIndex = days.findIndex(
+          //     (day) => day.id === source.droppableId
+          //   );
+
+          //   const dayDestinationIndex = days.findIndex(
+          //     (day) => day.id === destination.droppableId
+          //   );
+            
+          //   const newSourceTrucks = [...days[daySourceIndex].trucks];
+          //   const newDestinationTrucks =
+          //     source.droppableId !== destination.droppableId
+          //       ? [...days[dayDestinationIndex].trucks]
+          //       : newSourceTrucks;
+
+          //   const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
+          //   newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
+
+          //   const newDays = [...days];
+
+          //   newDays[dayDestinationIndex] = {
+          //     ...days[dayDestinationIndex],
+          //     trucks: newDestinationTrucks,
+          //   };
+
+          //   newDays[daySourceIndex] = {
+          //     ...days[daySourceIndex],
+          //     trucks: newSourceTrucks,
+          //   };
+
+          //   setDays(newDays);
+          // }
+
+
+          
+          
+          
+            //IF ELSE STATEMENTS THROUGHOUT THE LOGIC INSTEAD OF TWO MASSIVE IF STATEMENT BLOCKS OF CODE
+            
             const truckSourceIndex = source.index;
             const truckDestinationIndex = destination.index;
+            let newSourceTrucks = [];
 
             const daySourceIndex = days.findIndex(
               (day) => day.id === source.droppableId
@@ -207,8 +249,13 @@ const removeFromBoard =(id)=>{
             const dayDestinationIndex = days.findIndex(
               (day) => day.id === destination.droppableId
             );
-
-            const newSourceTrucks = [...days[daySourceIndex].trucks];
+            if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
+              newSourceTrucks = [...days[daySourceIndex].trucks];
+            }
+            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
+              newSourceTrucks = trucks;
+            }
+            
             const newDestinationTrucks =
               source.droppableId !== destination.droppableId
                 ? [...days[dayDestinationIndex].trucks]
@@ -224,13 +271,14 @@ const removeFromBoard =(id)=>{
               trucks: newDestinationTrucks,
             };
 
-            newDays[daySourceIndex] = {
-              ...days[daySourceIndex],
-              trucks: newSourceTrucks,
-            };
+            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
+              newDays[daySourceIndex] = {
+                ...days[daySourceIndex],
+                trucks: newSourceTrucks,
+              };
+            }
 
             setDays(newDays);
-          }
             
 
       
