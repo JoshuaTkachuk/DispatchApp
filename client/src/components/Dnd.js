@@ -36,31 +36,76 @@ const CARD = [
   {
     id:"11",
     name: "Monday",
-    trucks:[]
+    trucks:[
+      {
+        _id: "ofuhvwiuehvouyb",
+        driverName: "Emil"
+      },
+      {
+        _id: "uhrfouyb39q8f0auw",
+        driverName: "vitali"
+      }
+    ]
   },
 
   {
     id:"12",
     name: "Tuesday",
-    trucks:[]
+    trucks: [
+      {
+        _id: "iusydgvaeiouyr",
+        driverName: "andrey"
+      },
+      {
+        _id: "uayvrvuiywe",
+        driverName: "igor"
+      }
+    ]
   },
 
   {
     id:"13",
     name: "Wednesday",
-    trucks:[]
+    trucks:[
+      {
+        _id: "jvhabouywef",
+        driverName: "peter"
+      },
+      {
+        _id: "ygerfuyqerfqiow",
+        driverName: "kosta"
+      }
+    ]
   },
 
   {
     id:"14",
     name: "Thursday",
-    trucks:[]
+    trucks:[
+      {
+        _id: "bviuavoaiweuf",
+        driverName: "serge"
+      },
+      {
+        _id: "uavyrouiaerpf",
+        driverName: "anton"
+      }
+    ]
   },
 
   {
     id:"15",
     name: "Friday",
-    trucks:[]
+    trucks:[
+      {
+        _id: "iuayveoufyewoi",
+        driverName: "mikhail"
+      },
+      {
+        _id: "vhbauoyseroif",
+        driverName: "eduard"
+      }
+    ]
   },
 
 ]
@@ -75,8 +120,8 @@ function App(props) {
     axios.get("http://localhost:8000/api/allTrucks")
     .then((result)=>{
         console.log(result.data)
-        console.log(result.data.filter(truck => truck.onBoard == true))
-        setTrucks(result.data.filter(truck => truck.onBoard == true))
+        console.log(result.data.filter(truck => truck.onBoard === true))
+        setTrucks(result.data.filter(truck => truck.onBoard === true))
     })
     .catch(err=>{
         console.log(err)
@@ -87,7 +132,7 @@ const removeFromBoard =(id)=>{
   axios.put("http://localhost:8000/api/removeFromBoard",{id})
   .then((result)=>{
       console.log(result.data)
-      setTrucks(trucks.filter(truck => truck._id != id))
+      setTrucks(trucks.filter(truck => truck._id !== id))
   })
   .catch(err=>{
       console.log(err)
@@ -108,7 +153,7 @@ const removeFromBoard =(id)=>{
             
             return;
 
-            if (type === 'group'){
+            if (source.droppableId === "ROOT" && destination.droppableID === "ROOT"){
                 const reorderedTrucks = [...trucks];
                 const sourceIndex = source.index;
                 const destinationIndex = destination.index
@@ -118,21 +163,18 @@ const removeFromBoard =(id)=>{
 
                 return setTrucks(reorderedTrucks);
             }
-            if(source.droppableId === "ROOT"){
+            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
 
             const truckSourceIndex = source.index;
             const truckDestinationIndex = destination.index;
             console.log(truckSourceIndex)
             console.log(truckDestinationIndex)
             
-            const daySourceIndex = days.findIndex(
-              (day) => day.id === source.droppableId
-            );
             const dayDestinationIndex = days.findIndex(
               (day) => day.id === destination.droppableId
             );
         
-            const newSourceTrucks = [...days[daySourceIndex].trucks];
+            const newSourceTrucks = trucks;
             const newDestinationTrucks =
               source.droppableId !== destination.droppableId
                 ? [...days[dayDestinationIndex].trucks]
@@ -143,15 +185,50 @@ const removeFromBoard =(id)=>{
         
             const newDays = [...days];
         
-            newDays[daySourceIndex] = {
-              ...days[daySourceIndex],
-              trucks: newSourceTrucks,
-            };
             newDays[dayDestinationIndex] = {
               ...days[dayDestinationIndex],
               trucks: newDestinationTrucks,
             };
         
+            setDays(newDays);
+            console.log(newSourceTrucks, "new source trucks")
+            console.log(newDays, "updated Days")
+          }
+
+
+          if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
+            const truckSourceIndex = source.index;
+            const truckDestinationIndex = destination.index;
+
+            const daySourceIndex = days.findIndex(
+              (day) => day.id === source.droppableId
+            );
+
+            const dayDestinationIndex = days.findIndex(
+              (day) => day.id === destination.droppableId
+            );
+
+            const newSourceTrucks = [...days[daySourceIndex].trucks];
+            const newDestinationTrucks =
+              source.droppableId !== destination.droppableId
+                ? [...days[dayDestinationIndex].trucks]
+                : newSourceTrucks;
+
+            const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
+            newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
+
+            const newDays = [...days];
+
+            newDays[dayDestinationIndex] = {
+              ...days[dayDestinationIndex],
+              trucks: newDestinationTrucks,
+            };
+
+            newDays[daySourceIndex] = {
+              ...days[daySourceIndex],
+              trucks: newSourceTrucks,
+            };
+
             setDays(newDays);
           }
             
@@ -199,7 +276,7 @@ const removeFromBoard =(id)=>{
   
   {days.map((day, indx) => {
     return (
-      <Droppable droppableId={indx} type="group">
+      <Droppable droppableId={day.id} type="group" key={day.id}>
         {(provided) => ( 
           <div {...provided.droppableProps} ref={provided.innerRef}>
         <div className="card">
@@ -229,7 +306,7 @@ const removeFromBoard =(id)=>{
 }
 function TruckList({ name, trucks, id }) {
   return (
-    <Droppable droppableId={id} type="group">
+    <Droppable droppableId={`${id}`} type="group" key={id}>
       {(provided) => (
         <div {...provided.droppableProps} ref={provided.innerRef}>
           <div className="truck-container">
@@ -237,7 +314,7 @@ function TruckList({ name, trucks, id }) {
           <div className="truucks-container">
             {
             trucks.map((item, index) => (
-              <Draggable draggableId={item.id} index={index} key={item.id}>
+              <Draggable draggableId={item._id} index={index} key={item._id}>
                 {(provided) => (
                   <div
                     className="truck-container"
@@ -245,7 +322,7 @@ function TruckList({ name, trucks, id }) {
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                   >
-                    <h4>{item.name}</h4>
+                    <h4>{item.driverName}</h4>
                   </div>
                 )}
               </Draggable>
