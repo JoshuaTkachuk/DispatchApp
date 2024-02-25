@@ -5,155 +5,144 @@ import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 
 
-// const DATA = [
-//   {
-//     id: "0e2f0db1-5457-46b0-949e-8032d2f9997a",
-//     name: "Truck1",
-//     items: [
-//       { id: "26fd50b3-3841-496e-8b32-73636f6f4197", name: "truck1" },
-//     ],
-//     tint: 1,
-//   },
-//   {
-//     id: "487f68b4-1746-438c-920e-d67b7df46247",
-//     name: "Truck2",
-//     items: [
-//       { id: "27fd50b3-3841-496e-8b32-73636f6f4197", name: "truck2" },
-//     ],
-//     tint: 2,
-//   },
-//   {
-//     id: "25daffdc-aae0-4d73-bd31-43f73101e7c0",
-//     name: "Truck3",
-//     items: [
-//       { id: "28fd50b3-3841-496e-8b32-73636f6f4197", name: "truck3" },
-//     ],
-//     tint: 3,
-//   },
-// ];
-
-const CARD = [
-  {
-    id:"11",
-    name: "Monday",
-    trucks:[
-      {
-        _id: "ofuhvwiuehvouyb",
-        driverName: "Emil"
-      },
-      {
-        _id: "uhrfouyb39q8f0auw",
-        driverName: "vitali"
-      }
-    ]
-  },
-
-  {
-    id:"12",
-    name: "Tuesday",
-    trucks: [
-      {
-        _id: "iusydgvaeiouyr",
-        driverName: "andrey"
-      },
-      {
-        _id: "uayvrvuiywe",
-        driverName: "igor"
-      }
-    ]
-  },
-
-  {
-    id:"13",
-    name: "Wednesday",
-    trucks:[
-      {
-        _id: "jvhabouywef",
-        driverName: "peter"
-      },
-      {
-        _id: "ygerfuyqerfqiow",
-        driverName: "kosta"
-      }
-    ]
-  },
-
-  {
-    id:"14",
-    name: "Thursday",
-    trucks:[
-      {
-        _id: "bviuavoaiweuf",
-        driverName: "serge"
-      },
-      {
-        _id: "uavyrouiaerpf",
-        driverName: "anton"
-      }
-    ]
-  },
-
-  {
-    id:"15",
-    name: "Friday",
-    trucks:[
-      {
-        _id: "iuayveoufyewoi",
-        driverName: "mikhail"
-      },
-      {
-        _id: "vhbauoyseroif",
-        driverName: "eduard"
-      }
-    ]
-  },
-
-]
-
 function App(props) {
-
-    const date = new Date();
+    const d = new Date();
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
-    const [days,setDays] = useState(CARD);
+    const [days,setDays] = useState([
+      {
+        date: new Date(d.setDate(d.getDate())),
+        id:"11",
+        name: weekday[d.getDay()],
+        trucks:[]
+      },
+    
+      {
+        date: new Date(d.setDate(d.getDate() + 1)),
+        id:"12",
+        name: weekday[d.getDay()],
+        trucks: []
+      },
+    
+      {
+        date: new Date(d.setDate(d.getDate() + 1)),
+        id:"13",
+        name: weekday[d.getDay()],
+        trucks:[]
+      },
+    
+      {
+        date: new Date(d.setDate(d.getDate() + 1)),
+        id:"14",
+        name: weekday[d.getDay()],
+        trucks:[]
+      },
+    
+      {
+        date: new Date(d.setDate(d.getDate() + 1)),
+        id:"15",
+        name: weekday[d.getDay()],
+        trucks:[]
+      },
+    
+    ]);
 
   useEffect(()=>{
+    console.log(days, "logging days when useEffect runs")
     axios.get("http://localhost:8000/api/allTrucks")
     .then((result)=>{
         console.log(result.data)
-        console.log(result.data.filter(truck => truck.onBoard === true))
-        setTrucks(result.data.filter(truck => truck.onBoard === true))
+        setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
+        const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
+        console.log(weekTrucks, "week trucks");
+        weekTrucks.forEach((truck, idx)=>{
+          let tempTruckDate = new Date(truck.dateReady)
+          let tempDayDate = new Date(days[0].date)
+
+          if(tempTruckDate < tempDayDate){
+            truck.dateReady = tempDayDate;
+          }
+
+        })
+
+        setDays(prevDays => {
+          const newDays = [...prevDays];
+  
+          newDays.forEach((day, idx) => {
+            const dayTrucks = [];
+  
+            weekTrucks.forEach((truck) => {
+              const truckDate = new Date(truck.dateReady);
+  
+              if (truckDate.getDate() === day.date.getDate() && truckDate.getDay() === day.date.getDay() && truckDate.getFullYear() === day.date.getFullYear()) {
+                console.log("match found");
+  
+                if (newDays[idx].trucks.includes(truck)) {
+                  console.log("day already includes this truck");
+                  return;
+                } else {
+                  dayTrucks.push(truck);
+                }
+              }
+            });
+
+            dayTrucks.sort((a, b) => a.dayIndex - b.dayIndex);
+
+            newDays[idx] = {
+              ...newDays[idx],
+              trucks: dayTrucks,
+            };
+          });
+
+          return newDays;
+        });
     })
     .catch(err=>{
         console.log(err)
     })
 },[])
 
-const removeFromBoard =(id)=>{
-  axios.put("http://localhost:8000/api/removeFromBoard",{id})
+const removeFromBoard = (truckId, dayId, indx)=>{
+    axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
   .then((result)=>{
       console.log(result.data)
-      setTrucks(trucks.filter(truck => truck._id !== id))
+      setTrucks(trucks.filter(truck => truck._id !== truckId))
   })
   .catch(err=>{
       console.log(err)
   })
+
+  if( dayId && indx !== null){
+
+    const dayIndex = days.findIndex(
+      (day) => day.id === dayId
+    );
+    
+    console.log(dayIndex, "day index");
+    console.log(indx, "indx");
+    
+    console.log(days, "days before truck deleted")
+    days[dayIndex].trucks.splice(indx,1)
+    console.log(days, "days after truck deleted")
+  }
+
+
 }
 
     console.log(props.trucks);
 
     const handleDragDrop = (results) => {
-      console.log(results)
         const {source, destination, type} = results;
+        console.log(source.droppableId, "source droppable id")
+        console.log(destination.droppableId, "destination droppable id")
 
             if (!destination) return;
-            if (
-                source.droppableId === destination.droppableId && 
-                source.index === destination.index
-            ) 
-            
-            return;
+            if (source.droppableId === destination.droppableId && source.index === destination.index){
+              return;
+            }
 
-            if (source.droppableId === "ROOT" && destination.droppableID === "ROOT"){
+            if (source.droppableId === "ROOT" && destination.droppableId === "ROOT"){
+                console.log("reordering trucks within ROOT ID")
                 const reorderedTrucks = [...trucks];
                 const sourceIndex = source.index;
                 const destinationIndex = destination.index
@@ -163,84 +152,13 @@ const removeFromBoard =(id)=>{
 
                 return setTrucks(reorderedTrucks);
             }
-          //   if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
-
-          //   const truckSourceIndex = source.index;
-          //   const truckDestinationIndex = destination.index;
-          //   console.log(truckSourceIndex)
-          //   console.log(truckDestinationIndex)
-            
-          //   const dayDestinationIndex = days.findIndex(
-          //     (day) => day.id === destination.droppableId
-          //   );
-        
-          //   const newSourceTrucks = trucks;
-          //   const newDestinationTrucks =
-          //     source.droppableId !== destination.droppableId
-          //       ? [...days[dayDestinationIndex].trucks]
-          //       : newSourceTrucks;
-        
-          //   const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
-          //   newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
-        
-          //   const newDays = [...days];
-        
-          //   newDays[dayDestinationIndex] = {
-          //     ...days[dayDestinationIndex],
-          //     trucks: newDestinationTrucks,
-          //   };
-        
-          //   setDays(newDays);
-          //   console.log(newSourceTrucks, "new source trucks")
-          //   console.log(newDays, "updated Days")
-          // }
-
-
-          // if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
-          //   const truckSourceIndex = source.index;
-          //   const truckDestinationIndex = destination.index;
-
-          //   const daySourceIndex = days.findIndex(
-          //     (day) => day.id === source.droppableId
-          //   );
-
-          //   const dayDestinationIndex = days.findIndex(
-          //     (day) => day.id === destination.droppableId
-          //   );
-            
-          //   const newSourceTrucks = [...days[daySourceIndex].trucks];
-          //   const newDestinationTrucks =
-          //     source.droppableId !== destination.droppableId
-          //       ? [...days[dayDestinationIndex].trucks]
-          //       : newSourceTrucks;
-
-          //   const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
-          //   newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
-
-          //   const newDays = [...days];
-
-          //   newDays[dayDestinationIndex] = {
-          //     ...days[dayDestinationIndex],
-          //     trucks: newDestinationTrucks,
-          //   };
-
-          //   newDays[daySourceIndex] = {
-          //     ...days[daySourceIndex],
-          //     trucks: newSourceTrucks,
-          //   };
-
-          //   setDays(newDays);
-          // }
-
-
-          
-          
           
             //IF ELSE STATEMENTS THROUGHOUT THE LOGIC INSTEAD OF TWO MASSIVE IF STATEMENT BLOCKS OF CODE
             
             const truckSourceIndex = source.index;
             const truckDestinationIndex = destination.index;
             let newSourceTrucks = [];
+            let newDestinationTrucks = [];
 
             const daySourceIndex = days.findIndex(
               (day) => day.id === source.droppableId
@@ -249,41 +167,114 @@ const removeFromBoard =(id)=>{
             const dayDestinationIndex = days.findIndex(
               (day) => day.id === destination.droppableId
             );
-            if(source.droppableId !== "ROOT" && destination.droppableID !== "ROOT"){
+            if((source.droppableId !== "ROOT" && destination.droppableId !== "ROOT") || (source.droppableId !== "ROOT" && destination.droppableId === "ROOT")){
+              console.log("1")
               newSourceTrucks = [...days[daySourceIndex].trucks];
             }
-            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
+            if(source.droppableId === "ROOT" && destination.droppableId !== "ROOT"){
+              console.log("2")
               newSourceTrucks = trucks;
             }
             
-            const newDestinationTrucks =
+            if(destination.droppableId === "ROOT" && source.droppableId !== "ROOT"){
+              console.log("3")
+              newDestinationTrucks = trucks;
+            }
+            if(destination.droppableId !== "ROOT"){
+              console.log("4")
+              newDestinationTrucks =
               source.droppableId !== destination.droppableId
                 ? [...days[dayDestinationIndex].trucks]
                 : newSourceTrucks;
+            }
 
             const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
+            console.log(deletedTruck, "deleted truck not moving to a null position")
+            console.log(days[dayDestinationIndex], "this will be the day to set the date to")
+            if(destination.droppableId === "ROOT"){
+              console.log("deleting date")
+              deletedTruck.date = null;
+              console.log(deletedTruck);
+            }
+            console.log(deletedTruck, "deleted truck moving to a null poistion")
             newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
 
             const newDays = [...days];
 
-            newDays[dayDestinationIndex] = {
-              ...days[dayDestinationIndex],
-              trucks: newDestinationTrucks,
-            };
+            if(destination.droppableId !== "ROOT"){
+              console.log("5")
+              newDays[dayDestinationIndex] = {
+                ...days[dayDestinationIndex],
+                trucks: newDestinationTrucks,
+              };
+            }
 
-            if(source.droppableId === "ROOT" && destination.droppableID !== "ROOT"){
+            if(source.droppableId !== "ROOT" && destination.droppableId !== "ROOT" || source.droppableId !== "ROOT" && destination.droppableId === "ROOT" ){
+              console.log("6")
               newDays[daySourceIndex] = {
                 ...days[daySourceIndex],
                 trucks: newSourceTrucks,
               };
             }
-
             setDays(newDays);
+            
+            
+            
+            // updating truck index per day in backend
+            if(source.droppableId !== "ROOT"){
+              newDays[daySourceIndex].trucks.forEach((truck, idx1)=>{
+              console.log(truck, idx1, "day source index trucks backend")
+              axios.put("http://localhost:8000/api/updateTruckIndex",{truckId: truck._id, dayIndex: idx1})
+              .then((result)=>{
+                console.log(result,"updated truck dayIndex")
+              })
+              .catch(err=>{
+                console.log(err)
+              })
+            })
+            }
+            if(destination.droppableId !== "ROOT" || newDays[daySourceIndex] === newDays[dayDestinationIndex]){
+              newDays[dayDestinationIndex].trucks.forEach((truck,idx2)=>{
+                console.log(truck, idx2, "day destination index trucks backend")
+                axios.put("http://localhost:8000/api/updateTruckIndex",{truckId: truck._id, dayIndex: idx2})
+                .then((result)=>{
+                  console.log(result,"updated truck dayIndex")
+                })
+                .catch(err=>{
+                  console.log(err)
+                })
+              })
+
+            }
+
+
+            // updating date in the backend
+            let dateReady = null;
+            if(destination.droppableId !== "ROOT"){
+              dateReady = days[dayDestinationIndex].date
+            }
+            axios.put("http://localhost:8000/api/updateDate",{truckId: deletedTruck._id, dateReady: dateReady})
+            .then((result)=>{
+              console.log(result)
+              console.log(dateReady, "dateReady in backend")
+            })
+            .catch(err =>{
+              console.log(err)
+            })
             
 
       
             
     };
+    const handleTime=(truckId, timeReady)=>{
+      axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
+      .then((result)=>{
+        console.log(result)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
 
   
 
@@ -308,6 +299,9 @@ const removeFromBoard =(id)=>{
                       >
                         <div>
                           <h3>{truck.driverName}</h3>
+                          <form onSubmit={handleTime}>
+                            <input type="text" placeholder={truck.timeReady} onChange={(e)=> handleTime(truck._id, e.target.value)}></input>
+                          </form>
                           <button onClick={(e)=> removeFromBoard(truck._id)}>remove From board</button>
                         </div>
                       </div>
@@ -330,7 +324,38 @@ const removeFromBoard =(id)=>{
         <div className="card">
           <div className="header">
            <h1>{day.name}</h1>
-            <TruckList {...day} />
+           <h2> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</h2>
+            <Droppable droppableId={`${day.id}`} type="group" key={day.id}>
+              {(provided) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  <div className="truck-container">
+                  </div>
+                  <div className="truucks-container">
+                    {
+                      day.trucks.map((item, index) => (
+                        <Draggable draggableId={item._id} index={index} key={item._id}>
+                          {(provided) => (
+                          <div
+                          className="truck-container"
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                          >
+                          <h4>{item.driverName}</h4>
+                          <form onSubmit={handleTime}>
+                            <input type="text" placeholder={item.timeReady} onChange={(e)=> handleTime(item._id, e.target.value)}></input>
+                          </form>
+                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
+                          </div>
+                          )}
+                        </Draggable>
+                      ))
+                    }
+                    {provided.placeholder}
+                  </div>
+                </div>
+            )}
+            </Droppable>
          </div>
         </div>
         {provided.placeholder}
@@ -352,39 +377,6 @@ const removeFromBoard =(id)=>{
     
   );
 }
-function TruckList({ name, trucks, id }) {
-  return (
-    <Droppable droppableId={`${id}`} type="group" key={id}>
-      {(provided) => (
-        <div {...provided.droppableProps} ref={provided.innerRef}>
-          <div className="truck-container">
-          </div>
-          <div className="truucks-container">
-            {
-            trucks.map((item, index) => (
-              <Draggable draggableId={item._id} index={index} key={item._id}>
-                {(provided) => (
-                  <div
-                    className="truck-container"
-                    {...provided.dragHandleProps}
-                    {...provided.draggableProps}
-                    ref={provided.innerRef}
-                  >
-                    <h4>{item.driverName}</h4>
-                  </div>
-                )}
-              </Draggable>
-            ))
-          }
-            {provided.placeholder}
-          </div>
-        </div>
-      )}
-    </Droppable>
-  );
-}
-
-
 
 
 export default App;

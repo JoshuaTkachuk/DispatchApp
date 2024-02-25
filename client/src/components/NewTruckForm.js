@@ -11,10 +11,11 @@ const NewTruckForm=()=>{
     const [phoneNum,setPhoneNum] = useState("");
     const [endorsements,setEndorsements] = useState([]);
     const [homeLocation,setHomeLocation] = useState("");
+    const [dateReady, setDateReady] = useState("");
 
     const submithandler=(e)=>{
         e.preventDefault();
-        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation})
+        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady})
             .then((result)=>{
                 console.log(result.data)
             })
@@ -50,6 +51,10 @@ const NewTruckForm=()=>{
                     </input>
                 </div>
                 <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                <div>
+                    <label for="date">Date Ready</label>
+                    <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
+                </div>
                 <button type="submit">submit</button>
             </form>
             <Link to={"/myTrucks"}>back</Link>

@@ -10,7 +10,16 @@ const MyTrucks=()=>{
         axios.get("http://localhost:8000/api/allTrucks")
         .then((result)=>{
             console.log(result.data)
-            setTrucks(result.data)
+            const rawTrucks = result.data
+            let newTrucks = []
+            rawTrucks.forEach((item, idx)=>{
+                const d = new Date(item.dateReady)
+                newTrucks.push({
+                    ...item, 
+                    dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                })
+            })
+            setTrucks(newTrucks)
         })
         .catch(err=>{
             console.log(err)
@@ -41,6 +50,7 @@ const MyTrucks=()=>{
                                     <td>{itm.driverName}</td>
                                     <td>{itm.truckNum}</td>
                                     <td>{itm.trailerNum}</td>
+                                    <td>{itm.dateReady}</td>
                                 </tr>
                             </table>
                             <button onClick={(e)=> addToBoard(itm._id)}>add to list</button>

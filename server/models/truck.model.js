@@ -44,5 +44,15 @@ const TruckSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    timeReady:{
+        type: String
+    },
+    dayIndex:{
+        type: Number
+    },
+    createdBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
 },{timestamps:true});
 module.exports = mongoose.model("Truck", TruckSchema)

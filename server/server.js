@@ -21,5 +21,6 @@ app.use(express.urlencoded({extended: true}));
 require('./config/mongoose.config');
 
 require('./routes/truck.routes')(app);
+require('./routes/user.routes')(app);
     
 app.listen(process.env.PORT || 8000, () => console.log("Listening on port:", process.env.PORT));
