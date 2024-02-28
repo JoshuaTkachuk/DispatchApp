@@ -15,6 +15,7 @@ module.exports ={
                 }
                 else{
                     const user = new User(req.body);
+                    console.log(req.body);
                     user.save()
                         .then(result =>{
                             const userToken = jwt.sign({id: result.id}, process.env.SECRET_KEY)
