@@ -364,7 +364,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           ref={provided.innerRef}
                           >
                           <h4>{item.driverName}</h4>
-                          <form onSubmit={handleTime}>
+                          <form onSubmit={handleTime} className="form">
                             <input type="text" placeholder={item.timeReady} onChange={(e)=> handleTime(item._id, e.target.value)}></input>
                           </form>
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
