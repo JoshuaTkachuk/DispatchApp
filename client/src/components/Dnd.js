@@ -339,17 +339,13 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
       <div className="box-container">
   {days.map((day, indx) => {
-    return (
-      
-      <Droppable droppableId={day.id} type="group" key={day.id}>
-        {(provided) => ( 
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-          
+    return (    
         <div className="card">
           <div className="header">
            <h1>{day.name}</h1>
            <h2> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</h2>
-            <Droppable droppableId={`${day.id}`} type="group" key={day.id}>
+           </div>
+            <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   <div className="items-container">
@@ -378,12 +374,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                 </div>
             )}
             </Droppable>
-         </div>
         </div>
-        {provided.placeholder}
-        </div>
-        )}
-      </Droppable>
 
      
     );
