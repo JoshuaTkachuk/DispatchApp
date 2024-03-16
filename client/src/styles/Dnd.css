@@ -10,9 +10,12 @@
   padding: 0
 }
 
+.wrapper-main{
+  width: 100vw;
+}
+
 body {
-  background-color: #2a385c;
-  background-image: linear-gradient(320deg, hsl(215, 10%, 12%) 0% /* down */, hsl(215, 19%, 24%) /* up */ 100%);
+  background-color: #232730;
   font-family: var(--fonts-primary);
   font-size: 14px;
   margin: 0;
@@ -26,8 +29,8 @@ body {
   border-radius: 5px;
   justify-content: center;
   border-radius: 3px;
-  margin: 3rem 50px;
-  width: 200px;
+  margin: 1rem;
+  width: 15vw;
   display: flex;
   flex-direction: row;
 }
@@ -57,5 +60,12 @@ body {
   display: flex;
   justify-content: center;
   position: relative;
+width: 100%;
  }
  
+
+ @media (max-width: 600px) {
+  .box-container {
+    flex-direction: column;
+  }
+ }
