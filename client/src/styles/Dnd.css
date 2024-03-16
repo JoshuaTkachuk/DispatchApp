@@ -30,22 +30,16 @@ body {
   justify-content: center;
   border-radius: 3px;
   margin: 1rem;
-  width: 15vw;
-  display: flex;
-  flex-direction: row;
+  width: 15vw;  
 }
 
 .header {
-  border-bottom: 1px solid gray;
   padding-bottom: 10px;
   margin-bottom: 5px;
+  color: rgb(0, 0, 0);
+  font-size: calc(4px + .5vw);
 }
 
-.store-container {
-  text-align: center;
-  padding: 5px;
-  background-color: rgb(0, 247, 255);
-}
 
 .items-container {
   text-align: center;
@@ -53,14 +47,13 @@ body {
 
 .item-container {
   padding: 5px;
-  border-bottom: 1px solid grey
 }
 
 .box-container {
   display: flex;
   justify-content: center;
   position: relative;
-width: 100%;
+  width: 100%;
  }
  
 

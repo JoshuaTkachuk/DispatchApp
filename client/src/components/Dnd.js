@@ -340,9 +340,11 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       <div className="box-container">
   {days.map((day, indx) => {
     return (
+      
       <Droppable droppableId={day.id} type="group" key={day.id}>
         {(provided) => ( 
           <div {...provided.droppableProps} ref={provided.innerRef}>
+          
         <div className="card">
           <div className="header">
            <h1>{day.name}</h1>
