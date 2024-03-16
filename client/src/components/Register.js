@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 
 const Register =()=>{
     const [email, setEmail] = useState("");
@@ -37,6 +37,10 @@ const Register =()=>{
 
                 <button type="submit"> Submit </button>
             </form>
+            <div>
+                <h3>Already Have an account?</h3>
+                <Link to={"/login"}>Login</Link>
+            </div>
         </div>
     );
 

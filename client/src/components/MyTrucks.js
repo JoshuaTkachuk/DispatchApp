@@ -7,19 +7,27 @@ const MyTrucks=()=>{
     const [trucks,setTrucks] = useState([]);
 
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/allTrucks")
-        .then((result)=>{
-            console.log(result.data)
-            const rawTrucks = result.data
-            let newTrucks = []
-            rawTrucks.forEach((item, idx)=>{
-                const d = new Date(item.dateReady)
-                newTrucks.push({
-                    ...item, 
-                    dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+        axios.get("http://localhost:8000/api/User", {withCredentials: true})
+        .then((result1)=>{
+            const email = result1.data.email;
+            axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
+            .then((result)=>{
+                console.log(result.data)
+                const rawTrucks = result.data
+                let newTrucks = []
+                rawTrucks.forEach((item, idx)=>{
+                    const d = new Date(item.dateReady)
+                    newTrucks.push({
+                        ...item, 
+                        dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                    })
                 })
+                setTrucks(newTrucks)
             })
-            setTrucks(newTrucks)
+            .catch(err=>{
+                console.log(err)
+            })
+
         })
         .catch(err=>{
             console.log(err)
@@ -39,7 +47,7 @@ const MyTrucks=()=>{
     return(
         <div>
             <h1>My Trucks</h1>
-            <Link to={"/"}>Home</Link>
+            <Link to={"/home"}>Home</Link>
             <Link to={"/addTruck"}>addTruck</Link>
             {
                 trucks.length > 0?

@@ -102,6 +102,16 @@ module.exports ={
                 res.json(err)
             })
     },
+    getAllUsers:(req,res)=>{
+        User.find()
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+            res.json(err);
+        })
+    },
     deleteAllUsers:(req,res)=>{
         User.deleteMany({})
         .then(result=>{

@@ -1,5 +1,5 @@
 const Truck = require("../models/truck.model");
-
+const User = require("../models/user.model")
 module.exports={
     CreateTruck:(req,res)=>{
         if(req.body.dateReady){
@@ -13,6 +13,7 @@ module.exports={
             req.body.dateReady = null;
         }
         const newTruck = new Truck(req.body);
+        newTruck.createdBy = req.jwtpayload.id;
         newTruck.save()
             .then((result)=>{
                 res.json(result)
@@ -96,5 +97,29 @@ module.exports={
         .catch(err=>{
             console.log(err)
         })
+    },
+    findTrucksByUserId:(req,res)=>{
+        if(req.jwtpayload.email !== req.params.email){
+            User.findOne({email: req.params.email})
+                .then((notLoggedUser)=>{
+                    Truck.find({createdBy: notLoggedUser._id})
+                    .then((trucks) =>{
+                        res.json(trucks)
+                    })
+                    .catch(err=>console.log(err))
+                })
+                .catch(err=>{
+                    console.log(err)
+                    res.status(400).json(err)
+                })
+        }
+        //if user is logged in, simply find posts
+        else{
+            Truck.find({createdBy: req.jwtpayload.id})
+                .then((trucks)=>{
+                    res.json(trucks)
+                })
+                .catch((err)=>console.log(err))
+        }
     }
 }

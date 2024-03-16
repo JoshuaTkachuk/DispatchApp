@@ -9,19 +9,51 @@ const NewTruckForm=()=>{
     const [trailerNum,setTrailerNum] = useState("");
     const [driverName,setDriverName] = useState("");
     const [phoneNum,setPhoneNum] = useState("");
-    const [endorsements,setEndorsements] = useState([]);
     const [homeLocation,setHomeLocation] = useState("");
     const [dateReady, setDateReady] = useState("");
 
     const submithandler=(e)=>{
         e.preventDefault();
-        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady})
+        let T = document.getElementById("T");
+        let H = document.getElementById("H");
+        let DT = document.getElementById("DT");
+        let endorsements = [];
+
+        if(T.hasAttribute("checked")){
+            console.log(T.value, "tanker value")
+            endorsements.push(T.value)
+        }
+        if(H.hasAttribute("checked")){
+            console.log(H.value, "hazmat value")
+            endorsements.push(H.value)
+        }
+        if(DT.hasAttribute("checked")){
+            console.log(DT.value, "doubles/triples value")
+            endorsements.push(DT.value)
+        }
+        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady}, {withCredentials: true})
             .then((result)=>{
                 console.log(result.data)
             })
             .catch(error =>{
                 console.log(error)
             })
+    }
+    const setChecked=(id)=>{
+        console.log(id)
+        let endorsement = document.getElementById(id);
+        console.log(endorsement);
+
+        if (endorsement.hasAttribute("checked")){
+            endorsement.removeAttribute("checked")
+            console.log(endorsement, "removing checked attribute")
+        }
+        else{
+            endorsement.setAttribute("checked", "checked")
+            console.log(endorsement, "adding checked attribute")
+            
+        }
+
     }
     
     return(
@@ -39,15 +71,15 @@ const NewTruckForm=()=>{
                 <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
                 <div>
                     <label for="T">tanker</label>
-                    <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setEndorsements([...endorsements, e.target.value])}>
+                    <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
                     </input>
 
                     <label for="H">hazmat</label>
-                    <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setEndorsements([...endorsements, e.target.value])}>
+                    <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
                     </input>
 
                     <label for="DT">doubles/triples</label>
-                    <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setEndorsements([...endorsements, e.target.value])}>
+                    <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                 </div>
                 <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>

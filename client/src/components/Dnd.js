@@ -49,8 +49,12 @@ function App(props) {
 
   useEffect(()=>{
     console.log(days, "logging days when useEffect runs")
-    axios.get("http://localhost:8000/api/allTrucks")
-    .then((result)=>{
+    axios.get("http://localhost:8000/api/User", {withCredentials: true})
+    .then((result1)=>{
+      const email = result1.data.email
+      console.log(email)
+      axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
+      .then((result)=>{
         console.log(result.data)
         setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
         const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
@@ -100,6 +104,11 @@ function App(props) {
     .catch(err=>{
         console.log(err)
     })
+
+    })
+    .catch(err=>{
+      console.log(err)
+    })
 },[])
 
 const removeFromBoard = (truckId, dayId, indx)=>{
@@ -142,7 +151,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             }
 
             if (source.droppableId === "ROOT" && destination.droppableId === "ROOT"){
-                console.log("reordering trucks within ROOT ID")
+                // REORDERING TRUCKS INDEX WITHIN ROOT ID
                 const reorderedTrucks = [...trucks];
                 const sourceIndex = source.index;
                 const destinationIndex = destination.index
@@ -160,26 +169,34 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             let newSourceTrucks = [];
             let newDestinationTrucks = [];
 
+            //SETTING VARIBLE FOR SOURCE INDEX OF THE DAY THE TRUCK IS MOVING FROM
             const daySourceIndex = days.findIndex(
               (day) => day.id === source.droppableId
             );
-
+            // SETTING VARIABLE FOR DESTINATION INDEX OF THE DAY THE TRUCK IS MOVING TO
             const dayDestinationIndex = days.findIndex(
               (day) => day.id === destination.droppableId
             );
+
+            // SET SOURCE TRUCKS VARIABLE BASED OFF IF THE TRUCKS SOURCE LOCATION WASN'T THE ROOT ID
             if((source.droppableId !== "ROOT" && destination.droppableId !== "ROOT") || (source.droppableId !== "ROOT" && destination.droppableId === "ROOT")){
               console.log("1")
               newSourceTrucks = [...days[daySourceIndex].trucks];
             }
+            
+            // SET SOURCE TRUCKS VARIABLE BASED OFF IF THE TRUCK IS MOVING FROM SOURCE ID "ROOT"
             if(source.droppableId === "ROOT" && destination.droppableId !== "ROOT"){
               console.log("2")
               newSourceTrucks = trucks;
             }
             
+            // SET DESTINATION TRUCKS VARIABLE BASED OFF IF THE DESTINATION IS THE "ROOT" ID
             if(destination.droppableId === "ROOT" && source.droppableId !== "ROOT"){
               console.log("3")
               newDestinationTrucks = trucks;
             }
+
+            // SET DESTINATION TRUCKS BASED OFF IF THE TRUCKS DESTINATION IS NOT THE "ROOT" ID
             if(destination.droppableId !== "ROOT"){
               console.log("4")
               newDestinationTrucks =
@@ -188,9 +205,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                 : newSourceTrucks;
             }
 
+            // SET THE DELETED TRUCK BASED OFF TRUCK SOURCE INDEX DEFINED ABOVE
             const [deletedTruck] = newSourceTrucks.splice(truckSourceIndex, 1);
             console.log(deletedTruck, "deleted truck not moving to a null position")
             console.log(days[dayDestinationIndex], "this will be the day to set the date to")
+
+            // IF THE TRUCK IS MOVING TO "ROOT" ID, SET THE DATE TO NULL
             if(destination.droppableId === "ROOT"){
               console.log("deleting date")
               deletedTruck.date = null;
@@ -199,8 +219,10 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             console.log(deletedTruck, "deleted truck moving to a null poistion")
             newDestinationTrucks.splice(truckDestinationIndex, 0, deletedTruck);
 
+            // DEFINING VARIABLE FOR THE "NEW DAYS" THAT WILL BE MANIPULATED
             const newDays = [...days];
 
+            // IF THE TRUCK IS NOT MOVING TO THE "ROOT" ID, SET THE NEW DAYS DESTINATION TRUCKS ACCORDINGLY
             if(destination.droppableId !== "ROOT"){
               console.log("5")
               newDays[dayDestinationIndex] = {
@@ -209,6 +231,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
               };
             }
 
+            // IF THE TRUCK IS NOT MOVING FROM THE "ROOT" ID, SET THE DAYS WITH THEIR NEW TRUCKS ACCORDINGLY
             if(source.droppableId !== "ROOT" && destination.droppableId !== "ROOT" || source.droppableId !== "ROOT" && destination.droppableId === "ROOT" ){
               console.log("6")
               newDays[daySourceIndex] = {
@@ -315,7 +338,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       </div>
 
       <div className="box-container">
-  
   {days.map((day, indx) => {
     return (
       <Droppable droppableId={day.id} type="group" key={day.id}>
@@ -328,15 +350,13 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             <Droppable droppableId={`${day.id}`} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  <div className="truck-container">
-                  </div>
-                  <div className="truucks-container">
+                  <div className="items-container">
                     {
                       day.trucks.map((item, index) => (
                         <Draggable draggableId={item._id} index={index} key={item._id}>
                           {(provided) => (
                           <div
-                          className="truck-container"
+                          className="item-container"
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}

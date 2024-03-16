@@ -5,39 +5,26 @@ import Dnd from "./Dnd"
 import "../styles/Home.css"
 
 const Home=()=>{
+    const navigate = useNavigate();
 
-    // const [trucks,setTrucks] = useState([]);
-
-    // useEffect(()=>{
-    //     axios.get("http://localhost:8000/api/allTrucks")
-    //     .then((result)=>{
-    //         console.log(result.data)
-    //         console.log(result.data.filter(truck => truck.onBoard == true))
-    //         setTrucks(result.data.filter(truck => truck.onBoard == true))
-    //     })
-    //     .catch(err=>{
-    //         console.log(err)
-    //     })
-    // },[])
-    
-    //removed useEffect and added to Dnd component so state will update within the component rather than passing props to it
-
-    // const removeFromBoard =(id)=>{
-    //     axios.put("http://localhost:8000/api/removeFromBoard",{id})
-    //     .then((result)=>{
-    //         console.log(result.data)
-    //         setTrucks(trucks.filter(truck => truck._id != id))
-    //     })
-    //     .catch(err=>{
-    //         console.log(err)
-    //     })
-    // }
+    const logout =(e) =>{
+        e.preventDefault();
+        axios.post("http://localhost:8000/api/logout",{}, {withCredentials: true})
+        .then((result)=>{
+            console.log(result);
+            navigate('/')
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 
     
     return(
         <div className="mainheader">
             <h1>USKO Truck Board</h1>
             <Link to={"/myTrucks"}>My Trucks</Link>
+            <button onClick={logout}>logout</button>
             <Dnd/>
             {
                 // trucks.length > 0?
