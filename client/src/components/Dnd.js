@@ -142,8 +142,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
     const handleDragDrop = (results) => {
         const {source, destination, type} = results;
-        console.log(source.droppableId, "source droppable id")
-        console.log(destination.droppableId, "destination droppable id")
 
             if (!destination) return;
             if (source.droppableId === destination.droppableId && source.index === destination.index){
@@ -348,13 +346,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  <div className="items-container">
+                  <div className="item-container">
                     {
                       day.trucks.map((item, index) => (
                         <Draggable draggableId={item._id} index={index} key={item._id}>
                           {(provided) => (
-                          <div
-                          className="item-container"
+                          <div className="item-container"
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}
