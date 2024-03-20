@@ -348,7 +348,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  <div className="item-container">
+                  <div className="items-container">
                     {
                       day.trucks.map((item, index) => (
                         <Draggable draggableId={item._id} index={index} key={item._id}>
