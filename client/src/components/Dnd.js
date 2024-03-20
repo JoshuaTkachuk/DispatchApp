@@ -9,6 +9,7 @@ function App(props) {
     const d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
+    const [timeId, setTimeId] = useState()
     const [days,setDays] = useState([
       {
         date: new Date(d.setDate(d.getDate())),
@@ -287,7 +288,11 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       
             
     };
-    const handleTime=(truckId, timeReady)=>{
+    const handleTime=(e, truckId)=>{
+      e.preventDefault();
+      console.log(e, "save event")
+      const timeReady = document.getElementById(truckId).value
+      console.log(timeReady, "time ready element")
       axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
       .then((result)=>{
         console.log(result)
@@ -320,9 +325,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                       >
                         <div>
                           <h3>{truck.driverName}</h3>
-                          <form onSubmit={handleTime}>
-                            <input type="text" placeholder={truck.timeReady} onChange={(e)=> handleTime(truck._id, e.target.value)}></input>
-                          </form>
                           <button onClick={(e)=> removeFromBoard(truck._id)}>remove From board</button>
                         </div>
                       </div>
@@ -357,9 +359,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           ref={provided.innerRef}
                           >
                           <h4>{item.driverName}</h4>
-                          <form onSubmit={handleTime} className="form">
-                            <input type="text" placeholder={item.timeReady} onChange={(e)=> handleTime(item._id, e.target.value)}></input>
+                          {/* work on implementing appt time below */}
+                          <form>
+                            <input type="time" id={`${item._id}`} placeholder={item.timeReady}/>
+                            <button onClick={(e)=>handleTime(e,item._id)}>save</button>
                           </form>
+
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
                           </div>
                           )}
