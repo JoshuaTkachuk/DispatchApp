@@ -362,6 +362,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <h4>{item.homeLocation}</h4>
                           <h4>{item.trailerType}</h4>
                           {/* work on implementing appt time below */}
+                          {/* comment */}
                           <form>
                             <input type="time" id={`${item._id}`} placeholder={item.timeReady}/>
                             <button onClick={(e)=>handleTime(e,item._id)}>save</button>
