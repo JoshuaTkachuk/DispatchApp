@@ -25,12 +25,11 @@ body {
 
 .card {
   background-color: rgb(255, 255, 255);
-  padding: 20px;
   border-radius: 5px;
   justify-content: flex-start;
   border-radius: 3px;
   margin: 1rem;
-  width: 15vw;
+  width: 20vw;
   display: flex;
   flex-direction: column;
   height:fit-content;
@@ -51,13 +50,13 @@ body {
 }
 
 .item-container {
-  padding: 5px;
+  padding: 1px;
   background-color: aqua;
 }
 
 .truck-header {
   padding: 10px;
-
+  display: flex;
 }
 
 .truck-body{

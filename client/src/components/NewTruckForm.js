@@ -64,7 +64,7 @@ const NewTruckForm=()=>{
                 <label for="Ttype">trailer type</label>
                 <select name="Ttype" id="Ttype" onChange={(e)=> setTType(e.target.value)}>
                     <option value={"R"}>R</option>
-                    <option value={"V"}>V</option>
+                    <option selected value={"V"}>V</option>
                 </select>
                 <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
                 <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
