@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "rc-time-picker": "^3.7.3",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-bootstrap-time-picker": "^2.0.1",

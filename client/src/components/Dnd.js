@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css';
 import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 
@@ -364,7 +366,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                           {/* work on implementing appt time below */}
 
-                          {/* comment */}
+                          <TimePicker/>
                           <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
                             <p>{item.timeReady}</p>
                             <input type="time" id={`${item._id}`}/>
