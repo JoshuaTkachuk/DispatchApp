@@ -361,7 +361,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                           <div className="truck-header">
                           <h4>{item.homeLocation}</h4>
-                          <h4>{item.trailerType}</h4>
 
                           {/* work on implementing appt time below */}
 
@@ -375,6 +374,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           
 
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
+                          <h4>{item.trailerType}</h4>
                           </div>
                           <div className="truck-body">
                           <h4>{item.driverName}</h4>
