@@ -55,6 +55,7 @@ const MyTrucks=()=>{
                         return<div key={idx}>
                             <table>
                                 <tr>
+                                    <td>{itm.phoneNum}</td>
                                     <td>{itm.driverName}</td>
                                     <td>{itm.truckNum}</td>
                                     <td>{itm.trailerNum}</td>

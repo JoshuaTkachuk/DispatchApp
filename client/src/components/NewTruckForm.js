@@ -11,6 +11,7 @@ const NewTruckForm=()=>{
     const [phoneNum,setPhoneNum] = useState("");
     const [homeLocation,setHomeLocation] = useState("");
     const [dateReady, setDateReady] = useState("");
+    const [tType, setTType] = useState("");
 
     const submithandler=(e)=>{
         e.preventDefault();
@@ -31,7 +32,7 @@ const NewTruckForm=()=>{
             console.log(DT.value, "doubles/triples value")
             endorsements.push(DT.value)
         }
-        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady}, {withCredentials: true})
+        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady, trailerType: tType}, {withCredentials: true})
             .then((result)=>{
                 console.log(result.data)
             })
@@ -61,7 +62,7 @@ const NewTruckForm=()=>{
             <h1>New Truck</h1>
             <form onSubmit={submithandler}>
                 <label for="Ttype">trailer type</label>
-                <select name="Ttype" id="Ttype">
+                <select name="Ttype" id="Ttype" onChange={(e)=> setTType(e.target.value)}>
                     <option value={"R"}>R</option>
                     <option value={"V"}>V</option>
                 </select>
