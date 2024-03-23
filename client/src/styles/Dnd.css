@@ -52,6 +52,7 @@ body {
 
 .item-container {
   padding: 5px;
+  background-color: aqua;
 }
 
 .truck-header {
