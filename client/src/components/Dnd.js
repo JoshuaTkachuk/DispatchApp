@@ -288,7 +288,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       
             
     };
-    const handleTime=(e, truckId)=>{
+    const handleTime=(e, truckId, dayId)=>{
       e.preventDefault();
       console.log(e, "save event")
       const timeReady = document.getElementById(truckId).value
@@ -358,15 +358,21 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.draggableProps}
                           ref={provided.innerRef}
                           >
+
                           <div className="truck-header">
                           <h4>{item.homeLocation}</h4>
                           <h4>{item.trailerType}</h4>
+
                           {/* work on implementing appt time below */}
+
                           {/* comment */}
-                          <form>
-                            <input type="time" id={`${item._id}`} placeholder={item.timeReady}/>
-                            <button onClick={(e)=>handleTime(e,item._id)}>save</button>
+                          <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
+                            <p>{item.timeReady}</p>
+                            <input type="time" id={`${item._id}`}/>
+                            <input type="submit" hidden/>
                           </form>
+
+                          
 
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
                           </div>
