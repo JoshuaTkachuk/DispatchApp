@@ -47,12 +47,12 @@ body {
 .items-container {
   display: flex;
   flex-direction: column;
-  background-color: aqua;
   text-align: center;
 }
 
 .item-container {
   padding: 5px;
+  background-color: aqua;
 }
 
 .form{
