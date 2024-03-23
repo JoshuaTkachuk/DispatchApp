@@ -11,7 +11,7 @@ const NewTruckForm=()=>{
     const [phoneNum,setPhoneNum] = useState("");
     const [homeLocation,setHomeLocation] = useState("");
     const [dateReady, setDateReady] = useState("");
-    const [tType, setTType] = useState("");
+    const [tType, setTType] = useState("V");
 
     const submithandler=(e)=>{
         e.preventDefault();
@@ -62,7 +62,7 @@ const NewTruckForm=()=>{
             <h1>New Truck</h1>
             <form onSubmit={submithandler}>
                 <label for="Ttype">trailer type</label>
-                <select name="Ttype" id="Ttype" onChange={(e)=> setTType(e.target.value)}>
+                <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
                     <option value={"R"}>R</option>
                     <option value={"V"}>V</option>
                 </select>
