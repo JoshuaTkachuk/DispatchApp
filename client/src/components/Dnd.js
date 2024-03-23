@@ -358,7 +358,9 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.draggableProps}
                           ref={provided.innerRef}
                           >
-                          <h4>{item.driverName}</h4>
+                          <div className="truck-header">
+                          <h4>{item.homeLocation}</h4>
+                          <h4>{item.trailerType}</h4>
                           {/* work on implementing appt time below */}
                           <form>
                             <input type="time" id={`${item._id}`} placeholder={item.timeReady}/>
@@ -366,6 +368,17 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           </form>
 
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
+                          </div>
+                          <div className="truck-body">
+                          <h4>{item.driverName}</h4>
+                          <h4>{item.phoneNum}</h4>
+                          <h4>{item.trailerNum}</h4>
+                          <h4>{item.truckNum}</h4>
+
+                          </div>
+                          <div className="truck-footer">
+
+                          </div>
                           </div>
                           )}
                         </Draggable>
