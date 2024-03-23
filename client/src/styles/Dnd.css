@@ -55,6 +55,19 @@ body {
   background-color: aqua;
 }
 
+.truck-header {
+  padding: 10px;
+
+}
+
+.truck-body{
+  padding: 10px;
+}
+
+.truck-footer{
+  padding: 10px;
+}
+
 .form{
   padding: 5px;
 }
