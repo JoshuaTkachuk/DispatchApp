@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import TimePicker from 'rc-time-picker';
-import 'rc-time-picker/assets/index.css';
+import DatePicker from 'react-native-modern-datepicker';
 import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 
@@ -11,7 +10,7 @@ function App(props) {
     const d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
-    const [timeId, setTimeId] = useState()
+    const [timeId, setTimeId] = useState('10:00')
     const [days,setDays] = useState([
       {
         date: new Date(d.setDate(d.getDate())),
@@ -292,16 +291,16 @@ const removeFromBoard = (truckId, dayId, indx)=>{
     };
     const handleTime=(e, truckId, dayId)=>{
       e.preventDefault();
-      console.log(e, "save event")
-      const timeReady = document.getElementById(truckId).value
-      console.log(timeReady, "time ready element")
-      axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
-      .then((result)=>{
-        console.log(result)
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+      // console.log(e, "save event")
+      // const timeReady = document.getElementById(truckId).value
+      // console.log(timeReady, "time ready element")
+      // axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
+      // .then((result)=>{
+      //   console.log(result)
+      // })
+      // .catch(err=>{
+      //   console.log(err)
+      // })
     }
 
   
@@ -366,7 +365,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                           {/* work on implementing appt time below */}
 
-                          <TimePicker/>
+
                           <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
                             <p>{item.timeReady}</p>
                             <input type="time" id={`${item._id}`}/>
