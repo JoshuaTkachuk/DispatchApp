@@ -387,7 +387,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}
-                          onClick={(e)=>changeVisible(e,index)}
                           >
 
                           <div className="truck-header">
@@ -413,12 +412,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <div className="notes"> 
                             <p> Notes: </p>
                           </div>
-                          <div className="drop-down">
+                          <div className="drop-down" onClick={(e)=>changeVisible(e,item.phoneNum)}>
                               <p>down arrow</p>
                           </div>
 
 
-                          <div id={index} className="truck-body" style={{display: truckVisible}}>
+                          <div id={item.phoneNum} className="truck-body" style={{display: truckVisible}}>
                             <div className="truck-body1">
                               <h4>{item.driverName}</h4>
                               <h4>{item.phoneNum}</h4>
