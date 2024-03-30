@@ -46,8 +46,10 @@ const MyTrucks=()=>{
     }
 
     return(
-        <div className="list">
+        <div className="page">
+        <div className="header">
             <h1>My Trucks</h1>
+        </div>
         <div className="links">  
             <Link to={"/home"} style={{color:'blue', margin: '1rem'}}>Home</Link>
             <Link to={"/addTruck"} style={{color:'blue', margin: '1rem'}}>Add Truck</Link>
@@ -55,16 +57,16 @@ const MyTrucks=()=>{
             {
                 trucks.length > 0?
                     trucks.map((itm, idx)=>{
-                        return<div key={idx} className="table" style={{borderbottom: '1px solid #000'}}>
-                            <table stle={{margin:'0auto'}}>
-                                <tr>
-                                    <td>{itm.driverName}</td>
-                                    <td>{itm.truckNum}</td>
-                                    <td>{itm.trailerNum}</td>
-                                    <td>{itm.dateReady}</td>
+                        return<div key={idx} className="list">
+                   
+                                <div className="truckdata">
+                                    <div>{itm.driverName}</div>
+                                    <div>{itm.truckNum}</div>
+                                    <div>{itm.trailerNum}</div>
+                                    <div>{itm.dateReady}</div>
 
-                                </tr>
-                            </table>
+                                </div>
+                         
                             <div>
                             <button onClick={(e)=> addToBoard(itm._id)} style={{padding: '6px', borderRadius:'1vw', backgroundcolor: 'blue', border: 'none'}}>Add To Board</button>
                             </div>
