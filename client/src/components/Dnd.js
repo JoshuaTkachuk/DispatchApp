@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import TimePicker from 'react-time-picker'
-import DatePicker from 'react-native-modern-datepicker';
 import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 
@@ -308,12 +306,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
     return (
    <div>
-      <TimePicker />
-      <DatePicker
-      mode="time"
-      minuteInterval={3}
-      onTimeChange={selectedTime => setTimeId(selectedTime)}
-    />
       <DragDropContext onDragEnd={handleDragDrop}>
       <div className="topbox">
           <Droppable droppableId="ROOT" type="group">
@@ -374,8 +366,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
 
                           <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
-                            <p>{item.timeReady}</p>
-                            <input type="time" id={`${item._id}`}/>
+                            <input type="time" id={`${item._id}`} value={item.timeReady}/>
                             <input type="submit" hidden/>
                           </form>
 
