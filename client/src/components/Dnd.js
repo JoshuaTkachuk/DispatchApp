@@ -370,11 +370,11 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                          
                           <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
                             <p>{item.timeReady}</p>
-                            <input type="time" id={`${item._id}`}/>
-                            <input type="submit" hidden/>
+                              <input type="time" id={`${item._id}`}/>
+                              <input type="submit" hidden/>
                           </form>
-                          <h4>{item.trailerType}</h4>
-                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button" > <HiOutlineXMark/> </button>
+                            <h4>{item.trailerType}</h4>
+                              <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button" > <HiOutlineXMark/> </button>
                           <div className="popup">Remove From Board</div>
                           </div>
 
@@ -383,13 +383,13 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           </div>
 
                           <div className="truck-body">
-                          <div className="truck-body1">
-                          <h4>{item.driverName}</h4>
-                          <h4>{item.phoneNum}</h4>
+                            <div className="truck-body1">
+                              <h4>{item.driverName}</h4>
+                              <h4>{item.phoneNum}</h4>
                           </div>
                           <div className="truck-body2">
-                          <h4>{item.trailerNum}</h4>
-                          <h4>{item.truckNum}</h4>
+                              <h4>{item.trailerNum}</h4>
+                              <h4>{item.truckNum}</h4>
 
                           </div>
                           </div>
