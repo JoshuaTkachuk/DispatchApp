@@ -53,14 +53,27 @@ body {
   padding: 1px;
   background-color: rgb(255, 255, 255);
   border-radius: .5vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  margin-top:1vh;
+  width: 20vw;
 }
+
 
 .truck-header {
   padding: 10px;
   display: flex;
   position: relative;
 }
+
+.item-container:hover .truck-body,
+.truck-body:hover {
+  display: block; 
+}
+
+.truck-body {
+  display: none; 
+}
+
 
 .truck-body1{
   padding: 10px;
@@ -84,7 +97,12 @@ body {
 
 .notes{
   padding: 5px;
-  background-color: rgb(226, 226, 226);
+  background-color: rgba(246, 243, 243, 0.524);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: .2vw;
+  text-align: left;
+  text-indent: .2vw; 
+  margin:.1rem;
 }
 
 .box-container {
@@ -106,7 +124,7 @@ body {
  .popup {
   display: none;
   position: absolute;
-  top: -5vh; /* Adjust as needed */
+  top: -5vh; 
   right: -9vw;
   background-color: #e8e8e8;
   border-radius: 1vw;

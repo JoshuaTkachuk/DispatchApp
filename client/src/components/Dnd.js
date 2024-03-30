@@ -50,6 +50,8 @@ function App(props) {
     
     ]);
 
+  
+
   useEffect(()=>{
     console.log(days, "logging days when useEffect runs")
     axios.get("http://localhost:8000/api/User", {withCredentials: true})
@@ -378,9 +380,10 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           </div>
 
                           <div className="notes"> 
-                            <p> form </p>
+                            <p> Notes: </p>
                           </div>
 
+                          <div className="truck-body">
                           <div className="truck-body1">
                           <h4>{item.driverName}</h4>
                           <h4>{item.phoneNum}</h4>
@@ -389,6 +392,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <h4>{item.trailerNum}</h4>
                           <h4>{item.truckNum}</h4>
 
+                          </div>
                           </div>
                           </div>
                           )}
@@ -419,4 +423,3 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
 
 export default App;
-

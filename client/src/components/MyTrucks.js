@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import "../styles/MyTrucks.css"
 
 const MyTrucks=()=>{
     
@@ -45,28 +46,33 @@ const MyTrucks=()=>{
     }
 
     return(
-        <div>
+        <div className="list">
             <h1>My Trucks</h1>
-            <Link to={"/home"}>Home</Link>
-            <Link to={"/addTruck"}>addTruck</Link>
+        <div className="links">  
+            <Link to={"/home"} style={{color:'blue', margin: '1rem'}}>Home</Link>
+            <Link to={"/addTruck"} style={{color:'blue', margin: '1rem'}}>Add Truck</Link>
+       </div>
             {
                 trucks.length > 0?
                     trucks.map((itm, idx)=>{
-                        return<div key={idx}>
-                            <table>
+                        return<div key={idx} className="table" style={{borderbottom: '1px solid #000'}}>
+                            <table stle={{margin:'0auto'}}>
                                 <tr>
-                                    <td>{itm.phoneNum}</td>
                                     <td>{itm.driverName}</td>
                                     <td>{itm.truckNum}</td>
                                     <td>{itm.trailerNum}</td>
                                     <td>{itm.dateReady}</td>
+
                                 </tr>
                             </table>
-                            <button onClick={(e)=> addToBoard(itm._id)}>add to list</button>
+                            <div>
+                            <button onClick={(e)=> addToBoard(itm._id)} style={{padding: '6px', borderRadius:'1vw', backgroundcolor: 'blue', border: 'none'}}>Add To Board</button>
+                            </div>
                         </div>
                     })
                     :<></>
             }
+          
         </div>
     );
 }
