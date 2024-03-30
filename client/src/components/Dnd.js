@@ -413,6 +413,9 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <div className="notes"> 
                             <p> Notes: </p>
                           </div>
+                          <div className="drop-down">
+                              <p>down arrow</p>
+                          </div>
 
 
                           <div id={index} className="truck-body" style={{display: truckVisible}}>

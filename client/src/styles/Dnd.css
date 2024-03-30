@@ -65,14 +65,27 @@ body {
   position: relative;
 }
 
-.item-container:hover .truck-body,
-.truck-body:hover{
-  display: block;
+.drop-down {
+  max-height: 0; 
+  overflow: hidden; 
 }
+
+.item-container:hover .drop-down {
+  max-height: 200px; 
+  transition: max-height 1s ease; 
+  transition-delay: .275s;
+}
+
+.item-container:not(:hover) .drop-down {
+  max-height: 0; 
+  
+}
+
 
 .truck-body {
   display: none; 
 }
+
 
 
 .truck-body1{
@@ -81,7 +94,7 @@ body {
   justify-content: space-between;
 }
 
-.truck-body2{
+.truck-body2 {
   padding: 10px;
   display:flex;
   justify-content: space-between;
@@ -95,7 +108,7 @@ body {
   width: 50vw;
 }
 
-.notes{
+.notes {
   padding: 5px;
   background-color: rgba(246, 243, 243, 0.524);
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
