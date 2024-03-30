@@ -387,7 +387,6 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}
-                          onClick={(e)=>changeVisible(e,index)}
                           >
 
                           <div className="truck-header">
@@ -401,8 +400,8 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                          
 
 
-                          <form >
-                            <input type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
+                          <form>
+                            <input className="time" type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
                             <input type="submit" hidden/>
                           </form>
                           <h4>{item.trailerType}</h4>
@@ -413,19 +412,19 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <div className="notes"> 
                             <p> Notes: </p>
                           </div>
-                          <div className="drop-down">
+                          <div className="drop-down" onClick={(e)=>changeVisible(e,index)}>
                               <p>down arrow</p>
                           </div>
 
 
                           <div id={index} className="truck-body" style={{display: truckVisible}}>
                             <div className="truck-body1">
-                              <h4>{item.driverName}</h4>
-                              <h4>{item.phoneNum}</h4>
+                              <p>{item.driverName}</p>
+                              <p>{item.phoneNum}</p>
                             </div>
                             <div className="truck-body2">
-                              <h4>{item.trailerNum}</h4>
-                              <h4>{item.truckNum}</h4>
+                              <p>{item.trailerNum}</p>
+                              <p>{item.truckNum}</p>
                             </div>
                           </div>
                           </div>
