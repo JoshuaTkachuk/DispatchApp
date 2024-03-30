@@ -12,6 +12,7 @@ function App(props) {
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
     const [timeId, setTimeId] = useState('10:00')
+    const [truckVisible, setTruckVisible] = useState("none")
     const [days,setDays] = useState([
       {
         date: new Date(d.setDate(d.getDate())),
@@ -293,16 +294,42 @@ const removeFromBoard = (truckId, dayId, indx)=>{
     };
     const handleTime=(e, truckId, dayId)=>{
       e.preventDefault();
-      // console.log(e, "save event")
-      // const timeReady = document.getElementById(truckId).value
-      // console.log(timeReady, "time ready element")
-      // axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
-      // .then((result)=>{
-      //   console.log(result)
-      // })
-      // .catch(err=>{
-      //   console.log(err)
-      // })
+
+      setDays(prevDays =>{
+        const newDays = [...prevDays]
+
+        newDays.forEach((day, idx)=>{
+
+          day.trucks.forEach((truck, indx)=>{
+            if(truck._id === truckId){
+              truck.timeReady = document.getElementById(truckId).value
+            }
+          })
+
+        })
+        return newDays
+      })
+
+      console.log(e, "save event")
+      const timeReady = document.getElementById(truckId).value
+      console.log(timeReady, "time ready element")
+      axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
+      .then((result)=>{
+        console.log(result)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+
+    const changeVisible=(e, index)=>{
+      e.preventDefault();
+      if(document.getElementById(index).style.display === "none"){
+        document.getElementById(index).style.display = "block"
+      }
+      else{
+        document.getElementById(index).style.display = "none"
+      }
     }
 
   
@@ -360,6 +387,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}
+                          onClick={(e)=>changeVisible(e,index)}
                           >
 
                           <div className="truck-header">
@@ -372,29 +400,28 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                          
 
-                          <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
-                            <input type="time" id={`${item._id}`} value={item.timeReady}/>
+                          <form >
+                            <input type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
                             <input type="submit" hidden/>
                           </form>
                           <h4>{item.trailerType}</h4>
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button" > <HiOutlineXMark/> </button>
-                          <div className="popup">Remove From Board</div>
+                          <div className="popup" >Remove From Board</div>
                           </div>
 
                           <div className="notes"> 
                             <p> Notes: </p>
                           </div>
 
-                          <div className="truck-body">
-                          <div className="truck-body1">
-                          <h4>{item.driverName}</h4>
-                          <h4>{item.phoneNum}</h4>
-                          </div>
-                          <div className="truck-body2">
-                          <h4>{item.trailerNum}</h4>
-                          <h4>{item.truckNum}</h4>
-
-                          </div>
+                          <div id={index} className="truck-body" style={{display: truckVisible}}>
+                            <div className="truck-body1">
+                              <h4>{item.driverName}</h4>
+                              <h4>{item.phoneNum}</h4>
+                            </div>
+                            <div className="truck-body2">
+                              <h4>{item.trailerNum}</h4>
+                              <h4>{item.truckNum}</h4>
+                            </div>
                           </div>
                           </div>
                           )}

@@ -66,8 +66,8 @@ body {
 }
 
 .item-container:hover .truck-body,
-.truck-body:hover {
-  display: block; 
+.truck-body:hover{
+  display: block;
 }
 
 .truck-body {
