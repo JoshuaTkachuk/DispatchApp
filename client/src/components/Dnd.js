@@ -400,6 +400,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                          
 
+
                           <form >
                             <input type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
                             <input type="submit" hidden/>
@@ -412,6 +413,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <div className="notes"> 
                             <p> Notes: </p>
                           </div>
+
 
                           <div id={index} className="truck-body" style={{display: truckVisible}}>
                             <div className="truck-body1">
