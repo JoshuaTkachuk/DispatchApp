@@ -25,10 +25,10 @@ body {
 
 .card {
   background-color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 5vw;
   justify-content: flex-start;
   border-radius: 3px;
-  margin: 1rem;
+  margin: .5rem;
   width: 20vw;
   display: flex;
   flex-direction: column;
@@ -51,24 +51,58 @@ body {
 
 .item-container {
   padding: 1px;
-  background-color: aqua;
+  background-color: rgb(255, 255, 255);
+  border-radius: .5vw;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  margin-top:1vh;
+  width: 20vw;
 }
+
 
 .truck-header {
   padding: 10px;
   display: flex;
+  position: relative;
 }
 
-.truck-body{
+.item-container:hover .truck-body,
+.truck-body:hover {
+  display: block; 
+}
+
+.truck-body {
+  display: none; 
+}
+
+
+.truck-body1{
   padding: 10px;
+  display:flex;
+  justify-content: space-between;
 }
 
-.truck-footer{
+.truck-body2{
   padding: 10px;
+  display:flex;
+  justify-content: space-between;
 }
 
-.form{
+.truck-body2 h4 {
+  width: 50vw;
+}
+
+.truck-body1 h4 {
+  width: 50vw;
+}
+
+.notes{
   padding: 5px;
+  background-color: rgba(246, 243, 243, 0.524);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: .2vw;
+  text-align: left;
+  text-indent: .2vw; 
+  margin:.1rem;
 }
 
 .box-container {
@@ -77,7 +111,29 @@ body {
   position: relative;
   width: 100%;
  }
+
+ .button{
+  position: absolute;
+  top: 1vh;
+  right: .5vw;
+  border-style: none;
+  background-color: white;
+  cursor: pointer;
+ }
  
+ .popup {
+  display: none;
+  position: absolute;
+  top: -5vh; 
+  right: -9vw;
+  background-color: #e8e8e8;
+  border-radius: 1vw;
+  padding: 3%;
+}
+
+.button:hover + .popup {
+  display: block;
+}
 
  @media (max-width: 600px) {
   .box-container {

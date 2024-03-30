@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import TimePicker from 'rc-time-picker';
-import 'rc-time-picker/assets/index.css';
 import "../styles/Dnd.css";
 import "../styles/TopBox.css";
+import { HiOutlineXMark } from "react-icons/hi2";
+
 
 
 function App(props) {
@@ -49,6 +49,8 @@ function App(props) {
       },
     
     ]);
+
+  
 
   useEffect(()=>{
     console.log(days, "logging days when useEffect runs")
@@ -366,27 +368,31 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
                           {/* work on implementing appt time below */}
 
-                          <TimePicker/>
+                         
                           <form onSubmit={(e)=>handleTime(e,item._id, day.id)}>
                             <p>{item.timeReady}</p>
                             <input type="time" id={`${item._id}`}/>
                             <input type="submit" hidden/>
                           </form>
-
-                          
-
-                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}>remove From board</button>
                           <h4>{item.trailerType}</h4>
+                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button" > <HiOutlineXMark/> </button>
+                          <div className="popup">Remove From Board</div>
                           </div>
+
+                          <div className="notes"> 
+                            <p> Notes: </p>
+                          </div>
+
                           <div className="truck-body">
+                          <div className="truck-body1">
                           <h4>{item.driverName}</h4>
                           <h4>{item.phoneNum}</h4>
+                          </div>
+                          <div className="truck-body2">
                           <h4>{item.trailerNum}</h4>
                           <h4>{item.truckNum}</h4>
 
                           </div>
-                          <div className="truck-footer">
-
                           </div>
                           </div>
                           )}
@@ -417,4 +423,3 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
 
 export default App;
-
