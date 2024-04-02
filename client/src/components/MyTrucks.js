@@ -51,30 +51,31 @@ const MyTrucks=()=>{
             <h1>My Trucks</h1>
         </div>
         <div className="links">  
-            <Link to={"/home"} style={{color:'blue', margin: '1rem'}}>Home</Link>
-            <Link to={"/addTruck"} style={{color:'blue', margin: '1rem'}}>Add Truck</Link>
+            <Link to={"/home"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Home</Link>
+            <Link to={"/addTruck"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Add Truck</Link>
        </div>
+       <div className="list">
             {
                 trucks.length > 0?
                     trucks.map((itm, idx)=>{
-                        return<div key={idx} className="list">
+                        return<div key={idx} className="list-items">
                    
-                                <div className="truckdata">
-                                    <div>{itm.driverName}</div>
-                                    <div>{itm.truckNum}</div>
-                                    <div>{itm.trailerNum}</div>
-                                    <div>{itm.dateReady}</div>
+                                <div className="truckdata" style={{paddingTop: '3vh'}}>
+                                    <div >{itm.driverName}</div>
+                                    <div >{itm.truckNum}</div>
+                                    <div >{itm.trailerNum}</div>
+                                    <div >{itm.dateReady}</div>
 
                                 </div>
                          
                             <div>
-                            <button onClick={(e)=> addToBoard(itm._id)} style={{padding: '6px', borderRadius:'1vw', backgroundcolor: 'blue', border: 'none'}}>Add To Board</button>
+                            <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button>
                             </div>
                         </div>
                     })
                     :<></>
             }
-          
+        </div>
         </div>
     );
 }

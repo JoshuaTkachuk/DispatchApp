@@ -21,10 +21,16 @@ const Home=()=>{
 
     
     return(
+        <div>
         <div className="mainheader">
             <h1>USKO Truck Board</h1>
-            <Link to={"/myTrucks"}>My Trucks</Link>
-            <button onClick={logout}>logout</button>
+            <button onClick={logout} className="logout" style={{position: 'absolute', right:'3vw', top: '3vw', padding: '.75vh .75vw .75vh .75vw', borderRadius:'.5vw', border: 'none'}}>logout</button>
+            <div>
+                <button className="mytruck-link">
+                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'blue'}}> My trucks</Link>
+                </button>
+            </div>
+            </div>
             <Dnd/>
             {
                 // trucks.length > 0?
@@ -45,6 +51,7 @@ const Home=()=>{
 
                 // removed truck list and implemented it into the Dnd component to be able to manipulate it with state
             }
+
         </div>
     );
 }

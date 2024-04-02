@@ -4,6 +4,8 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { SlArrowDown } from "react-icons/sl";
+
 
 
 
@@ -338,6 +340,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
    <div>
       <DragDropContext onDragEnd={handleDragDrop}>
       <div className="topbox">
+        <div className="header">
           <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -348,7 +351,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                     key={truck._id}
                   >
                     {(provided) => (
-                      <div
+                      <div className="top-item-container"
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
@@ -365,6 +368,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
               </div>
             )}
           </Droppable>
+          </div>
       </div>
 
       <div className="box-container">
@@ -388,7 +392,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           {...provided.draggableProps}
                           ref={provided.innerRef}
                           >
-
+                          
                           <div className="truck-header">
                           <h4>{item.homeLocation}</h4>
 
@@ -404,28 +408,32 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                             <input className="time" type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
                             <input type="submit" hidden/>
                           </form>
-                          <h4>{item.trailerType}</h4>
-                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button" > <HiOutlineXMark/> </button>
+                          <h4 className="trailer-type">{item.trailerType}</h4>
+                          <div className="button-remove"> 
+                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
                           <div className="popup" >Remove From Board</div>
+                          </div>
+                         
                           </div>
 
                           <div className="notes"> 
-                            <p> Notes: </p>
+                              <p> Notes:</p>
                           </div>
 
                           <div className="drop-down" onClick={(e)=>changeVisible(e,item.phoneNum)}>
-                              <p>down arrow</p>
+                              <SlArrowDown style={{ margin: '.2rem' }}/>
                           </div>
 
 
                           <div id={item.phoneNum} className="truck-body" style={{display: truckVisible}}>
+                            <span className="line"></span>
                             <div className="truck-body1">
-                              <p>{item.driverName}</p>
-                              <p>{item.phoneNum}</p>
+                              <p style={{marginRight:'.3vw'}}>{item.driverName}</p>
+                              <p style={{marginLeft:'.3vw'}}>{item.phoneNum}</p>
                             </div>
                             <div className="truck-body2">
-                              <p>{item.trailerNum}</p>
-                              <p>{item.truckNum}</p>
+                              <p style={{marginRight:'.3vw'}}>{item.trailerNum}</p>
+                              <p style={{marginLeft:'.3vw'}}>{item.truckNum}</p>
                             </div>
                           </div>
                           </div>

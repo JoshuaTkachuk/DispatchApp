@@ -5,6 +5,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 3vh;
+    border-radius: .5vw;
+    justify-content: flex-start;
+    max-width: 20vw;
+    flex-direction: column;
+    height:fit-content;
+    margin-bottom: 3vh;
    }
 
+   .top-item-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: .5vw;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    margin-top:1vh;
+    width: 100%;
+  }
