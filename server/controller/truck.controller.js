@@ -121,5 +121,15 @@ module.exports={
                 })
                 .catch((err)=>console.log(err))
         }
+    },
+    updateTruckEmptyLocation:(req,res)=>{
+        Truck.findByIdAndUpdate({ _id: req.body.truckId}, {emptyLocation: req.body.emptyLocation})
+        .then((result)=>{
+            console.log(result)
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 }
