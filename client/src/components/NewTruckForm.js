@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import "../styles/NewTruckForm.css";
+import { HiOutlineXMark } from "react-icons/hi2";
 
-const NewTruckForm=()=>{
+const NewTruckForm=({ open,onClose })=>{
     
     const [trucks,setTrucks] = useState([]);
     const [truckNum,setTruckNum] = useState("");
@@ -57,11 +59,19 @@ const NewTruckForm=()=>{
 
     }
     
+    if(!open) return null
+
     return(
-        <div>
+        <div className="popupForm" style={{position: 'absolute'}}>
+        <div className="formHeader">
             <h1>New Truck</h1>
+            <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'2vh'}}/> </p>
+
+        </div>
+        <div className="form" >
             <form onSubmit={submithandler}>
-                <label for="Ttype">trailer type</label>
+                
+                <label for="Ttype" className="tType">trailer type</label>
                 <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
                     <option value={"R"}>R</option>
                     <option selected value={"V"}>V</option>
@@ -70,6 +80,7 @@ const NewTruckForm=()=>{
                 <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
                 <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                 <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
+            
                 <div>
                     <label for="T">tanker</label>
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
@@ -90,8 +101,10 @@ const NewTruckForm=()=>{
                 </div>
                 <button type="submit">submit</button>
             </form>
-            <Link to={"/myTrucks"}>back</Link>
+          
+            </div>
         </div>
+     
     );
 }
 export default NewTruckForm;

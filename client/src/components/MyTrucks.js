@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import "../styles/MyTrucks.css"
+import "../styles/MyTrucks.css";
+import AddtruckPopup from "./AddTruckPopup";
 
 const MyTrucks=()=>{
     
@@ -46,13 +47,13 @@ const MyTrucks=()=>{
     }
 
     return(
-        <div className="page">
+        <div className="page" style={{zIndex:'-1'}}>
         <div className="header">
             <h1>My Trucks</h1>
         </div>
         <div className="links">  
             <Link to={"/home"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Home</Link>
-            <Link to={"/addTruck"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Add Truck</Link>
+            <AddtruckPopup/>
        </div>
        <div className="list">
             {
