@@ -1,28 +1,24 @@
-
-.container {
+.mainheader {
+  text-align: center;
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  font-size: 1.4vmax;
+}
+
+.logout{
+  cursor:pointer;
+}
+
+.mytruck-link {
   align-items: center;
-  height: 100vh; /* 100% of the viewport height */
-}
-
-.calendar {
-  display: flex;
-  flex-direction: column;
-  background-color: #f0f0f0;
-  border: 1px solid #aaaaaa;
-  margin-top: 10px;
-}
-
-.calendar-day {
-  flex: 1;
-  border-bottom: 1px solid #aaaaaa;
-  padding: 10px;
-  text-align: center;
-}
-
-.mainheader{
-  text-align: center;
-  margin-top: 50px;
+  margin-top: 1vh;
+  cursor: pointer;
+  padding: .75vh .75vw .75vh .75vw;
+  border-radius: .5vw;
+  border: none;
+  background: none;
+  font-size: 2.5vh;
 }
 

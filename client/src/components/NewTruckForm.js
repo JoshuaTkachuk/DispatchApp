@@ -1,8 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import "../styles/NewTruckForm.css";
+import { HiOutlineXMark } from "react-icons/hi2";
 
-const NewTruckForm=()=>{
+const NewTruckForm=({ open,onClose })=>{
     
     const [trucks,setTrucks] = useState([]);
     const [truckNum,setTruckNum] = useState("");
@@ -57,20 +59,37 @@ const NewTruckForm=()=>{
 
     }
     
+    if(!open) return null
+
     return(
-        <div>
+        <div className="popupForm" >
+        <div className="formHeader">
             <h1>New Truck</h1>
+            <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'2vh'}}/> </p>
+
+        </div>
+        <div className="form" >
             <form onSubmit={submithandler}>
-                <label for="Ttype">trailer type</label>
-                <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
-                    <option value={"R"}>R</option>
-                    <option selected value={"V"}>V</option>
-                </select>
-                <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
-                <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
-                <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
-                <div>
+
+                <div className="tType">
+                    <div for="Ttype">Trailer Type</div>
+                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
+                        <option value={"R"}>R</option>
+                        <option selected value={"V"}>V</option>
+                    </select>
+                </div>
+                <div className="formbody1">
+                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
+                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
+                </div>
+                <div className="formbody2">
+                    <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
+                    <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
+                </div>
+                <div className="formbody3">
+                    <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                </div>
+                <div className="endorsements">
                     <label for="T">tanker</label>
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
                     </input>
@@ -83,15 +102,16 @@ const NewTruckForm=()=>{
                     <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                 </div>
-                <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
-                <div>
+                <div className="dateReady">
                     <label for="date">Date Ready</label>
                     <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
                 </div>
-                <button type="submit">submit</button>
+                <button type="submit" className="buttonSubmit">Submit</button>
             </form>
-            <Link to={"/myTrucks"}>back</Link>
+          
+            </div>
         </div>
+     
     );
 }
 export default NewTruckForm;
