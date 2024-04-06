@@ -405,7 +405,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
 
                           <form>
-                            <input className="time" type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
+                            <input type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
                             <input type="submit" hidden/>
                           </form>
                           <h4 className="trailer-type">{item.trailerType}</h4>
