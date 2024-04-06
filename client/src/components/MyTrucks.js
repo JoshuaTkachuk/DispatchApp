@@ -5,6 +5,7 @@ import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
 
 
+
 const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
@@ -69,6 +70,7 @@ const MyTrucks=()=>{
         </div> 
         </div>
        </div>
+
        <div className="list">
             {
                 trucks.length > 0?
