@@ -1,0 +1,124 @@
+.popupForm{
+    max-width: 45vw;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+    background-color: grey;
+    border-radius: 3vw;
+}
+
+
+.form{
+    color: black;
+    padding-bottom: 6vh;
+    display: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formHeader {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2vh;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.openBtn{
+    padding: .5rem;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 1vw;
+    border: none;
+    width: 8vw;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tType{
+    display: flex;
+    justify-content: center;
+}
+
+.formbody1{
+    display: flex; 
+    justify-content: center;
+    margin: 1rem;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    justify-content: space-evenly;
+}
+
+.formbody1 input{
+    width: 12vw;
+    padding: 1vh;
+    border-radius: .3vw;
+    border: none;
+}
+
+.formbody2{
+    display: flex; 
+    justify-content: center;
+    margin: 1rem;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    justify-content: space-evenly;
+}
+
+.formbody2 input{
+    width: 12vw;
+    padding: 1vh;
+    border-radius: .3vw;
+    border: none;
+}
+
+.formbody3{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.formbody3 input{
+    width: 12vw;
+    padding: 1vh;
+    border-radius: .3vw;
+    border: none;
+}
+
+.endorsements{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    justify-content: space-evenly;
+    margin-left: 6vw;
+    margin-right: 6vw;
+}
+
+.dateReady{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    padding-bottom: 2vh;
+}
+
+.buttonSubmit{
+    padding: .5rem;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 1vw;
+    border: none;
+    width: 8vw;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
