@@ -294,26 +294,24 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       
             
     };
-    const handleTime=(e, truckId, dayId)=>{
+    const handleTime=(e, truckId, index)=>{
       e.preventDefault();
 
       setDays(prevDays =>{
         const newDays = [...prevDays]
 
-        newDays.forEach((day, idx)=>{
-
-          day.trucks.forEach((truck, indx)=>{
+          newDays[index].trucks.forEach((truck, indx)=>{
             if(truck._id === truckId){
-              truck.timeReady = document.getElementById(truckId).value
+              truck.timeReady = document.getElementById(`${truckId}Time`).value
             }
           })
 
-        })
+
         return newDays
       })
 
       console.log(e, "save event")
-      const timeReady = document.getElementById(truckId).value
+      const timeReady = document.getElementById(`${truckId}Time`).value
       console.log(timeReady, "time ready element")
       axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
       .then((result)=>{
@@ -332,6 +330,33 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       else{
         document.getElementById(index).style.display = "none"
       }
+    }
+
+
+    const handleLocation=(e, truckId, emptyLocation, dayIndex)=>{
+      e.preventDefault();
+
+      setDays(prevDays =>{
+        const newDays = [...prevDays]
+
+          newDays[dayIndex].trucks.forEach((truck, indx)=>{
+            if(truck._id === truckId){
+              truck.emptyLocation = emptyLocation
+            }
+          })
+
+
+        return newDays
+      })
+      
+      axios.put("http://localhost:8000/api/updateEmptyLocation",{truckId, emptyLocation})
+      .then((result)=>{
+        console.log(result)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+
     }
 
   
@@ -394,20 +419,11 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           >
                           
                           <div className="truck-header">
-                          <h4>{item.homeLocation}</h4>
-
-                          {/* work on implementing appt time below */}
-
-
-
-
-                         
-
-
+                          <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text" style={{width: "100px"}}/>
+                          <form >
+                            <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
                           <form>
-                            <input type="time" id={`${item._id}`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,day.id)}/>
-                            <input type="submit" hidden/>
-                          </form>
+
                           <h4 className="trailer-type">{item.trailerType}</h4>
                           <div className="button-remove"> 
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
