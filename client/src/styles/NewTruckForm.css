@@ -1,7 +1,7 @@
 .popupForm{
     max-width: 45vw;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -10,6 +10,12 @@
     border-radius: 3vw;
 }
 
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5); 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
 .form{
     color: black;

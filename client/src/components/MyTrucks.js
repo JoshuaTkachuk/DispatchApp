@@ -3,10 +3,12 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import "../styles/MyTrucks.css";
 import AddtruckPopup from "./AddTruckPopup";
+import NewTruckForm from "./NewTruckForm";
 
 const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
+    const [openForm, setOpenForm] = useState(false);
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/User", {withCredentials: true})
@@ -47,13 +49,24 @@ const MyTrucks=()=>{
     }
 
     return(
+        <div>
         <div className="page" style={{zIndex:'-1'}}>
         <div className="header">
             <h1>My Trucks</h1>
         </div>
         <div className="links">  
             <Link to={"/home"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Home</Link>
-            <AddtruckPopup/>
+        <div className={openForm == "false"? "" : "overlay"}>
+        <div> 
+
+            <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
+           
+            
+        </div>
+        <div> 
+        <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)}/>
+        </div>
+        </div>
        </div>
        <div className="list">
             {
@@ -76,6 +89,7 @@ const MyTrucks=()=>{
                     })
                     :<></>
             }
+        </div>
         </div>
         </div>
     );

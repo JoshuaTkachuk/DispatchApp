@@ -62,6 +62,7 @@ const NewTruckForm=({ open,onClose })=>{
     if(!open) return null
 
     return(
+        <div>
         <div className="popupForm" >
         <div className="formHeader">
             <h1>New Truck</h1>
@@ -95,22 +96,24 @@ const NewTruckForm=({ open,onClose })=>{
                     </input>
 
                     <label for="H">hazmat</label>
-                    <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
-                    </input>
+                        <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
+                        </input>
 
-                    <label for="DT">doubles/triples</label>
-                    <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
-                    </input>
-                </div>
-                <div className="dateReady">
-                    <label for="date">Date Ready</label>
-                    <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
-                </div>
-                <button type="submit" className="buttonSubmit">Submit</button>
-            </form>
+                        <label for="DT">doubles/triples</label>
+                            <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
+                            </input>
+                    </div>
+                    <div className="dateReady">
+                        <label for="date">Date Ready</label>
+                        <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
+                 </div>
+                    <button type="submit" className="buttonSubmit">Submit</button>
+                </form>
           
+                </div>
             </div>
         </div>
+       
      
     );
 }

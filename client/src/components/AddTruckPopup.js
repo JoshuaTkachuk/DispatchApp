@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import NewTruckForm from "./NewTruckForm";
 
-function AddTruckPopup() {
-    const [openForm, setOpenForm] = useState(false)
+function AddTruckPopup(props) {
+    const openForm = props.openForm
 
     return(
-        <div className="overlay">
+        <div className={openForm == "false"? "" : "overlay"}>
         <div> 
 
             <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
