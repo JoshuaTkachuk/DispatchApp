@@ -422,7 +422,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text" style={{width: "100px"}}/>
                           <form >
                             <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
-                          <form>
+                          </form>
 
                           <h4 className="trailer-type">{item.trailerType}</h4>
                           <div className="button-remove"> 
