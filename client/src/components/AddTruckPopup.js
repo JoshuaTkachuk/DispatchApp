@@ -5,8 +5,8 @@ function AddTruckPopup() {
     const [openForm, setOpenForm] = useState(false)
 
     return(
-        <div>
-        <div className="overlay"> 
+        <div className="overlay">
+        <div> 
 
             <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
            

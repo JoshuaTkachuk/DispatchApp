@@ -62,7 +62,7 @@ const NewTruckForm=({ open,onClose })=>{
     if(!open) return null
 
     return(
-        <div className="popupForm" style={{position: 'absolute'}}>
+        <div className="popupForm" >
         <div className="formHeader">
             <h1>New Truck</h1>
             <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'2vh'}}/> </p>
@@ -70,18 +70,26 @@ const NewTruckForm=({ open,onClose })=>{
         </div>
         <div className="form" >
             <form onSubmit={submithandler}>
-                
-                <label for="Ttype" className="tType">trailer type</label>
-                <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
-                    <option value={"R"}>R</option>
-                    <option selected value={"V"}>V</option>
-                </select>
-                <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
-                <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
-                <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
-            
-                <div>
+
+                <div className="tType">
+                    <div for="Ttype">Trailer Type</div>
+                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
+                        <option value={"R"}>R</option>
+                        <option selected value={"V"}>V</option>
+                    </select>
+                </div>
+                <div className="formbody1">
+                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
+                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
+                </div>
+                <div className="formbody2">
+                    <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
+                    <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
+                </div>
+                <div className="formbody3">
+                    <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                </div>
+                <div className="endorsements">
                     <label for="T">tanker</label>
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
                     </input>
@@ -94,12 +102,11 @@ const NewTruckForm=({ open,onClose })=>{
                     <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                 </div>
-                <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
-                <div>
+                <div className="dateReady">
                     <label for="date">Date Ready</label>
                     <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
                 </div>
-                <button type="submit">submit</button>
+                <button type="submit" className="buttonSubmit">Submit</button>
             </form>
           
             </div>
