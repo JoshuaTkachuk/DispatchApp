@@ -5,7 +5,6 @@ import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
 
 
-
 const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
