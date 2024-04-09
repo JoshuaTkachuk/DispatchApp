@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
 
+
 const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
@@ -49,22 +50,21 @@ const MyTrucks=()=>{
 
     return(
         <div>
-        <div className="page" style={{zIndex:'-1'}}>
+        <div className={openForm == false ? "" : "overlay"}>
+        </div>
+        <div className="page" >
         <div className="header">
-            <h1>My Trucks</h1>
+            <h1>Truck List</h1>
         </div>
         <div className="links">  
-            <Link to={"/home"} style={{color:'blue', margin: '1rem', textDecoration: 'none'}}>Home</Link>
-        <div className={openForm == "false"? "" : "overlay"}>
+            <Link to={"/home"} style={{color:'black', margin: '1rem', textDecoration: 'none'}}>Home</Link>
+        <div>
         <div> 
-
             <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
-           
-            
         </div>
         <div> 
-        <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)}/>
-        </div>
+          <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
+        </div> 
         </div>
        </div>
        <div className="list">
@@ -84,13 +84,21 @@ const MyTrucks=()=>{
                             <div>
                             <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button>
                             </div>
+                            
+
+                
                         </div>
                     })
                     :<></>
             }
         </div>
+        <div className="footer">
+            <p>Next Page</p>
+        </div>
+        
         </div>
         </div>
+    
     );
 }
 export default MyTrucks;

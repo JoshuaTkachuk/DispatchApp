@@ -1,24 +1,35 @@
-.mainheader {
-  text-align: center;
-  margin-top: 5vh;
+.mainHeader {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   font-size: 1.4vmax;
+  border-bottom: solid 1px hsl(222, 15%, 23%);
+  max-height: 10vh;
+  align-items: center;
 }
 
-.logout{
+.mainHeader h1{
+  margin-left: 2vw;
+}
+
+.mainHeader-right {
+    display: flex;
+    position: absolute;
+    right:3vw;
+    font-size: calc(4px + .5vw);
+}
+
+.logout {
   cursor:pointer;
+  padding: .75vh .75vw .75vh .75vw;
+  border-radius: .5vw; 
+  border: none;
 }
 
 .mytruck-link {
   align-items: center;
-  margin-top: 1vh;
   cursor: pointer;
-  padding: .75vh .75vw .75vh .75vw;
+  margin-right: 1vw;
   border-radius: .5vw;
   border: none;
   background: none;
-  font-size: 2.5vh;
 }
 

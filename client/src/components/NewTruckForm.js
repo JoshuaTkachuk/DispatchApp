@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import "../styles/NewTruckForm.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 
-const NewTruckForm=({ open,onClose })=>{
+const NewTruckForm=({ open, onClose })=>{
     
     const [trucks,setTrucks] = useState([]);
     const [truckNum,setTruckNum] = useState("");
@@ -63,10 +63,10 @@ const NewTruckForm=({ open,onClose })=>{
 
     return(
         <div>
-        <div className="popupForm" >
+        <div className="popupForm" style={{zIndex:'12'}}>
         <div className="formHeader">
             <h1>New Truck</h1>
-            <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'2vh'}}/> </p>
+            <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
 
         </div>
         <div className="form" >
@@ -86,10 +86,15 @@ const NewTruckForm=({ open,onClose })=>{
                 <div className="formbody2">
                     <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                     <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
-                </div>
+                </div> 
                 <div className="formbody3">
+                <div className="homeAddress">
                     <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                 </div>
+                <div className="dateReady">
+                        <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
+                 </div>
+                 </div>
                 <div className="endorsements">
                     <label for="T">tanker</label>
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
@@ -103,10 +108,6 @@ const NewTruckForm=({ open,onClose })=>{
                             <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
                             </input>
                     </div>
-                    <div className="dateReady">
-                        <label for="date">Date Ready</label>
-                        <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
-                 </div>
                     <button type="submit" className="buttonSubmit">Submit</button>
                 </form>
           
