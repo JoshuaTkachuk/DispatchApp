@@ -1,14 +1,3 @@
-:root {
-  --border-radius-500: 8px;
-  --color-on-background: #ffffff;
-  --fonts-primary: Karla, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0
-}
 
 
 .box-container {
@@ -18,17 +7,8 @@
   max-width: 100vw;
  }
 
-body {
-  background-color: hsl(222, 16%, 16%);
-  font-family: var(--fonts-primary);
-  font-size: 14px;
-  margin: 0;
-  min-height: 100vh;
-}
-
-
 .card {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.907);
   border-radius: .5vw;
   justify-content: flex-start;
   margin: .5rem;
@@ -39,11 +19,20 @@ body {
 }
 
 .header {
-  padding-bottom: 10px;
-  margin-bottom: 5px;
   color: rgb(0, 0, 0);
   font-size: calc(4px + .5vw);
   text-align: center;
+  margin-bottom: .1vh;
+}
+
+.header h1 {
+  margin-bottom: 0;
+
+}
+
+.header p{
+  margin-top: .1vh;
+  font-weight: bold;
 }
 
 
@@ -58,9 +47,8 @@ body {
   padding: 1px;
   background-color: rgb(255, 255, 255);
   border-radius: .5vw;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  margin-top:1vh;
   width: 18vw;
+  margin-bottom: .2vh;
 }
 
 
@@ -70,6 +58,18 @@ body {
   position: relative;
   justify-content: space-between;
   padding-left: 1vw;
+  max-height: 1.5vh;
+  align-items: center;
+}
+
+.truck-header form {
+  height: 1vh;
+}
+
+.truckHeader-Location input{
+  padding: 0;
+  border: none;
+  max-width: 8vw;
 }
 
 input[type=time] {
@@ -87,6 +87,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .trailer-type{
   padding-right: .6vw;
+  max-height: 1.5vh;
 }
 
 .item-container:hover .button-delete{
@@ -115,6 +116,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   border-radius: .7vw;
   padding: 1.5%;
   font-size: 1.5vh;
+  color:rgb(36, 36, 36);
 }
 
 .button-delete:hover + .popup {
@@ -206,15 +208,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 
 .notes {
-  padding: 5px;
+  padding-bottom: .1vh;
   background-color: rgba(246, 243, 243, 0.524);
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
   border-radius: .2vw;
   text-align: left;
+  text-align: top;
   text-indent: .2vw; 
-  margin:.1rem;
   color: rgb(68, 68, 68);
   font-size: .8vmax;
+  margin-left: .1vw;
+  margin-right: .1vw;
+  margin-bottom: .1vh;
 }
 
 

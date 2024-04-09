@@ -1,15 +1,16 @@
+
+
 .popupForm{
     max-width: 45vw;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
     background-color: grey;
-    border-radius: 3vw;
+    border-radius: .5vw;
 }
-
 
 .form{
     color: black;
@@ -32,17 +33,6 @@
     cursor: pointer;
 }
 
-.openBtn{
-    padding: .5rem;
-    display: flex;
-    margin: 0 auto;
-    border-radius: 1vw;
-    border: none;
-    width: 8vw;
-    justify-content: center;
-    font-weight: bold;
-    cursor: pointer;
-}
 
 .tType{
     display: flex;
@@ -56,12 +46,13 @@
     margin-left: 3vw;
     margin-right: 3vw;
     justify-content: space-evenly;
+    padding-bottom: 2vh;
 }
 
 .formbody1 input{
     width: 12vw;
-    padding: 1vh;
-    border-radius: .3vw;
+    padding: 2vh;
+    border-radius: 1vw;
     border: none;
 }
 
@@ -76,8 +67,8 @@
 
 .formbody2 input{
     width: 12vw;
-    padding: 1vh;
-    border-radius: .3vw;
+    padding: 2vh;
+    border-radius: 1vw;
     border: none;
 }
 
@@ -85,13 +76,32 @@
     display: flex;
     justify-content: center;
     margin: 1rem;
+    align-items: center;
+    margin-left: 3.2vw;
+    margin-right: 3.2vw;
+    justify-content: space-evenly;
 }
 
-.formbody3 input{
-    width: 12vw;
-    padding: 1vh;
-    border-radius: .3vw;
+.homeAddress input{
+    width: 14vw;
+    align-items: center;
+    padding: .8vw;
+    padding-bottom: 2vh;
+    margin: 1rem;
+    border-radius: 1vw;
     border: none;
+}
+
+.dateReady input{
+    width: 14vw;
+    align-items: center;
+    padding: .8vw;
+    padding-bottom: 2vh;
+    margin: 1rem;
+    border-radius: 1vw;
+    border: none;
+
+    
 }
 
 .endorsements{
@@ -99,15 +109,8 @@
     justify-content: center;
     margin: 1rem;
     justify-content: space-evenly;
-    margin-left: 6vw;
-    margin-right: 6vw;
-}
-
-.dateReady{
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
-    padding-bottom: 2vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
 
 .buttonSubmit{

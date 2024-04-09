@@ -362,7 +362,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
   
 
     return (
-   <div>
+   <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
       <div className="topbox">
         <div className="header">
@@ -402,7 +402,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
         <div className="card">
           <div className="header">
            <h1>{day.name}</h1>
-           <h2> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</h2>
+           <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
            </div>
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
@@ -419,10 +419,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           >
                           
                           <div className="truck-header">
+                          <div className="truckHeader-Location">
                           <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text" style={{width: "100px"}}/>
+                          </div>
                           <form >
                             <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
-                          <form>
+                          </form>
 
                           <h4 className="trailer-type">{item.trailerType}</h4>
                           <div className="button-remove"> 
