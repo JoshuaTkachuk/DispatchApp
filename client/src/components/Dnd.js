@@ -5,6 +5,7 @@ import "../styles/Dnd.css";
 import "../styles/TopBox.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowDown } from "react-icons/sl";
+import { SlArrowUp } from "react-icons/sl";
 
 
 
@@ -15,6 +16,7 @@ function App(props) {
     const [trucks, setTrucks] = useState([]);
     const [timeId, setTimeId] = useState('10:00')
     const [truckVisible, setTruckVisible] = useState("none")
+    const [upVisible, setUpVisible] = useState("none")
     const [days,setDays] = useState([
       {
         date: new Date(d.setDate(d.getDate())),
@@ -332,6 +334,15 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       }
     }
 
+    const handleClick = (e) => {
+      // Toggle visibility of arrows
+      if (upVisible === "none") {
+          setUpVisible("block");
+      } else {
+          setUpVisible("none");
+      }
+  };
+    
 
     const handleLocation=(e, truckId, emptyLocation, dayIndex)=>{
       e.preventDefault();
@@ -420,7 +431,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           
                           <div className="truck-header">
                           <div className="truckHeader-Location">
-                          <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text" style={{width: "100px"}}/>
+                          <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
                           </div>
                           <form >
                             <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
@@ -434,24 +445,29 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                          
                           </div>
 
-                          <div className="notes"> 
-                              <p> Notes:</p>
+                          <div > 
+                              <p className="notes"> Notes</p>
                           </div>
 
-                          <div className="drop-down" onClick={(e)=>changeVisible(e,item.phoneNum)}>
-                              <SlArrowDown style={{ margin: '.2rem' }}/>
-                          </div>
+                          <div onClick={(e) => handleClick (e)}>
+                              <div className="drop-down" onClick={(e)=>changeVisible(e,item.phoneNum)}>
+                                <SlArrowDown style={{ display: upVisible === "none" ? "block" : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+                                <SlArrowUp style={{ display: upVisible === "block" ? "block" : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+
+                        </div>
+
+        </div>
 
 
-                          <div id={item.phoneNum} className="truck-body" style={{display: truckVisible}}>
+                          <div id={item.phoneNum} className="truck-body" style={{display: truckVisible, justifyContent: 'center'}}>
                             <span className="line"></span>
                             <div className="truck-body1">
-                              <p style={{marginRight:'.3vw'}}>{item.driverName}</p>
-                              <p style={{marginLeft:'.3vw'}}>{item.phoneNum}</p>
+                              <p style={{marginRight:'1vw', width: 'auto'}}>{item.driverName}</p>
+                              <p style={{marginLeft:'1vw',  width: 'auto'}}>{item.phoneNum}</p>
                             </div>
                             <div className="truck-body2">
-                              <p style={{marginRight:'.3vw'}}>{item.trailerNum}</p>
-                              <p style={{marginLeft:'.3vw'}}>{item.truckNum}</p>
+                              <p style={{marginRight:'1vw', width: 'auto'}}>{item.trailerNum}</p>
+                              <p style={{marginLeft:'1vw', width: 'auto'}}>{item.truckNum}</p>
                             </div>
                           </div>
                           </div>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import "../styles/Login.css";
 
 const Login=()=>{
 
@@ -22,17 +23,17 @@ const Login=()=>{
     }
 
     return(
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h1>Login</h1>
-                <div>
+        <div className="loginFormm">
+            <div className="formHeaderr">
+            <h1>Login</h1>
+            </div>
+            <form onSubmit={handleSubmit} className="formOptionss">
                     <input type={"text"} placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
                     <input type={"password"} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-                    <button type={"submit"}>Login</button>
-                </div>   
+                    <button type={"submit"} className="loginButton" style={{textDecoration:'none'}}>Login</button>
             </form>
-            <div>
-                <h3>Don't have an account?</h3>
+            <div className="newUser">
+                <h4>Don't have an account?</h4>
                 <Link to={'/'}>Register</Link>
             </div>
         </div>

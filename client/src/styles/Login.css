@@ -1,0 +1,55 @@
+.loginFormm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    color: rgb(217,217,217);
+    display: flex;
+    flex-direction: column;
+}
+
+.formHeaderr{
+    margin: 0 auto;
+}
+
+.formOptionss { 
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    margin: 0 auto;
+}
+
+.formOptionss input {
+    margin-bottom: 3vh;
+    background: none;
+    border: 1px solid hsl(225, 15%, 22%);
+    padding: 1.5vh;
+    border-radius: .3vw;
+}
+
+.loginButtonn {
+    padding: .5rem;
+    display: flex;
+    margin: 0 auto;
+    border-radius: 1vw;
+    border: none;
+    width: 8vw;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer; 
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.newUser{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.newUser h4 {
+    margin-bottom: 0;
+}

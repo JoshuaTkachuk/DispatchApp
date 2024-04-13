@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link,useNavigate} from "react-router-dom";
+import "../styles/Register.css";
 
 const Register =()=>{
     const [email, setEmail] = useState("");
@@ -24,21 +25,26 @@ const Register =()=>{
 
 
     return(
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label for="email">Email: </label>
+        <div className="loginForm">
+            <div className="formHeader">
+                <h1>Create Your Account</h1>
+                <span></span>
+            </div>
+            <form onSubmit={handleSubmit} className="formOptions">
+                <label for="email">Email </label>
                 <input id="email" onChange={(e)=>setEmail(e.target.value)}/>
                 
-                <label for="password">Password: </label>
+                <label for="password">Password </label>
                 <input id="password" onChange={(e)=> setPassword(e.target.value)}/>
 
-                <label for="confirmPassword">Confirm Password: </label>
+                <label for="confirmPassword">Confirm Password </label>
                 <input id="confirmPassword" onChange={(e)=> setConfirmPassword(e.target.value)}/>
+                <button type="submit" className="loginButton" style={{textDecoration: 'none'}}> Submit </button>
 
-                <button type="submit"> Submit </button>
             </form>
-            <div>
-                <h3>Already Have an account?</h3>
+            <div className="exiUser">
+           
+                <h4>Already Have an account?</h4>
                 <Link to={"/login"}>Login</Link>
             </div>
         </div>
