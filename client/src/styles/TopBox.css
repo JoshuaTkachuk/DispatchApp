@@ -1,7 +1,7 @@
 .topbox {
     width: 200px;
     padding: 20px;
-    background-color: #fff;
+    background-color: hsl(227, 17%, 16%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin: auto;

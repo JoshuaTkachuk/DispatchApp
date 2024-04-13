@@ -53,14 +53,16 @@ const MyTrucks=()=>{
         <div className={openForm == false ? "" : "overlay"}>
         </div>
         <div className="page" >
-        <div className="header">
+        <div>
             <h1>Truck List</h1>
         </div>
+        <div className="headerTop-right"> 
         <div className="links">  
             <Link to={"/home"} style={{color:'black', margin: '1rem', textDecoration: 'none'}}>Home</Link>
         <div>
         <div> 
             <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
+        </div>
         </div>
         <div> 
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  

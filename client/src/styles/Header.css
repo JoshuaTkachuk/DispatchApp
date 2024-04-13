@@ -6,8 +6,21 @@
   align-items: center;
 }
 
+.mainHeader img {
+   height: 6vh;
+   margin-left: 2vh;
+}
+
 .mainHeader h1{
   margin-left: 2vw;
+  color: rgb(32, 32, 119);
+}
+
+.mainHeader h2 {
+  margin-left: 2vw;
+  font-weight: 85;
+  color: rgb(217,217,217);
+  font-size: 1.5vmax;
 }
 
 .mainHeader-right {
@@ -31,5 +44,6 @@
   border-radius: .5vw;
   border: none;
   background: none;
+  text-decoration: none;
+  font-weight: bold;
 }
-

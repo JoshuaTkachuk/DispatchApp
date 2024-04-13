@@ -30,7 +30,7 @@
     justify-content: space-between;
     width: 60vw;
     margin: 0 auto;
-    color: rgb(0, 0, 0); 
+    color: rgb(237, 237, 237); 
 }
 
 .links {
@@ -46,9 +46,9 @@
 .list{
     width: 75vw;
     margin: 0 auto;
-    background-color: hsl(0, 0%, 94%);
-    border-top-right-radius: 1vw;
-    border-top-left-radius: 1vw;
+    background-color: hsl(225, 10%, 24%);
+    border-top-right-radius: .75vw;
+    border-top-left-radius: .75vw;
 }
 
 .list-items{
@@ -56,7 +56,7 @@
     background: none;
     text-align: center;
     width: 75vw;
-    border-bottom: solid 1px hsl(0, 0%, 83%);
+    border-bottom: solid 1px hsl(225, 7%, 32%);
 }
 
 /*.list-items:nth-child(odd){ background-color:rgb(68, 68, 68); }*/

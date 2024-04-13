@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import Dnd from "./Dnd"
-import "../styles/Home.css"
+import "../styles/Header.css"
 
 
 const Logout=()=>{
@@ -24,12 +24,11 @@ return(
 
 
 <div className="mainHeader"> 
-
-    <h1>U</h1>
-    <h2> </h2>  
+    <img src="images/U_Logo1.png"/>
+    <h2>Home</h2>  
     <div className="mainHeader-right">
         <button className="mytruck-link">
-                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'black'}}> My Trucks</Link>
+                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> My Trucks</Link>
         </button>
         <button onClick={logout} className="logout" >logout</button>
     </div>
