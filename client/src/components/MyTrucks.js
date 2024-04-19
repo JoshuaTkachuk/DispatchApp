@@ -9,10 +9,13 @@ const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
     const [openForm, setOpenForm] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const [user,setUser] = useState([]);
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/User", {withCredentials: true})
         .then((result1)=>{
+            setUser(result1.data);
             const email = result1.data.email;
             axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
             .then((result)=>{
@@ -48,6 +51,47 @@ const MyTrucks=()=>{
         })
     }
 
+    const searchTrucks = (searchParam)=>{
+        console.log(searchParam, "searchParam")
+        if(searchParam){
+            axios.get(`http://localhost:8000/api/SearchTrucks/${searchParam}`, {withCredentials: true})
+        .then((result)=>{
+            console.log(result.data)
+            const rawTrucks = result.data
+                let newTrucks = []
+                rawTrucks.forEach((item, idx)=>{
+                    const d = new Date(item.dateReady)
+                    newTrucks.push({
+                        ...item, 
+                        dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                    })
+                })
+                setTrucks(newTrucks)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        }
+        if(!searchParam){
+            axios.get("http://localhost:8000/api/findTrucksById", {withCredentials: true})
+            .then((result)=>{
+                const rawTrucks = result.data
+                let newTrucks = []
+                rawTrucks.forEach((item, idx)=>{
+                    const d = new Date(item.dateReady)
+                    newTrucks.push({
+                        ...item, 
+                        dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                    })
+                })
+                setTrucks(newTrucks)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+    }
+
     return(
         <div>
         <div className={openForm == false ? "" : "overlay"}>
@@ -63,6 +107,9 @@ const MyTrucks=()=>{
         <div> 
             <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
         </div>
+        </div>
+        <div>
+            <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)}/>
         </div>
         <div> 
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
