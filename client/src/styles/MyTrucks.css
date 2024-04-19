@@ -21,16 +21,7 @@
     margin-top: 3vh;
     font-size: 50px;
     text-align: center;
-}
-
-.truckdata{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-between;
-    width: 60vw;
-    margin: 0 auto;
-    color: rgb(237, 237, 237); 
+    color: rgb(31, 44, 112);
 }
 
 .links {
@@ -43,6 +34,33 @@
     margin-bottom: 3vh;
 }
 
+.tableHeader {
+    display: flex;
+    height: 5vh;
+    border-bottom: solid 1px hsl(225, 7%, 32%);
+}
+
+.selectAllBox { 
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+}
+
+.columnValues { 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 5 equal columns */
+    grid-gap: 1vw;
+    align-items: center;
+    font-size: 2vh;
+    margin: 0 auto;
+    width: 65vw;
+}
+
+.columnValues h3 {
+    margin: 0;
+    font-weight: 75;
+}
+
 .list{
     width: 75vw;
     margin: 0 auto;
@@ -52,14 +70,34 @@
 }
 
 .list-items{
-    margin: 0 auto;
+    height: 10vh;
+    display: flex;
+    color: rgb(237, 237, 237); 
     background: none;
     text-align: center;
+    justify-content: center;
     width: 75vw;
     border-bottom: solid 1px hsl(225, 7%, 32%);
 }
 
 /*.list-items:nth-child(odd){ background-color:rgb(68, 68, 68); }*/
+
+.truckdata{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 5 equal columns */
+    grid-gap: 1vw;
+    width: 65vw;
+    align-items: center;
+}
+
+.checkBox { 
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    color: hsl(224, 7%, 33%);
+}
+
 
 .add-button {
     padding: 6px;

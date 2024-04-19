@@ -1,23 +1,23 @@
 .topbox {
-    width: 200px;
-    padding: 20px;
+    width: 20vw;
+    padding: 3vh;
     background-color: hsl(227, 17%, 16%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    margin-top: 5vh !important;
     margin: auto;
-    margin-top: 3vh;
     border-radius: .5vw;
-    justify-content: flex-start;
-    max-width: 20vw;
-    flex-direction: column;
-    height:fit-content;
     margin-bottom: 3vh;
+    color: rgb(217,21 7,217);
+    align-items: center;
+    justify-content: center;
    }
 
    .top-item-container {
-    background-color: rgb(255, 255, 255);
-    border-radius: .5vw;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-    margin-top:1vh;
+    padding: 1px;
+    background-color:  hsl(226, 12%, 21%);
+    border-radius: .2vw;
     width: 100%;
-  }
+    margin-bottom: .2vh;
+    border-left: 3px solid green;
+    border-bottom-left-radius: .4vw;
+   }
