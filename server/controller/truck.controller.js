@@ -131,5 +131,34 @@ module.exports={
         .catch(err=>{
             console.log(err)
         })
+    },
+    searchTrucks:(req,res)=>{
+        // find trucks using operators and filter by user while also querying to find all matches for the searchParam
+        console.log(req.params)
+        Truck.find({
+            $and:[
+                {createdBy: req.jwtpayload.id},
+                {$or:[{driverName:new RegExp(req.params.searchParam, "i")},{truckNum:new RegExp(req.params.searchParam, "i")},{trailerNum:new RegExp(req.params.searchParam, "i")}]}
+            ]
+        })
+        .then((result)=>{
+            console.log(result, "result after query")
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
+        
+    },
+    findTrucksById:(req,res)=>{
+        Truck.find({createdBy: req.jwtpayload.id})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
+
 }

@@ -5,7 +5,9 @@ module.exports = app =>{
     app.post("/api/truck", authenticate, truckController.CreateTruck);
     app.get("/api/allTrucks", truckController.getAllTrucks);
     app.get("/api/searchByDriverName/:driverName", truckController.searchByDriverName);
-    app.get("/api/TrucksByUserID/:email", authenticate, truckController.findTrucksByUserId)
+    app.get("/api/TrucksByUserID/:email", authenticate, truckController.findTrucksByUserId);
+    app.get("/api/findTrucksById", authenticate, truckController.findTrucksById)
+    app.get("/api/SearchTrucks/:searchParam", authenticate,  truckController.searchTrucks)
     app.put("/api/addToBoard/", truckController.addToBoard);
     app.put("/api/removeFromBoard", truckController.removeFromBoard);
     app.put("/api/updateDate", truckController.updateTruckDate);
