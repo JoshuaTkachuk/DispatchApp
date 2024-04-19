@@ -3,12 +3,17 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { MdCheckBox } from "react-icons/md";
+
+
 
 
 const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
     const [openForm, setOpenForm] = useState(false);
+    const [checkVisible, setCheckVisible] = useState("none")
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/User", {withCredentials: true})
@@ -48,6 +53,15 @@ const MyTrucks=()=>{
         })
     }
 
+    const handleClick = (e) => {
+        // Toggle visibility of arrows
+        if (checkVisible === "none") {
+            setCheckVisible("block");
+        } else {
+            setCheckVisible("none");
+        }
+    };
+
     return(
         <div>
         <div className={openForm == false ? "" : "overlay"}>
@@ -70,22 +84,38 @@ const MyTrucks=()=>{
         </div>
        </div>
        <div className="list">
+       <div className="tableHeader">
+       <div onClick={(e) => handleClick (e)} className="selectAllBox">
+                                        <MdCheckBoxOutlineBlank style={{ display: checkVisible === "none" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                        <MdCheckBox style={{ display: checkVisible === "block" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+        </div> 
+        <div className="columnValues">
+        <h3> Name </h3>
+        <h3> Truck Number </h3>
+        <h3> Trailer Number </h3>
+        <h3> Date Ready </h3>
+       </div>
+       </div>
             {
                 trucks.length > 0?
                     trucks.map((itm, idx)=>{
                         return<div key={idx} className="list-items">
+                             <div onClick={(e) => handleClick (e)} className="checkBox">
+                                        <MdCheckBoxOutlineBlank style={{ display: checkVisible === "none" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                        <MdCheckBox style={{ display: checkVisible === "block" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                    </div>
                    
-                                <div className="truckdata" style={{paddingTop: '3vh'}}>
-                                    <div >{itm.driverName}</div>
-                                    <div >{itm.truckNum}</div>
-                                    <div >{itm.trailerNum}</div>
-                                    <div >{itm.dateReady}</div>
+                                <div className="truckdata">
+                                    <div style={{justifySelf:'start'}}>{itm.driverName}</div>
+                                    <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
+                                    <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
+                                    <div style={{justifySelf:'start'}}>{itm.dateReady}</div>
 
                                 </div>
                          
                             <div>
                             <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button>
-                            </div>
+                            </div> 
                             
 
                 

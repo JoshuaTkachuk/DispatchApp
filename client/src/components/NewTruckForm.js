@@ -85,29 +85,34 @@ const NewTruckForm=({ open, onClose })=>{
                 </div>
                 <div className="formbody2">
                     <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
-                    <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)}></input>
+                    <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
                 </div> 
                 <div className="formbody3">
+                <div className="formbody3Left">
                 <div className="homeAddress">
                     <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                 </div>
                 <div className="dateReady">
                         <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
-                 </div>
-                 </div>
+                </div>
+                </div>
                 <div className="endorsements">
-                    <label for="T">tanker</label>
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
                     </input>
+                        <label for="T">tanker</label>
 
-                    <label for="H">hazmat</label>
-                        <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
-                        </input>
+                    <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
+                    </input>
+                        <label for="H">hazmat</label>
 
+                    <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
+                    </input>
                         <label for="DT">doubles/triples</label>
-                            <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
-                            </input>
                     </div>
+                    </div>
+                        <div className="truckNotes">
+                            <input></input>
+                        </div>
                     <button type="submit" className="buttonSubmit">Submit</button>
                 </form>
           
