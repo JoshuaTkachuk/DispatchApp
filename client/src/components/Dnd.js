@@ -376,8 +376,10 @@ const removeFromBoard = (truckId, dayId, indx)=>{
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
       <div className="topbox">
-        <div className="header">
+        <div className="top-header">
           <h1> TBD </h1>
+        </div>
+        <div className="items-container"> 
           <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -393,9 +395,12 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                       >
-                        <div>
+                        <div className="top-item-header">
+                        <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
+                        <p className="top-popup">Remove From Board</p>
+                        </div>
+                        <div className="top-truck-data"> 
                           <h3>{truck.driverName}</h3>
-                          <button onClick={(e)=> removeFromBoard(truck._id)}>remove From board</button>
                         </div>
                       </div>
                     )}
@@ -439,11 +444,8 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           </form>
 
                           <h4 className="trailer-type">{item.trailerType}</h4>
-                          <div className="button-remove"> 
                           <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
-                          <div className="popup" >Remove From Board</div>
-                          </div>
-                         
+                          <p className="popup" >Remove From Board</p>
                           </div>
 
                           <div > 
