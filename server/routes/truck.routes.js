@@ -8,6 +8,7 @@ module.exports = app =>{
     app.get("/api/TrucksByUserID/:email", authenticate, truckController.findTrucksByUserId);
     app.get("/api/findTrucksById", authenticate, truckController.findTrucksById)
     app.get("/api/SearchTrucks/:searchParam", authenticate,  truckController.searchTrucks)
+    app.get("/api/filterTrucks/:Ttype/:endorsements", authenticate, truckController.filterTrucks)
     app.put("/api/addToBoard/", truckController.addToBoard);
     app.put("/api/removeFromBoard", truckController.removeFromBoard);
     app.put("/api/updateDate", truckController.updateTruckDate);

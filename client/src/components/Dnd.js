@@ -334,12 +334,15 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       }
     }
 
-    const handleClick = (e) => {
+    const handleClick = (id) => {
       // Toggle visibility of arrows
-      if (upVisible === "none") {
-          setUpVisible("block");
-      } else {
-          setUpVisible("none");
+      if(document.getElementById(`${id}downArrow`).style.display === "block"){
+        document.getElementById(`${id}downArrow`).style.display = "none"
+        document.getElementById(`${id}upArrow`).style.display = "block"
+      }
+      else{
+        document.getElementById(`${id}downArrow`).style.display = "block"
+        document.getElementById(`${id}upArrow`).style.display = "none"
       }
   };
     
@@ -450,17 +453,17 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                               <p className="notes"> Notes</p>
                           </div>
 
-                          <div onClick={(e) => handleClick (e)}>
-                              <div className="drop-down" onClick={(e)=>changeVisible(e,item.phoneNum)}>
-                                <SlArrowDown style={{ display: upVisible === "none" ? "block" : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
-                                <SlArrowUp style={{ display: upVisible === "block" ? "block" : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+                          <div onClick={(e) => handleClick(item._id)}>
+                              <div className="drop-down" onClick={(e)=>changeVisible(e,item._id)}>
+                              <SlArrowDown id={`${item._id}downArrow`} style={{display : "block", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+                              <SlArrowUp id={`${item._id}upArrow`} style={{display : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
 
                         </div>
 
         </div>
 
 
-                          <div id={item.phoneNum} className="truck-body" style={{display: truckVisible, justifyContent: 'center'}}>
+                          <div id={item._id} className="truck-body" style={{display: truckVisible, justifyContent: 'center'}}>
                             <span className="line"></span>
                             <div className="truck-body1">
                               <p style={{marginRight:'1vw', width: 'auto'}}>{item.driverName}</p>
