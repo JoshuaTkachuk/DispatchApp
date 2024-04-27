@@ -159,6 +159,66 @@ module.exports={
         .catch(err=>{
             console.log(err)
         })
-    }
-
+    },
+    filterTrucks:(req,res)=>{
+        console.log(req.params, "params")
+        if(req.params.Ttype !== "all" && req.params.endorsements !== "all"){
+            console.log("im here")
+            Truck.find({
+                $and:[
+                    {createdBy: req.jwtpayload.id},
+                    {trailerType: req.params.Ttype},
+                    {endorsements:req.params.endorsements}
+                ]
+            })
+            .then((result)=>{
+                res.json(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+        if(req.params.Ttype !== "all" && req.params.endorsements === "all" ){
+            Truck.find({
+                $and:[
+                    {createdBy: req.jwtpayload.id},
+                    {trailerType: req.params.Ttype}
+                ]
+            })
+            .then((result)=>{
+                res.json(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+        if(req.params.Ttype === "all" && req.params.endorsements !== "all" ){
+            console.log(req.params.endorsements, "endorsement")
+            Truck.find({
+                $and:[
+                    {createdBy: req.jwtpayload.id},
+                    {endorsements:req.params.endorsements}
+                ]
+            })
+            .then((result)=>{
+                res.json(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+        if(req.params.Ttype === "all" && req.params.endorsements === "all" ){
+            Truck.find({
+                $and:[
+                    {createdBy: req.jwtpayload.id}
+                ]
+            })
+            .then((result)=>{
+                res.json(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        }
+}
 }

@@ -103,7 +103,7 @@ const NewTruckForm=({ open, onClose })=>{
                     </input>
                         <label for="H">hazmat</label>
 
-                    <input name="endorsements" id="DT" value="Doubles/Triples" type="checkbox" onChange={(e)=>setChecked("DT")}>
+                    <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                         <label for="DT">doubles/triples</label>
                     </div>

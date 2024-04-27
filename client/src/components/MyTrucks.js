@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import axios from "axios";
-import {Link, useNavigate} from "react-router-dom";
+import axios, { all } from "axios";
+import {Link} from "react-router-dom";
 import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
@@ -16,14 +16,10 @@ const MyTrucks=()=>{
 
     const [checkVisible, setCheckVisible] = useState("none")
 
-    const [selected, setSelected] = useState([]);
-    const [user,setUser] = useState([]);
-
 
     useEffect(()=>{
         axios.get("http://localhost:8000/api/User", {withCredentials: true})
         .then((result1)=>{
-            setUser(result1.data);
             const email = result1.data.email;
             axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
             .then((result)=>{
@@ -71,6 +67,8 @@ const MyTrucks=()=>{
     const searchTrucks = (searchParam)=>{
         console.log(searchParam, "searchParam")
         if(searchParam){
+            document.getElementById("Ttype").value = "all";
+            document.getElementById("endorsements").value = "all";
             axios.get(`http://localhost:8000/api/SearchTrucks/${searchParam}`, {withCredentials: true})
         .then((result)=>{
             console.log(result.data)
@@ -90,6 +88,8 @@ const MyTrucks=()=>{
         })
         }
         if(!searchParam){
+            document.getElementById("Ttype").value = "all";
+            document.getElementById("endorsements").value = "all";
             axios.get("http://localhost:8000/api/findTrucksById", {withCredentials: true})
             .then((result)=>{
                 const rawTrucks = result.data
@@ -108,11 +108,70 @@ const MyTrucks=()=>{
             })
         }
     }
+    const filterTrucks = (e, trailerType, endorsements) =>{
+        console.log("filter trucks function being called")
+        console.log(trailerType, "trailer type")
+        console.log(endorsements, "endorsements")
+        axios.get(`http://localhost:8000/api/filterTrucks/${trailerType}/${endorsements}`, {withCredentials: true})
+             .then((result)=>{
+                const rawTrucks = result.data
+                let newTrucks = []
+                rawTrucks.forEach((item, idx)=>{
+                    const d = new Date(item.dateReady)
+                    newTrucks.push({
+                        ...item, 
+                        dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                    })
+                })
+                setTrucks(newTrucks)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        
+
+        // if(type !== "all"){
+        //     axios.get(`http://localhost:8000/api/TrucksByTrailerType/${type}`, {withCredentials: true})
+        //     .then((result)=>{
+        //         const rawTrucks = result.data
+        //         let newTrucks = []
+        //         rawTrucks.forEach((item, idx)=>{
+        //             const d = new Date(item.dateReady)
+        //             newTrucks.push({
+        //                 ...item, 
+        //                 dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+        //             })
+        //         })
+        //         setTrucks(newTrucks)
+        //     })
+        //     .catch(err=>{
+        //         console.log(err)
+        //     })
+        // }
+        // else(
+        //     axios.get("http://localhost:8000/api/findTrucksById", {withCredentials: true})
+        //     .then((result)=>{
+        //         const rawTrucks = result.data
+        //         let newTrucks = []
+        //         rawTrucks.forEach((item, idx)=>{
+        //             const d = new Date(item.dateReady)
+        //             newTrucks.push({
+        //                 ...item, 
+        //                 dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+        //             })
+        //         })
+        //         setTrucks(newTrucks)
+        //     })
+        //     .catch(err=>{
+        //         console.log(err)
+        //     })
+        // )
+    }
 
 
     return(
         <div>
-        <div className={openForm == false ? "" : "overlay"}>
+        <div className={openForm === false ? "" : "overlay"}>
         </div>
         <div className="page" >
             <h1>Truck List</h1>
@@ -126,6 +185,20 @@ const MyTrucks=()=>{
         <div>
             <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)}/>
         </div>
+        <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
+            <select defaultValue={"all"} name="Ttype" id="Ttype" >
+                <option value={"all"} >all</option>
+                <option value="V">V</option>
+                <option value="R">R</option>
+            </select>
+            <select defaultValue={"all"} name="endorsements" id="endorsements">
+                <option value={"all"} >all</option>
+                <option value="Hazmat" >Hazmat</option>
+                <option value="Tanker" >Tanker</option>
+                <option value="DT" >Doubles/Triples</option>
+            </select>
+        </form>
+        <label for="Ttype">Trailer Type:</label>
         <div> 
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
