@@ -12,7 +12,17 @@
     justify-content: center;
    }
 
-   .top-item-container {
+.top-header {
+    color: rgb(237, 237, 237);
+    font-size: calc(4px + .5vw);
+    text-align: center;
+}
+
+.top-header h1 {
+    margin-top: 0;
+}
+
+.top-item-container {
     padding: 1px;
     background-color:  hsl(226, 12%, 21%);
     border-radius: .2vw;
@@ -20,4 +30,42 @@
     margin-bottom: .2vh;
     border-left: 3px solid green;
     border-bottom-left-radius: .4vw;
+   }
+
+   .top-item-header { 
+    display: flex;
+    justify-content: right;
+    position: relative;
+   }
+
+   .top-item-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+   }
+
+   .top-popup {
+    opacity: 0;
+    top: -1.5vh;
+    right: -7vw;
+    background-color:  hsl(227, 14%, 19%);
+    border-radius: .7vw;
+    padding: .2vh;
+    font-size: 1.5vh;
+    color:rgb(217, 217, 217);
+    position: relative;
+    min-width: fit-content;
+   }
+
+   .top-item-button:hover + .top-popup {
+    display: block;
+    opacity: 1;
+    transition-delay: 1s; 
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+   .top-truck-data h3 {
+    margin-top: 0;
    }

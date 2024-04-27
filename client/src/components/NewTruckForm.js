@@ -89,13 +89,11 @@ const NewTruckForm=({ open, onClose })=>{
                 </div> 
                 <div className="formbody3">
                 <div className="formbody3Left">
-                <div className="homeAddress">
                     <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                 </div>
-                <div className="dateReady">
+                {/* <div className="dateReady">
                         <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
-                </div>
-                </div>
+                </div> */}
                 <div className="endorsements">
                     <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
                     </input>

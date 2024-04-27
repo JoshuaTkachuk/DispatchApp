@@ -115,10 +115,7 @@ const MyTrucks=()=>{
         <div className={openForm == false ? "" : "overlay"}>
         </div>
         <div className="page" >
-        <div>
             <h1>Truck List</h1>
-        </div>
-        <div className="headerTop-right"> 
         <div className="links">  
             <Link to={"/home"} style={{color:'black', margin: '1rem', textDecoration: 'none'}}>Home</Link>
         <div>
@@ -133,7 +130,6 @@ const MyTrucks=()=>{
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
         </div>
-       </div>
 
        <div className="list">
        <div className="tableHeader">
@@ -165,9 +161,9 @@ const MyTrucks=()=>{
 
                                 </div>
                          
-                            <div>
-                            <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button>
-                            </div> 
+                        
+                            <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button> 
+                    
                             
 
                 
