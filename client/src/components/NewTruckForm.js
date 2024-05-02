@@ -4,9 +4,8 @@ import {Link, useNavigate} from "react-router-dom";
 import "../styles/NewTruckForm.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 
-const NewTruckForm=({ open, onClose })=>{
+const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
     
-    const [trucks,setTrucks] = useState([]);
     const [truckNum,setTruckNum] = useState("");
     const [trailerNum,setTrailerNum] = useState("");
     const [driverName,setDriverName] = useState("");
@@ -36,7 +35,8 @@ const NewTruckForm=({ open, onClose })=>{
         }
         axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady, trailerType: tType}, {withCredentials: true})
             .then((result)=>{
-                console.log(result.data)
+                console.log(result.data, "new truck made")
+                setTrucks([...trucks, result.data])
             })
             .catch(error =>{
                 console.log(error)

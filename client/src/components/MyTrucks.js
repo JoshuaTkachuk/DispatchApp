@@ -15,6 +15,8 @@ const MyTrucks=()=>{
     const [openForm, setOpenForm] = useState(false);
 
     const [checkVisible, setCheckVisible] = useState("none")
+    const [selectedTrucks, setSelectedTrucks] = useState([]);
+    const [buttonsVisibile, setButtonsVisible] = useState(false);
 
 
     useEffect(()=>{
@@ -45,25 +47,46 @@ const MyTrucks=()=>{
         })
     },[])
 
-    const addToBoard =(id)=>{
-        axios.put("http://localhost:8000/api/addToBoard",{id})
-        .then((result)=>{
-            console.log(result)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
-    }
 
 
-    const handleClick = (e) => {
+    const handleClick = (id) => {
         // Toggle visibility of arrows
-        if (checkVisible === "none") {
-            setCheckVisible("block");
-        } else {
-            setCheckVisible("none");
+        
+        if(document.getElementById(`${id}blankBox`).style.display === "none"){
+            let filteredTrucks = selectedTrucks.filter((truck) => truck !== id);
+            if(filteredTrucks.length <= 0){
+                setButtonsVisible(false)
+            }
+            setSelectedTrucks(filteredTrucks);
+            document.getElementById(`${id}blankBox`).style.display = "block"
+            document.getElementById(`${id}checkBox`).style.display = "none"
+        }
+        else{
+            let newTrucks = [...selectedTrucks, id];
+            setButtonsVisible(true)
+            setSelectedTrucks(newTrucks)
+            document.getElementById(`${id}blankBox`).style.display = "none"
+            document.getElementById(`${id}checkBox`).style.display = "block"
         }
     };
+    const selectAll =()=>{
+        if(checkVisible === "none"){
+            setCheckVisible("true")
+            setSelectedTrucks(()=>{
+                let truckIds = []
+                trucks.forEach((truck,idx)=>{
+                    truckIds.push(truck._id)
+                })
+                return truckIds
+            });
+            setButtonsVisible(true)
+        }
+        else{
+            setCheckVisible("none")
+            setSelectedTrucks([]);
+            setButtonsVisible(false)
+        }
+    }
     const searchTrucks = (searchParam)=>{
         console.log(searchParam, "searchParam")
         if(searchParam){
@@ -128,44 +151,49 @@ const MyTrucks=()=>{
             .catch(err=>{
                 console.log(err)
             })
+            
+    }
+    const addToBoard =(e)=>{
+        e.preventDefault();
+        console.log(selectedTrucks, "selected trucks to be added")
+        selectedTrucks.forEach((truck,idx)=>{
+            document.getElementById(`${truck}blankBox`).style.display = "block"
+            document.getElementById(`${truck}checkBox`).style.display = "none"
+            console.log(truck, "iteration per truck adding to board")
+            axios.put("http://localhost:8000/api/addToBoard",{truck})
+            .then((result)=>{
+                console.log(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        })
+        setSelectedTrucks([]);
+        setButtonsVisible(false);
+        setCheckVisible("none");
         
+    }
+    const deleteTrucks =(e)=>{
+        e.preventDefault();
+        selectedTrucks.forEach((truck,idx)=>{
+            document.getElementById(`${truck}blankBox`).style.display = "block"
+            document.getElementById(`${truck}checkBox`).style.display = "none"
+            axios.delete(`http://localhost:8000/api/deleteById/${truck}`)
+            .then((result)=>{
+                console.log(result)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+        })
+        setTrucks(()=>{
+            return trucks.filter(truck => !selectedTrucks.includes(truck._id));
 
-        // if(type !== "all"){
-        //     axios.get(`http://localhost:8000/api/TrucksByTrailerType/${type}`, {withCredentials: true})
-        //     .then((result)=>{
-        //         const rawTrucks = result.data
-        //         let newTrucks = []
-        //         rawTrucks.forEach((item, idx)=>{
-        //             const d = new Date(item.dateReady)
-        //             newTrucks.push({
-        //                 ...item, 
-        //                 dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
-        //             })
-        //         })
-        //         setTrucks(newTrucks)
-        //     })
-        //     .catch(err=>{
-        //         console.log(err)
-        //     })
-        // }
-        // else(
-        //     axios.get("http://localhost:8000/api/findTrucksById", {withCredentials: true})
-        //     .then((result)=>{
-        //         const rawTrucks = result.data
-        //         let newTrucks = []
-        //         rawTrucks.forEach((item, idx)=>{
-        //             const d = new Date(item.dateReady)
-        //             newTrucks.push({
-        //                 ...item, 
-        //                 dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
-        //             })
-        //         })
-        //         setTrucks(newTrucks)
-        //     })
-        //     .catch(err=>{
-        //         console.log(err)
-        //     })
-        // )
+        })
+        
+        setCheckVisible("none");
+        setButtonsVisible(false);
+        setSelectedTrucks([]);
     }
 
 
@@ -186,11 +214,13 @@ const MyTrucks=()=>{
             <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)}/>
         </div>
         <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
+            <label for="Ttype">Trailer Type:</label>
             <select defaultValue={"all"} name="Ttype" id="Ttype" >
                 <option value={"all"} >all</option>
                 <option value="V">V</option>
                 <option value="R">R</option>
             </select>
+            <label for="endorsements">Endorsements:</label>
             <select defaultValue={"all"} name="endorsements" id="endorsements">
                 <option value={"all"} >all</option>
                 <option value="Hazmat" >Hazmat</option>
@@ -198,17 +228,29 @@ const MyTrucks=()=>{
                 <option value="DT" >Doubles/Triples</option>
             </select>
         </form>
-        <label for="Ttype">Trailer Type:</label>
+            {
+                buttonsVisibile?
+                <div>
+                    <button onClick={(e)=>addToBoard(e)}>add to board</button>
+                    <button onClick={(e)=>deleteTrucks(e)} >delete</button>
+                </div>
+                :<></>
+            }
         <div> 
-          <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
+          <NewTruckForm open={openForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
         </div>
 
        <div className="list">
        <div className="tableHeader">
-       <div onClick={(e) => handleClick (e)} className="selectAllBox">
-                                        <MdCheckBoxOutlineBlank style={{ display: checkVisible === "none" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
-                                        <MdCheckBox style={{ display: checkVisible === "block" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+       <div onClick={(e) => selectAll(e)} className="selectAllBox">
+                                        {
+                                            checkVisible === "none"?
+                                            <MdCheckBoxOutlineBlank style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            :
+                                            <MdCheckBox style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                        }
+                                        
         </div> 
         <div className="columnValues">
         <h3> Name </h3>
@@ -218,12 +260,23 @@ const MyTrucks=()=>{
        </div>
        </div>
             {
-                trucks.length > 0?
+                trucks?
                     trucks.map((itm, idx)=>{
                         return<div key={idx} className="list-items">
-                             <div onClick={(e) => handleClick (e)} className="checkBox">
-                                        <MdCheckBoxOutlineBlank style={{ display: checkVisible === "none" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
-                                        <MdCheckBox style={{ display: checkVisible === "block" ? "block" : "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                             <div onClick={(e) => handleClick(itm._id)} className="checkBox">
+                                        {
+                                            checkVisible === "none"?
+                                            <div>
+                                                <MdCheckBoxOutlineBlank id={`${itm._id}blankBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBox id={`${itm._id}checkBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            </div>
+                                            :
+                                            <div>
+                                                <MdCheckBoxOutlineBlank id={`${itm._id}blankBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBox id={`${itm._id}checkBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            </div>
+
+                                        }
                                     </div>
                    
                                 <div className="truckdata">
@@ -235,7 +288,6 @@ const MyTrucks=()=>{
                                 </div>
                          
                         
-                            <button onClick={(e)=> addToBoard(itm._id)} className="add-button">Add To Board</button> 
                     
                             
 
