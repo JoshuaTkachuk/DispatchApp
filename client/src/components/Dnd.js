@@ -378,7 +378,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
     return (
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
-      <div className="topbox">
+      {/* <div className="topbox">
         <div className="top-header">
           <h1> TBD </h1>
         </div>
@@ -414,7 +414,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             )}
           </Droppable>
           </div>
-      </div>
+      </div> */}
 
       <div className="box-container">
   {days.map((day, indx) => {
@@ -439,16 +439,20 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           >
                           
                           <div className="truck-header">
-                          <div className="truckHeader-Location">
+                          <div className="truckHeader-row1">
                           <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
+                          <div style={{width: '100%', display: 'flex', justifyContent: 'right'}}>
+                            <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
+                            <p className="popup" >Remove From Board</p>
                           </div>
+                          </div>
+                          <div className="truckHeader-row2"> 
                           <form >
                             <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
                           </form>
-
                           <h4 className="trailer-type">{item.trailerType}</h4>
-                          <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
-                          <p className="popup" >Remove From Board</p>
+                          <h4 style={{paddingLeft: '.5vw', fontWeight: '100'}}>{item.driverName}</h4>
+                          </div>
                           </div>
 
                           <div > 
@@ -468,12 +472,10 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <div id={item._id} className="truck-body" style={{display: truckVisible, justifyContent: 'center'}}>
                             <span className="line"></span>
                             <div className="truck-body1">
-                              <p style={{marginRight:'1vw', width: 'auto'}}>{item.driverName}</p>
-                              <p style={{marginLeft:'1vw',  width: 'auto'}}>{item.phoneNum}</p>
-                            </div>
-                            <div className="truck-body2">
-                              <p style={{marginRight:'1vw', width: 'auto'}}>{item.trailerNum}</p>
+                              <p style={{marginLeft:'1vw', width: 'auto'}}>{item.trailerNum}</p>
                               <p style={{marginLeft:'1vw', width: 'auto'}}>{item.truckNum}</p>
+                              <p style={{marginLeft:'1vw',  width: 'auto'}}>{item.phoneNum}</p>  
+                              <p style={{marginLeft:'1vw',  width: 'auto'}}>More Info</p>
                             </div>
                           </div>
                           </div>

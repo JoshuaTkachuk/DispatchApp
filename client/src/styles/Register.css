@@ -28,6 +28,7 @@
     border: 1px solid hsl(225, 15%, 22%);
     padding: 1.5vh;
     border-radius: .3vw;
+    color: rgb(217,217,217);
 }
 
 .formOptions label {
@@ -56,6 +57,3 @@
     color: black;
 }
 
-.exiUser h4 {
-    margin-bottom: 0;
-}

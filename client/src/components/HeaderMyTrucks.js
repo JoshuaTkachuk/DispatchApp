@@ -1,11 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import Dnd from "./Dnd"
-import "../styles/Header.css"
+import "../styles/HeaderMyTrucks.css"
 
 
-const Logout=()=>{
+const Logout2=()=>{
     const navigate = useNavigate();
 
     const logout =(e) =>{
@@ -25,13 +24,10 @@ return(
 
 <div className="mainHeader"> 
     <img src="images/UskoLogo.png"/>
-    <h2>Home</h2> 
-    <div className="tbdBox">
-         <p>Schedule</p>
-    </div> 
+    <h2>Truck List</h2>  
     <div className="mainHeader-right">
         <button className="mytruck-link">
-                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> My Trucks</Link>
+                    <Link to={"/Home"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}>Home</Link>
         </button>
         <button onClick={logout} className="logout" >logout</button>
     </div>
@@ -41,4 +37,4 @@ return(
     );
 }
 
-export default Logout;
+export default Logout2;

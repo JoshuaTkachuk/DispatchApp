@@ -44,7 +44,7 @@ const Register =()=>{
             </form>
             <div className="exiUser">
            
-                <h4>Already Have an account?</h4>
+                <p>Already Have an account?</p>
                 <Link to={"/login"}>Login</Link>
             </div>
         </div>

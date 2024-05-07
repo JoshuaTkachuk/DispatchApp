@@ -3,8 +3,13 @@ import axios, { all } from "axios";
 import {Link} from "react-router-dom";
 import "../styles/MyTrucks.css";
 import NewTruckForm from "./NewTruckForm";
+import HeaderMyTrucks from "./HeaderMyTrucks"
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
+import { SlMagnifier } from "react-icons/sl";
+import { CiFilter } from "react-icons/ci";
+
+
 
 
 
@@ -13,8 +18,9 @@ const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
     const [openForm, setOpenForm] = useState(false);
-
     const [checkVisible, setCheckVisible] = useState("none")
+    const [searchVisible, setSearchVisible] = useState("none")
+    const [filterVisible, setFilterVisible] = useState("none")
 
 
     useEffect(()=>{
@@ -64,6 +70,23 @@ const MyTrucks=()=>{
             setCheckVisible("none");
         }
     };
+
+    const searchClick = () => {
+        if (searchVisible === "none") {
+            setSearchVisible("block");
+        } else {
+            setSearchVisible("none");
+        }
+    };
+
+    const filterClick = () => {
+        if (filterVisible === "none") {
+            setFilterVisible("block");
+        } else {
+            setFilterVisible("none");
+        }
+    };
+
     const searchTrucks = (searchParam)=>{
         console.log(searchParam, "searchParam")
         if(searchParam){
@@ -171,39 +194,48 @@ const MyTrucks=()=>{
 
     return(
         <div>
+        <HeaderMyTrucks/>
         <div className={openForm === false ? "" : "overlay"}>
         </div>
         <div className="page" >
-            <h1>Truck List</h1>
         <div className="links">  
-            <Link to={"/home"} style={{color:'black', margin: '1rem', textDecoration: 'none'}}>Home</Link>
-        <div>
-        <div> 
-            <button onClick={() => setOpenForm(true)} className="openBtn" >Add Truck</button>
-        </div>
-        </div>
-        <div>
-            <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)}/>
-        </div>
-        <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
-            <select defaultValue={"all"} name="Ttype" id="Ttype" >
-                <option value={"all"} >all</option>
-                <option value="V">V</option>
-                <option value="R">R</option>
-            </select>
-            <select defaultValue={"all"} name="endorsements" id="endorsements">
-                <option value={"all"} >all</option>
-                <option value="Hazmat" >Hazmat</option>
-                <option value="Tanker" >Tanker</option>
-                <option value="DT" >Doubles/Triples</option>
-            </select>
-        </form>
-        <label for="Ttype">Trailer Type:</label>
         <div> 
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
         </div>
-
+       <div className="aboveList">
+        <div className="aboveList-left"> 
+            <div className="listSearch">
+                <SlMagnifier size={25}  onClick={() => searchClick ()} className="SlMagnifier" style={{cursor: 'pointer', color: searchVisible === "block" ? "rgb(82, 145, 240)": ""}}/>
+                <p onClick={() => searchClick ()} style={{ display: searchVisible === "block" ? "none": "block", cursor: 'pointer'}}>Search</p>
+                <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)} style={{ display: searchVisible === "block" ? "block" : "none", marginLeft: '1vw'}}/>
+            </div>
+            <div className="listFilter-icon"> 
+                <CiFilter size={30} onClick={() => filterClick ()} style={{cursor: 'pointer', marginLeft: '2vw', color: filterVisible === "block" ? "rgb(82, 145, 240)": ""}}/>
+                <p onClick={() => filterClick ()} style={{ display: filterVisible === "block" ? "none" : "block", cursor:'pointer'}}>Filter</p>
+            </div>
+            <div className="listFilter" style={{ display: filterVisible === "block" ? "block" : "none"}}> 
+                <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
+                <label for="Ttype">Trailer Type</label>
+                <select defaultValue={"all"} name="Ttype" id="Ttype" >
+                    <option value={"all"} >All</option>
+                    <option value="V">V</option>
+                    <option value="R">R</option>
+                </select>
+                <label for="Ttype">Endorsements</label>
+                <select defaultValue={"all"} name="endorsements" id="endorsements">
+                    <option value={"all"} >All</option>
+                    <option value="Hazmat" >Hazmat</option>
+                    <option value="Tanker" >Tanker</option>
+                    <option value="DT" >Doubles/Triples</option>
+                </select>
+                </form>
+        </div>
+        </div>
+        <div > 
+            <button onClick={() => setOpenForm(true)} className="openBtn" style={{}}>Add Truck</button>
+        </div>
+       </div>
        <div className="list">
        <div className="tableHeader">
        <div onClick={(e) => handleClick (e)} className="selectAllBox">
@@ -246,7 +278,7 @@ const MyTrucks=()=>{
             }
         </div>
         <div className="footer">
-            <p>Next Page</p>
+            <p>Load More</p>
         </div>
         
         </div>

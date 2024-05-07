@@ -14,15 +14,10 @@
     width: 100vw;
     font-family: var(--fonts-primary);
     font-size: 22px;
+    color: rgb(217, 217, 217);
 }
 
-.page h1 {
-    margin-bottom: 0vh;
-    margin-top: 3vh;
-    font-size: 50px;
-    text-align: center;
-    color: rgb(31, 44, 112);
-}
+
 
 .links {
     display: flex;
@@ -32,6 +27,7 @@
     width: 75vw;
     margin: 0 auto;
     margin-bottom: 3vh;
+    color: rgb(217, 217, 217);
 }
 
 .tableHeader {
@@ -61,10 +57,75 @@
     font-weight: 75;
 }
 
+.aboveList {
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 1vh;
+}
+
+.aboveList-left { 
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+    align-items: center;
+    margin-left: 0;
+}
+
+.aboveList-left form {
+    display: flex;
+    align-items: center;
+}
+
+.aboveList-left label {
+    font-size: 50%;
+}
+
+.listFilter { 
+    display: flex;
+    align-items: center;
+    color: rgb(217, 217, 217);
+}
+
+.listFilter select {
+    justify-content: center;
+    background: none;
+    border-radius: .2vw;
+    border: 1px solid  hsl(225, 13%, 25%);
+    max-width: 3vw;
+    color: rgb(217, 217, 217);
+}
+
+.listFilter label { 
+    margin-left: 1vw;
+    margin-right: .5vw;
+}
+
+.listSearch {
+    display: flex;
+    align-items: center;
+    font-size: 50%;
+
+}
+
+.listSearch:hover {
+    color: rgb(82, 145, 240);
+}
+
+.listFilter-icon {
+    display: flex;
+    align-items: center;
+    font-size: 50%;
+}
+
+.listFilter-icon:hover {
+    color: rgb(82, 145, 240);
+}
+
 .list{
     width: 75vw;
     margin: 0 auto;
-    background-color: hsl(225, 10%, 24%);
+    background-color:  hsl(226, 12%, 21%);
     border-top-right-radius: .75vw;
     border-top-left-radius: .75vw;
 }
@@ -89,6 +150,7 @@
     grid-gap: 1vw;
     width: 65vw;
     align-items: center;
+    font-size: 2vh;
 }
 
 .checkBox { 
@@ -107,20 +169,22 @@
     margin-bottom: 2vh;
     background-color: rgb(124, 124, 124);
     cursor: pointer;
-    font-size: 2vh;
 }
 
 .openBtn{
-    position: relative;
     padding: .5rem;
-    display: flex;
-    margin: 0 auto;
     border-radius: 1vw;
     border: none;
     width: 8vw;
     justify-content: center;
-    font-weight: bold;
     cursor: pointer;
+    min-width: fit-content; 
+    background: none;
+    color: rgb(217, 217, 217);
+}
+
+.openBtn:hover {
+    background-color: hsl(228, 14%, 14%);
 }
 
 .footer {
@@ -136,7 +200,7 @@
 
 .footer p {
     font-size: 2vh;
-    position: absolute;
-    right: 3vw;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
