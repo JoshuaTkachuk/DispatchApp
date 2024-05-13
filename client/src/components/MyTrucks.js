@@ -259,23 +259,12 @@ const MyTrucks=()=>{
                     <option value="DT" >Doubles/Triples</option>
                 </select>
                 </form>
+
         </div>
         </div>
-        <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
-            <label for="Ttype">Trailer Type:</label>
-            <select defaultValue={"all"} name="Ttype" id="Ttype" >
-                <option value={"all"} >all</option>
-                <option value="V">V</option>
-                <option value="R">R</option>
-            </select>
-            <label for="endorsements">Endorsements:</label>
-            <select defaultValue={"all"} name="endorsements" id="endorsements">
-                <option value={"all"} >all</option>
-                <option value="Hazmat" >Hazmat</option>
-                <option value="Tanker" >Tanker</option>
-                <option value="DT" >Doubles/Triples</option>
-            </select>
-        </form>
+        <div > 
+            <button onClick={() => setOpenForm(true)} className="openBtn" style={{}}>Add Truck</button>
+        </div>
             {
                 buttonsVisibile?
                 <div>
@@ -349,7 +338,6 @@ const MyTrucks=()=>{
             <p>Load More</p>
         </div>
         
-        </div>
         </div>
     
     );
