@@ -109,7 +109,7 @@
 }
 
 .listSearch:hover {
-    color: rgb(82, 145, 240);
+    color: rgb(0,128,0);
 }
 
 .listFilter-icon {
@@ -119,7 +119,7 @@
 }
 
 .listFilter-icon:hover {
-    color: rgb(82, 145, 240);
+    color: rgb(0,128,0);
 }
 
 .list{

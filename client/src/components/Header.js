@@ -31,7 +31,7 @@ return(
     </div> 
     <div className="mainHeader-right">
         <button className="mytruck-link">
-                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> My Trucks</Link>
+                    <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> Truck List</Link>
         </button>
         <button onClick={logout} className="logout" >logout</button>
     </div>

@@ -107,7 +107,7 @@ const NewTruckForm=({ open, onClose })=>{
                     </div>
                     <div className="tType">
                 <div for="Ttype">Trailer Type</div>
-                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className="">
+                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className="tType-Select">
                         <option value={"R"}>R</option>
                         <option selected value={"V"}>V</option>
                     </select>

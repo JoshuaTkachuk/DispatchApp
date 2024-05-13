@@ -378,7 +378,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
     return (
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
-      {/* <div className="topbox">
+       <div className="topbox">
         <div className="top-header">
           <h1> TBD </h1>
         </div>
@@ -414,7 +414,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
             )}
           </Droppable>
           </div>
-      </div> */}
+      </div> 
 
       <div className="box-container">
   {days.map((day, indx) => {
