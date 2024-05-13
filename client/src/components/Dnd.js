@@ -119,8 +119,7 @@ function App(props) {
       console.log(err)
     })
 },[])
-
-const removeFromBoard = (truckId, dayId, indx)=>{
+const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
   .then((result)=>{
       console.log(result.data)
@@ -143,6 +142,14 @@ const removeFromBoard = (truckId, dayId, indx)=>{
     days[dayIndex].trucks.splice(indx,1)
     console.log(days, "days after truck deleted")
   }
+  axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: dateReady})
+    .then((result)=>{
+      console.log(result)
+      console.log(dateReady, "dateReady in backend")
+    })
+    .catch(err =>{
+      console.log(err)
+    })
 
 
 }
@@ -304,7 +311,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
 
           newDays[index].trucks.forEach((truck, indx)=>{
             if(truck._id === truckId){
-              truck.timeReady = document.getElementById(`${truckId}Time`).value
+              truck.timeReady = document.getElementById(`${truckId}timeInput`).value
             }
           })
 
@@ -313,7 +320,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       })
 
       console.log(e, "save event")
-      const timeReady = document.getElementById(`${truckId}Time`).value
+      const timeReady = document.getElementById(`${truckId}timeInput`).value
       console.log(timeReady, "time ready element")
       axios.put("http://localhost:8000/api/updateTime", {truckId, timeReady})
       .then((result)=>{
@@ -370,6 +377,17 @@ const removeFromBoard = (truckId, dayId, indx)=>{
       .catch(err=>{
         console.log(err)
       })
+
+    }
+    const handlestatus=(itemId)=>{
+      if(document.getElementById(`${itemId}status`).value === "TIME"){
+        document.getElementById(`${itemId}timeInput`).style.display = "block"
+      }
+      else{
+        document.getElementById(`${itemId}timeInput`).style.display = "none"
+      }
+    }
+    const handleNotes = (itemId) =>{
 
     }
 
@@ -440,10 +458,15 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           
                           <div className="truck-header">
                           <div className="truckHeader-Location">
-                          <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
+                          <input id = {`${item._id}Location`} placeholder="location" value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
                           </div>
                           <form >
-                            <input type="time" id={`${item._id}Time`} value={item.timeReady} onChange={(e)=>handleTime(e,item._id,indx)}/>
+                            <select name="status" id={`${item._id}status`} onChange={(e)=>handlestatus(item._id)}>
+                              <option value="READY">READY</option>
+                              <option value="CONFIRM" selected>CONFIRM</option>
+                              <option value="TIME">TIME</option>
+                            </select>
+                            <input id={`${item._id}timeInput`} type="time" style={{display: "none"}} value={item.timeReady} onChange={(e) => handleTime(e,item._id, indx)}></input>
                           </form>
 
                           <h4 className="trailer-type">{item.trailerType}</h4>
@@ -451,18 +474,27 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                           <p className="popup" >Remove From Board</p>
                           </div>
 
-                          <div > 
-                              <p className="notes"> Notes</p>
+                          <div >
+                            {
+                              item.notes ? 
+                              <div>
+                                <p className="notes"> Notes:</p>
+                                <p>{item.notes}</p>
+                              </div>
+                              :
+                              <></>
+                            }
+                              
                           </div>
 
                           <div onClick={(e) => handleClick(item._id)}>
                               <div className="drop-down" onClick={(e)=>changeVisible(e,item._id)}>
-                              <SlArrowDown id={`${item._id}downArrow`} style={{display : "block", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
-                              <SlArrowUp id={`${item._id}upArrow`} style={{display : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+                                <SlArrowDown id={`${item._id}downArrow`} style={{display : "block", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
+                                <SlArrowUp id={`${item._id}upArrow`} style={{display : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
 
-                        </div>
+                              </div>
 
-        </div>
+                          </div>
 
 
                           <div id={item._id} className="truck-body" style={{display: truckVisible, justifyContent: 'center'}}>
@@ -475,6 +507,7 @@ const removeFromBoard = (truckId, dayId, indx)=>{
                               <p style={{marginRight:'1vw', width: 'auto'}}>{item.trailerNum}</p>
                               <p style={{marginLeft:'1vw', width: 'auto'}}>{item.truckNum}</p>
                             </div>
+                            <input onChange={(e)=> handleNotes(item._id)}>{item.notes}</input>
                           </div>
                           </div>
                           )}
