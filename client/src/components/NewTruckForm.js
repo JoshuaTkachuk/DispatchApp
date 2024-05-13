@@ -3,6 +3,8 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import "../styles/NewTruckForm.css";
 import { HiOutlineXMark } from "react-icons/hi2";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { MdCheckBox } from "react-icons/md";
 
 const NewTruckForm=({ open, onClose })=>{
     
@@ -43,7 +45,7 @@ const NewTruckForm=({ open, onClose })=>{
             })
     }
     const setChecked=(id)=>{
-        console.log(id)
+        console.log(id, "checked")
         let endorsement = document.getElementById(id);
         console.log(endorsement);
 
@@ -71,14 +73,6 @@ const NewTruckForm=({ open, onClose })=>{
         </div>
         <div className="form" >
             <form onSubmit={submithandler}>
-
-                <div className="tType">
-                    <div for="Ttype">Trailer Type</div>
-                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)}>
-                        <option value={"R"}>R</option>
-                        <option selected value={"V"}>V</option>
-                    </select>
-                </div>
                 <div className="formbody1">
                     <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
                     <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
@@ -90,28 +84,38 @@ const NewTruckForm=({ open, onClose })=>{
                 <div className="formbody3">
                 <div className="formbody3Left">
                     <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                    <input placeholder="notes"></input>
                 </div>
                 {/* <div className="dateReady">
                         <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
                 </div> */}
+                <div className="formbody3Right">
                 <div className="endorsements">
-                    <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
+                    <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox">
                     </input>
-                        <label for="T">tanker</label>
+
+                        <label for="T">Tanker</label>
 
                     <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
                     </input>
-                        <label for="H">hazmat</label>
+                        <label for="H">Hazmat</label>
 
                     <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
-                        <label for="DT">doubles/triples</label>
+                        <label for="DT">Doubles/Triples</label>
+                   
+                    </div>
+                    <div className="tType">
+                <div for="Ttype">Trailer Type</div>
+                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className="tType-Select">
+                        <option value={"R"}>R</option>
+                        <option selected value={"V"}>V</option>
+                    </select>
+                    
+                </div>
                     </div>
                     </div>
-                        <div className="truckNotes">
-                            <input></input>
-                        </div>
-                    <button type="submit" className="buttonSubmit">Submit</button>
+                    <button type="submit" className="buttonSubmit">Submit</button>         
                 </form>
           
                 </div>

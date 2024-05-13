@@ -28,6 +28,7 @@
     border: 1px solid hsl(225, 15%, 22%);
     padding: 1.5vh;
     border-radius: .3vw;
+    color: rgb(217,217,217);
 }
 
 .formOptions label {
@@ -53,9 +54,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: rgb(207,207,207);
 }
 
-.exiUser h4 {
-    margin-bottom: 0;
-}
