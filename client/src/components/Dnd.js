@@ -382,13 +382,17 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     const handlestatus=(itemId)=>{
       if(document.getElementById(`${itemId}status`).value === "TIME"){
         document.getElementById(`${itemId}timeInput`).style.display = "block"
+        document.getElementById(`${itemId}status`).style.display = "none"
+        document.getElementById(`${itemId}timeDownArrow`).style.display = "block"
+        
       }
       else{
+        document.getElementById(`${itemId}timeDownArrow`).style.display = "none"
         document.getElementById(`${itemId}timeInput`).style.display = "none"
       }
     }
     const handleNotes = (itemId) =>{
-
+      
     }
 
     
@@ -466,7 +470,10 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               <option value="CONFIRM" selected>CONFIRM</option>
                               <option value="TIME">TIME</option>
                             </select>
-                            <input id={`${item._id}timeInput`} type="time" style={{display: "none"}} value={item.timeReady} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                            <div style={{display: "flex"}}>
+                              <input id={`${item._id}timeInput`} style={{display: "none", width: "75px"}} value={item.timeReady} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                              <SlArrowDown id={`${item._id}timeDownArrow`} style={{display: "none"}} />
+                            </div>
                           </form>
 
                           <h4 className="trailer-type">{item.trailerType}</h4>
