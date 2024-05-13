@@ -37,12 +37,14 @@
 }
 
 .selectAllBox { 
+    color: rgb(217, 217, 217);
     margin-left: 2vw;
     display: flex;
     align-items: center;
 }
 
 .columnValues { 
+    color: rgb(217, 217, 217);
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 5 equal columns */
     grid-gap: 1vw;
@@ -199,6 +201,7 @@
 }
 
 .footer p {
+    color: rgb(217, 217, 217);
     font-size: 2vh;
     margin: 0 auto;
     cursor: pointer;
