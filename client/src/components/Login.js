@@ -33,7 +33,7 @@ const Login=()=>{
                     <button type={"submit"} className="loginButton" style={{textDecoration:'none'}}>Login</button>
             </form>
             <div className="newUser">
-                <h4>Don't have an account?</h4>
+                <p>Don't have an account?</p>
                 <Link to={'/'}>Register</Link>
             </div>
         </div>
