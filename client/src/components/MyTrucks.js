@@ -36,11 +36,20 @@ const MyTrucks=()=>{
                 const rawTrucks = result.data
                 let newTrucks = []
                 rawTrucks.forEach((item, idx)=>{
-                    const d = new Date(item.dateReady)
-                    newTrucks.push({
-                        ...item, 
-                        dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
-                    })
+                    if(item.dateReady !== null){
+                        const d = new Date(item.dateReady)
+                        console.log(d, "this is the date object being made everytime truck list loops")
+                        newTrucks.push({
+                            ...item, 
+                            dateReady: `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  d.getDate() + "/" + d.getFullYear()}`
+                        })
+                    }
+                    else{
+                        newTrucks.push({
+                            ...item, 
+                            dateReady: "Confirm"
+                        })
+                    }
                 })
                 setTrucks(newTrucks)
             })
