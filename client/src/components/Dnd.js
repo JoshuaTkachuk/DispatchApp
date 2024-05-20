@@ -491,7 +491,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               <option value="TIME">TIME</option>
                             </select>
                             <div style={{display: "flex"}}>
-                              <input type="time" id={`${item._id}timeInput`} style={{display: "none", width: "75px"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                              <input id={`${item._id}timeInput`} style={{display: "none", width: "75px"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
                           <h4 className="trailer-type">{item.trailerType}</h4>
