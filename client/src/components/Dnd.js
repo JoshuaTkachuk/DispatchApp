@@ -382,18 +382,32 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     const handlestatus=(itemId)=>{
       if(document.getElementById(`${itemId}status`).value === "TIME"){
         document.getElementById(`${itemId}timeInput`).style.display = "block"
-        document.getElementById(`${itemId}status`).style.display = "none"
-        document.getElementById(`${itemId}timeDownArrow`).style.display = "block"
+        document.getElementById(`${itemId}timeInput`).focus()
         
       }
       else{
-        document.getElementById(`${itemId}timeDownArrow`).style.display = "none"
         document.getElementById(`${itemId}timeInput`).style.display = "none"
       }
     }
     const handleNotes = (itemId) =>{
       
     }
+
+    function checkSubmit(e, timeId, statusId) {
+      if(e && e.keyCode == 13) {
+        document.getElementById(statusId).style.display = "none"
+        document.getElementById(timeId).blur();
+     }
+   }
+   const handleStatusBlur = (statusId, timeId) =>{
+    if(document.getElementById(statusId).value === "TIME"){
+      document.getElementById(statusId).style.display = "none"
+    }
+
+   }
+   const handleBlur = (statusId)=>{
+    document.getElementById(statusId).focus()
+   }
 
     
 
@@ -463,7 +477,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           <div className="truck-header">
 
                           <div className="truckHeader-row1">
-                          <input id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
+                          <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
                           <div style={{width: '100%', display: 'flex', justifyContent: 'right'}}>
                             <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className="button-delete"> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
                             <p className="popup" >Remove From Board</p>
@@ -471,14 +485,13 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           </div>
                           <div className="truckHeader-row2"> 
                           <form >
-                            <select name="status" id={`${item._id}status`} onChange={(e)=>handlestatus(item._id)}>
+                            <select onBlur={(e)=>handleStatusBlur(`${item._id}status`,`${item._id}timeInput` )} name="status" id={`${item._id}status`} onChange={(e)=>handlestatus(item._id)}>
                               <option value="READY">READY</option>
                               <option value="CONFIRM" selected>CONFIRM</option>
                               <option value="TIME">TIME</option>
                             </select>
                             <div style={{display: "flex"}}>
-                              <input id={`${item._id}timeInput`} style={{display: "none", width: "75px"}} value={item.timeReady} onChange={(e) => handleTime(e,item._id, indx)}></input>
-                              <SlArrowDown id={`${item._id}timeDownArrow`} style={{display: "none"}} />
+                              <input type="time" id={`${item._id}timeInput`} style={{display: "none", width: "75px"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
                           <h4 className="trailer-type">{item.trailerType}</h4>
