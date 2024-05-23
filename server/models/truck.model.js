@@ -37,8 +37,9 @@ const TruckSchema = new mongoose.Schema({
     date:{
         type: String
     },
-    emptyTime:{
-        type: String
+    status:{
+        type: String,
+        default: "CONFIRM"
     },
     dateReady:{
         type: String,
