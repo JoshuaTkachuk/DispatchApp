@@ -1,23 +1,19 @@
 import { useRef, useEffect } from "react";
-const AutoComplete = () => {
- const autoCompleteRef = useRef();
- const inputRef = useRef();
- const options = {
-  componentRestrictions: { country: "ng" },
-  fields: ["address_components", "geometry", "icon", "name"],
-  types: ["establishment"]
- };
+
+const AutoComplete = (props) => {
+    const indx = props.indx
+    const item = props.item;
+    const handleLocation = props.handleLocation
+    const autoCompleteRef = useRef();
+    const inputRef = useRef();
  useEffect(() => {
   autoCompleteRef.current = new window.google.maps.places.Autocomplete(
    inputRef.current,
-   options
   );
  }, []);
+
  return (
-  <div>
-   <label>enter address :</label>
-   <input ref={inputRef} />
-  </div>
+   <input ref={inputRef}/>
  );
 };
 export default AutoComplete;

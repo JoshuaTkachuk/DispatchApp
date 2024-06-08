@@ -14,6 +14,7 @@ import AutoComplete from "./Autocomplete";
 
 
 function App(props) {
+    const API_KEY = "AIzaSyDk5CT7_hx0XCxtRYWTIGx004owevDiBsY"
     const toggleComponents = props.toggleComponents;
     const d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -332,8 +333,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
       }
   };
   
-    const handleLocation=(e, truckId, emptyLocation, dayIndex)=>{
-      e.preventDefault();
+    const handleLocation=(truckId, emptyLocation, dayIndex)=>{
 
       setDays(prevDays =>{
         const newDays = [...prevDays]
@@ -518,8 +518,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           <div className={styles["truck-header"]}>
 
                           <div className={styles["truckHeader-row1"]}>
-                          <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)}/>
-                          <AutoComplete/>
+                          <AutoComplete id={`${item._id}Location`} onChange={(e) => console.log(e)}/>
                           <div style={{width: 'auto', display: 'flex', justifyContent: 'right'}}>
                             <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
                             <p className={styles["popup"]} >Remove From Board</p>
