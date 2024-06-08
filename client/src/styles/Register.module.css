@@ -1,26 +1,30 @@
-.loginFormm {
+.loginForm {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60vw;
     color: rgb(217,217,217);
-    display: flex;
-    flex-direction: column;
 }
 
-.formHeaderr{
-    margin: 0 auto;
+.formHeader{
+    justify-content: center;
+    font-size: 2.5vh;
 }
 
-.formOptionss { 
+
+.header span {
+    border: 1px solid black;
+}
+
+.formOptions { 
     display: flex;
     flex-direction: column;
     width: 20vw;
     margin: 0 auto;
 }
 
-.formOptionss input {
+.formOptions input {
     margin-bottom: 3vh;
     background: none;
     border: 1px solid hsl(225, 15%, 22%);
@@ -29,13 +33,19 @@
     color: rgb(217,217,217);
 }
 
-.loginButtonn {
+.formOptions label {
+    margin-bottom: 1vh;
+    font-size: 2.5vh;
+}
+
+.loginButton {
     padding: .5rem;
     display: flex;
     margin: 0 auto;
-    border-radius: 1vw;
-    border: none;
-    width: 8vw;
+    border-radius: .4vw;
+    border: solid 1px rgb(217,217,217);
+    background-color: rgb(217,217,217);
+    width: 20vw;
     justify-content: center;
     font-weight: bold;
     cursor: pointer; 
@@ -43,7 +53,12 @@
     margin-bottom: 2vh;
 }
 
-.newUser{
+.loginButton:hover {
+    background: none;
+    border: solid 1px rgb(217,217,217);
+}
+
+.exiUser{
     display: flex;
     flex-direction: column;
     justify-content: center;

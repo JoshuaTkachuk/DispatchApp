@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import styles from "../styles/Dnd.module.css";  
-import Header from "./Header";
+import styles from "../styles/DndList.module.css";
+import Header from "./Header"
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowDown } from "react-icons/sl";
 import { SlArrowUp } from "react-icons/sl";
 import { MdPhoneEnabled } from "react-icons/md";
 import { MdOutlineOpenInNew } from "react-icons/md";
+
 
 
 
@@ -416,55 +417,27 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     return (
    <div className="body">
-     <DragDropContext onDragEnd={handleDragDrop}>
-     {/*<div className="topbox">
-      
-        <div className="top-header">
-          <h1> TBD </h1>
-        </div>
-        <div className="items-container"> 
-          <Droppable droppableId="ROOT" type="group">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {trucks.map((truck, index) => (
-                  <Draggable
-                    draggableId={truck._id}
-                    index={index}
-                    key={truck._id}
-                  >
-              
-                    {(provided) => (
-                      <div className="top-item-container"
-              
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                      >
-                        <div className="top-item-header">
-                        <h3 style={{margin: '0'}}>{truck.driverName}</h3>
-                        <button onClick={(e)=> removeFromBoard(truck._id)} style={{width: '10%', display: 'flex', justifyContent: 'right', paddingRight: '.5vw'}}className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
-                        <p className="top-popup">Remove From Board</p>
-                        </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          </div>
-        
-      </div>  */}
-
-      <div className={styles.boxContainer}>
+      <DragDropContext onDragEnd={handleDragDrop}>
+      <div className={styles["box-container"]}>
   {days.map((day, indx) => {
-    return (    
+    return ( 
+
+        
         <div className={styles.card}>
           <div className={styles.header}>
+       
            <h1>{day.name}</h1>
            <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
            </div>
+           <div className={styles["card-header"]}> 
+                    <h4>location</h4>
+                    <h4>Status</h4>
+                    <h4>Trailer Type</h4>
+                    <h4>Name</h4>
+                    <h4>Trailer Number</h4>
+                    <h4>Truck Number </h4>
+                    <h4>Phone Number</h4>         
+                  </div> 
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -473,105 +446,83 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                       day.trucks.map((item, index) => (
                         <Draggable draggableId={item._id} index={index} key={item._id}>
                           {(provided) => (
+                            
                           <div className={styles["item-container"]}
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
                           ref={provided.innerRef}>
-                          
-                          <div className={styles["truck-header"]}>
-
-                          <div className={styles["truckHeader-row1"]}>
+                          <div className={styles["truck-body"]}>
+                          <div className={styles["truck-column1"]}>
                           <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
-                          <div style={{width: 'auto', display: 'flex', justifyContent: 'right'}}>
-                            <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
-                            <p className={styles["popup"]} >Remove From Board</p>
                           </div>
-                          </div>
-                          <div className={styles["truckHeader-row2"]}> 
-                          <form style={{display:'flex', flexDirection:'column'}} >
+                          <div className={styles["truck-column2"]}> 
+                          <form style={{display:'flex'}} >
                             <select onBlur={(e)=>handleStatusBlur(`${item._id}status`,`${item._id}timeInput` )} name="status" id={`${item._id}status`} onChange={(e)=>handlestatus(item._id)}>
                               <option value="READY">READY</option>
                               <option value="CONFIRM" selected>CONFIRM</option>
                               <option value="TIME">TIME</option>
                             </select>
-                            <div className={styles.timeInput} style={{display: "flex"}}>
-                              <input id={`${item._id}timeInput`} style={{display: "none"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                          
+                            <div style={{display: "flex"}}>
+                              <input id={`${item._id}timeInput`} style={{display: "none", width: "2vw"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
-                          <h4 className={styles["trailer-type"]} style={{fontWeight: '100'}}>{item.trailerType}</h4>
-                          <h4 className={styles["driver-name"]}style={{paddingLeft: '.5vw', fontWeight: '100', margin: '0', }}>{item.driverName}</h4>
                           </div>
+                          <div>
+                          <h4 className={styles["trailer-type"]} style={{fontWeight: '100'}}>{item.trailerType}</h4>
+                          </div>
+                          <div>
+                          <h4 style={{ fontWeight: '100', margin: '0'}}>{item.driverName}</h4>
                           </div>
 
-                          <div >
+                         {/* <div >
                             {
                               item.notes ? 
                               <div>
-                                <p className={styles.notes}> Notes:</p>
+                                <p className="notes"> Notes:</p>
                                 <p>{item.notes}</p>
                               </div>
                               :
                               <></>
                             }
                               
-                          </div>
-
-                          <div onClick={(e) => handleClick(item._id)}>
-                              <div className={styles["drop-down"]} onClick={(e)=>changeVisible(e,item._id)}>
-                                <SlArrowDown id={`${item._id}downArrow`} style={{display : "block", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
-                                <SlArrowUp id={`${item._id}upArrow`} style={{display : "none", margin: '.2rem', color: 'rgb(217,217,217)'}}/>
-
+                          </div>*/}
+                              <div id={item._id}>
+                                <p>{item.trailerNum}</p>
                               </div>
-
-                          </div>
-
-
-                          <div id={item._id} className={styles["truck-body"]} style={{display: truckVisible, justifyContent: 'center'}}>
-                            <span className={styles.line}></span>
-                            <div className={styles["truck-body1"]}>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)',  overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent:'center'}}>
-                                <h4>TN</h4>
-                                <p style={{paddingLeft:'.2vw', width: 'auto', margin: '0'}}>{item.trailerNum}</p>
-                              </div>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display:'flex', justifyContent:'center'}}>
-                                <h4>TR</h4>
-                                <p style={{paddingLeft:'.2vw', width: 'auto', margin: '0'}}>{item.truckNum}</p>
+                              <div  id={item._id}>
+                                <p>{item.truckNum}</p>
                               </div >
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
-                                <MdPhoneEnabled size={10} style={{paddingLeft:''}}/>
-                                <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>{item.phoneNum}</p>  
-                              </div>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
-                                <MdOutlineOpenInNew size={10} style={{paddingLeft:''}}/>
-                                <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>More Info</p>
-                              </div>
-                            </div>
-                            <div className={styles.notes}>
+                              <div  id={item._id} style={{display: 'flex', alignItems:'center', position: 'relative'}}>
+                                <p>{item.phoneNum}</p>  
+                                <div className={styles["more-info"]} style={{ display: 'flex'}}>                  
+                               <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/>
+                               </div>
+                               <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark size={10} className={styles["icon-buttonDelete"]}/> </button>
+                                <p className={styles.popup}>Remove From Board</p>
+                          </div>  
+                        
+                          
+                          </div>
+                          <div className={styles.notes}>
                             <input placeholder="Notes" onChange={(e)=> handleNotes(item._id)}>{item.notes}</input>
                             </div>
                           </div>
-                          </div>
                           )}
+                          
                         </Draggable>
                       ))
                     }
                     {provided.placeholder}
-                  </div>
+                </div>             
                 </div>
             )}
             </Droppable>
         </div>
-
-     
     );
-    
-     
   })}
-  
 </div>
-
       </DragDropContext>
-
     </div>
     
   );
