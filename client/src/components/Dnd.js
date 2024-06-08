@@ -8,6 +8,7 @@ import { SlArrowDown } from "react-icons/sl";
 import { SlArrowUp } from "react-icons/sl";
 import { MdPhoneEnabled } from "react-icons/md";
 import { MdOutlineOpenInNew } from "react-icons/md";
+import AutoComplete from "./Autocomplete";
 
 
 
@@ -517,7 +518,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           <div className={styles["truck-header"]}>
 
                           <div className={styles["truckHeader-row1"]}>
-                          <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
+                          <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)}/>
+                          <AutoComplete/>
                           <div style={{width: 'auto', display: 'flex', justifyContent: 'right'}}>
                             <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
                             <p className={styles["popup"]} >Remove From Board</p>
