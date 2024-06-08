@@ -6,7 +6,6 @@ import Header from "./Header";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowDown } from "react-icons/sl";
 import { SlArrowUp } from "react-icons/sl";
-import Header from "./Header"
 import { MdPhoneEnabled } from "react-icons/md";
 import { MdOutlineOpenInNew } from "react-icons/md";
 
@@ -14,6 +13,7 @@ import { MdOutlineOpenInNew } from "react-icons/md";
 
 
 function App(props) {
+    const toggleComponents = props.toggleComponents;
     const d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
@@ -489,7 +489,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     return (
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
-        <Header trucks={trucks} removeFromBoard={removeFromBoard}/>
+        <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles.boxContainer}>
   {days.map((day, indx) => {
     return (    

@@ -14,10 +14,7 @@ const Home=()=>{
 
     return(
         <div>
-            <button onClick={toggleComponents}>
-            Toggle Components
-            </button>
-            {listVisible ? <Dnd /> : <DndList/>} 
+            {listVisible ? <Dnd toggleComponents={toggleComponents}/> : <DndList toggleComponents={toggleComponents}/>} 
 
         </div>
     );
