@@ -14,6 +14,8 @@ module.exports = app =>{
     app.put("/api/updateDate", truckController.updateTruckDate);
     app.put("/api/updateTruckIndex", truckController.updateTruckIndex);
     app.put("/api/updateTime", truckController.updateTruckTime);
+    app.put("/api/updateNotes", truckController.updateNotes);
+    app.put("/api/updateStatus", truckController.updateTruckStatus);
     app.put("/api/updateEmptyLocation", truckController.updateTruckEmptyLocation);
     app.delete("/api/deleteById/:Id", truckController.deleteTrucksById)
     app.delete("/api/deleteAllTrucks", truckController.deleteAllTrucks);

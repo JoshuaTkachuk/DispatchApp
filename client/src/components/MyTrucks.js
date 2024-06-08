@@ -8,6 +8,7 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { SlMagnifier } from "react-icons/sl";
 import { CiFilter } from "react-icons/ci";
+import { FaRegEdit } from "react-icons/fa";
 
 
 
@@ -326,11 +327,14 @@ const MyTrucks=()=>{
                                         }
                                     </div>
                    
-                                <div className={styles.truckdata}>
+
+                                <div id={`${itm._id}truckData`} className={styles.truckdata} onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseLeave={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
+
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.dateReady}</div>
+                                    <FaRegEdit id={`${itm._id}editButton`} style={{display: "none"}} />
 
                                 </div>
                          
