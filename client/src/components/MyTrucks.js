@@ -8,7 +8,7 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { SlMagnifier } from "react-icons/sl";
 import { CiFilter } from "react-icons/ci";
-import { FaRegEdit } from "react-icons/fa";
+import { MdOutlineOpenInNew } from "react-icons/md";
 
 
 
@@ -273,7 +273,7 @@ const MyTrucks=()=>{
         </div>
         </div>
         <div className={styles["aboveList-Right"]}> 
-            <button onClick={() => setOpenForm(true)} className={styles.openBtn} style={{}}>Add Truck</button>
+            <button onClick={() => setOpenForm(true)} className={styles.openBtn} style={{}}>Add Driver</button>
         
             {
                 buttonsVisibile?
@@ -294,7 +294,7 @@ const MyTrucks=()=>{
        <div onClick={(e) => selectAll(e)} className={styles.selectAllBox}>
                                         {
                                             checkVisible === "none"?
-                                            <MdCheckBoxOutlineBlank size={20} style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            <MdCheckBoxOutlineBlank className={styles.iconCheck} size={20} style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
                                             :
                                             <MdCheckBox size={20} style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
                                         }
@@ -315,12 +315,12 @@ const MyTrucks=()=>{
                                         {
                                             checkVisible === "none"?
                                             <div>
-                                                <MdCheckBoxOutlineBlank size={20} id={`${itm._id}blankBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBoxOutlineBlank className={styles.iconCheck} size={20} id={`${itm._id}blankBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
                                                 <MdCheckBox size={20} id={`${itm._id}checkBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
                                             </div>
                                             :
                                             <div>
-                                                <MdCheckBoxOutlineBlank size={20}  id={`${itm._id}blankBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBoxOutlineBlank className={styles.iconCheck} size={20}  id={`${itm._id}blankBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
                                                 <MdCheckBox size={20} id={`${itm._id}checkBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
                                             </div>
 
@@ -333,9 +333,10 @@ const MyTrucks=()=>{
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
-                                    <div style={{justifySelf:'start'}}>{itm.dateReady}</div>
-                                    <FaRegEdit id={`${itm._id}editButton`} style={{display: "none"}} />
-
+                                    <div style={{justifySelf:'start', display: 'flex'}}>
+                                    {itm.dateReady}
+                                    <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} />
+                                    </div>
                                 </div>
                          
                         

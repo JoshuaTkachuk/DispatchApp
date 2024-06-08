@@ -3,7 +3,8 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {Draggable, Droppable } from "react-beautiful-dnd";
 import { HiOutlineXMark } from "react-icons/hi2";
-import styles from "../styles/Header.module.css"
+import styles from "../styles/Header.module.css";
+
 
 
 
@@ -42,16 +43,16 @@ return(
                     key={truck._id}
                   >
                     {(provided) => (
-                      <div className="top-item-container"
+                      <div className={styles["top-item-container"]}
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                       >
-                        <div className="top-item-header">
+                        <div className={styles["top-item-header"]}>
                         <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
-                        <p className="top-popup">Remove From Board</p>
+                        <p className={styles["top-popup"]}>Remove From Board</p>
                         </div>
-                        <div className="top-truck-data"> 
+                        <div className={styles["top-truck-data"]}> 
                           <h3>{truck.driverName}</h3>
                         </div>
                       </div>
@@ -62,15 +63,18 @@ return(
               </div>
             )}
           </Droppable>
-    <div className="mainHeader-right">
-            <button onClick={toggleComponents}>
+    <div className={styles["mainHeader-right"]}>
+    <div className={styles.dropDown}> 
+        <button className={styles.settings}>Settings</button>
+        <button className={styles.toggleComponent} onClick={toggleComponents}>
                 Toggle Components
-            </button>
-        <button className="mytruck-link">
+        </button>
+    </div> 
+        <button className={styles["mytruck-link"]}>
 
                     <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> Truck List</Link>
         </button>
-        <button onClick={logout} className="logout" >logout</button>
+        <button onClick={logout} className={styles["logout"]} >logout</button>
     </div>
 
 </div>

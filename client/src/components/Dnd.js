@@ -544,7 +544,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               }
                             </select>
                             <div className={styles.timeInput} style={{display: "flex"}}>
-                              <input id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block", width: "75px"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                              <input id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
                            <h4 className={styles["trailer-type"]} style={{fontWeight: '100'}}>{item.trailerType}</h4>

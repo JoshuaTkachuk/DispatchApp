@@ -71,6 +71,7 @@
     margin: 0 auto;
     align-items: center;
     margin-left: 0;
+    margin-bottom: 1vh;
 }
 
 .aboveList-left form {
@@ -162,6 +163,7 @@
     display: flex;
     align-items: center;
     font-size: 75%;
+    
 }
 
 .listFilter-icon:hover {
@@ -212,8 +214,19 @@
     margin-left: 2vw;
     display: flex;
     align-items: center;
-    color: rgb(197, 197, 197);
 }
+
+.iconCheck {
+    color: rgb(237, 237, 237);
+    opacity: .5;
+    transition: opacity 0.3s ease-in;
+}
+
+.iconCheck:hover {
+    opacity: 1;
+}
+
+ 
 
 
 .add-button {
@@ -273,6 +286,20 @@
 .openBtn2:hover {
     background-color: hsl(228, 14%, 14%);
 }
+
+.icon-moreInfo { 
+    margin-left: 1vw;
+    color: rgb(197, 197, 197);
+    opacity: .5;
+    transition: opacity 0.3s ease-in;
+}
+
+.icon-moreInfo:hover { 
+    cursor: pointer;
+    color: rgb(217, 217, 217);
+    opacity: 1;
+}
+
 
 .footer {
     position: relative;
