@@ -14,6 +14,7 @@ import { MdOutlineOpenInNew } from "react-icons/md";
 
 
 function App(props) {
+    const toggleComponents = props.toggleComponents
     const d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
@@ -418,6 +419,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     return (
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
+      <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles["box-container"]}>
   {days.map((day, indx) => {
     return ( 
@@ -429,7 +431,9 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
            <h1>{day.name}</h1>
            <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
            </div>
-           <div className={styles["card-header"]}> 
+           {
+            day.trucks.length > 0 ?
+            <div className={styles["card-header"]}> 
                     <h4>location</h4>
                     <h4>Status</h4>
                     <h4>Trailer Type</h4>
@@ -438,6 +442,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                     <h4>Truck Number </h4>
                     <h4>Phone Number</h4>         
                   </div> 
+                  :<></>
+           }
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -464,7 +470,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                             </select>
                           
                             <div style={{display: "flex"}}>
-                              <input id={`${item._id}timeInput`} style={{display: "none", width: "2vw"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                              <input id={`${item._id}timeInput`} style={{display: "none", width: "2vw"}} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)} onFocus={(e)=>document.getElementById(`${item._id}status`).style.display = "block"} onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}/>
                             </div>
                           </form>
                           </div>
@@ -475,18 +481,6 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           <h4 style={{ fontWeight: '100', margin: '0'}}>{item.driverName}</h4>
                           </div>
 
-                         {/* <div >
-                            {
-                              item.notes ? 
-                              <div>
-                                <p className="notes"> Notes:</p>
-                                <p>{item.notes}</p>
-                              </div>
-                              :
-                              <></>
-                            }
-                              
-                          </div>*/}
                               <div id={item._id}>
                                 <p>{item.trailerNum}</p>
                               </div>
@@ -505,7 +499,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           
                           </div>
                           <div className={styles.notes}>
-                            <input placeholder="Notes" onChange={(e)=> handleNotes(item._id)}>{item.notes}</input>
+                            <input placeholder="Notes"  value={item.notes} onChange={(e)=> handleNotes(item._id)} />
                             </div>
                           </div>
                           )}
