@@ -33,7 +33,7 @@
 .tableHeader {
     display: flex;
     height: 5vh;
-    border-bottom: solid 1px hsl(225, 7%, 32%);
+    border-bottom: solid 1px hsl(223, 6%, 22%);
 }
 
 .selectAllBox { 
@@ -56,14 +56,13 @@
 
 .columnValues h3 {
     margin: 0;
-    font-weight: 75;
+    font-weight: bold;
 }
 
 .aboveList {
     display: flex;
     width: 75%;
     margin: 0 auto;
-    margin-bottom: 1vh;
 }
 
 .aboveList-left { 
@@ -80,7 +79,7 @@
 }
 
 .aboveList-left label {
-    font-size: 50%;
+    font-size: 75%;
 }
 
 .listFilter { 
@@ -88,6 +87,8 @@
     align-items: center;
     color: rgb(217, 217, 217);
 }
+
+
 
 .listFilter select {
     justify-content: center;
@@ -106,9 +107,52 @@
 .listSearch {
     display: flex;
     align-items: center;
-    font-size: 50%;
-
+    font-size: 75%;
 }
+
+
+.listSearch input {
+    background: none;
+    border: 1px solid hsl(225, 13%, 25%);
+    border-radius: .3vw;
+    padding: .5vh;
+    font-size: 2vh;
+    outline: none;
+    -webkit-appearance: none;
+    /* Add a transition effect for smoother focus change */
+    transition: border-color 0.3s ease;
+    animation: typewriter .5s steps(44) 0s 1 normal both,
+                blinkTextCursor 500ms steps(44) infinite normal;
+}
+
+/* Highlight the search bar on focus */
+.listSearch input:focus {
+    border-color: hsl(0, 0%, 100%);
+}
+
+.listSearch input:focus {
+    animation: blinkTextCursor 500ms steps(44) infinite normal;
+    color: white;
+}
+
+/* Optional: Control the width with the typewriter effect if desired */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 10em; }
+}
+
+.listSearch input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* .listSearch input {
+    background: none;
+    border: solid 1px hsl(225, 7%, 32%);
+    border-radius: .2rem;
+    height: 3vh;
+} */
 
 .listSearch:hover {
     color: rgb(0,128,0);
@@ -117,17 +161,22 @@
 .listFilter-icon {
     display: flex;
     align-items: center;
-    font-size: 50%;
+    font-size: 75%;
 }
 
 .listFilter-icon:hover {
     color: rgb(0,128,0);
 }
 
+.aboveList-Right {
+    display: flex;
+    align-items: center;
+}
+
 .list{
     width: 75vw;
     margin: 0 auto;
-    background-color:  hsl(226, 12%, 21%);
+    background-color:  hsl(227, 11%, 16%);
     border-top-right-radius: .75vw;
     border-top-left-radius: .75vw;
 }
@@ -140,7 +189,11 @@
     text-align: center;
     justify-content: center;
     width: 75vw;
-    border-bottom: solid 1px hsl(225, 7%, 32%);
+    border-bottom: solid 1px hsl(223, 6%, 22%);
+}
+
+.list-items:hover {
+    background:  hsl(228, 14%, 14%);
 }
 
 /*.list-items:nth-child(odd){ background-color:rgb(68, 68, 68); }*/
@@ -159,7 +212,7 @@
     margin-left: 2vw;
     display: flex;
     align-items: center;
-    color: hsl(224, 7%, 33%);
+    color: rgb(197, 197, 197);
 }
 
 
@@ -189,11 +242,43 @@
     background-color: hsl(228, 14%, 14%);
 }
 
+.openBtn1{
+    padding: .5rem;
+    border-radius: 1vw;
+    border: none;
+    width: 8vw;
+    justify-content: center;
+    cursor: pointer;
+    min-width: fit-content; 
+    background: none;
+    color: rgb(217, 217, 217);
+}
+
+.openBtn1:hover {
+    background-color: hsl(228, 14%, 14%);
+}
+
+.openBtn2{
+    padding: .5rem;
+    border-radius: 1vw;
+    border: none;
+    width: 8vw;
+    justify-content: center;
+    cursor: pointer;
+    min-width: fit-content; 
+    background: none;
+    color: rgb(217, 217, 217);
+}
+
+.openBtn2:hover {
+    background-color: hsl(228, 14%, 14%);
+}
+
 .footer {
     position: relative;
     display: flex;
     height: 7vh;
-    background: hsl(225, 10%, 24%);
+    background:  hsl(227, 11%, 16%);
     width: 75vw;
     margin: 0 auto;
     margin-bottom: 5vh;

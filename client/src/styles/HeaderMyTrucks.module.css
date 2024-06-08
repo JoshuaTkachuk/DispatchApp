@@ -1,0 +1,51 @@
+.mainHeader {
+    display: flex;
+    font-size: 1.4vmax;
+    border-bottom: solid 1px hsl(222, 15%, 23%);
+    height: 10vh;
+    align-items: center;
+  }
+  
+  .mainHeader img {
+     height: 6vh;
+     margin-left: 2vh;
+  }
+  
+  .mainHeader h1{
+    color: rgb(207, 207, 207);
+  }
+  
+  .mainHeader h2 {
+    margin-left: 2vw;
+    font-weight: 85;
+    color: rgb(217,217,217);
+    font-size: 1.5vmax;
+  }
+  
+  .mainHeader-right {
+      display: flex;
+      position: absolute;
+      right:3vw;
+      font-size: calc(4px + .5vw);
+  }
+  
+  .logout {
+    cursor:pointer;
+    padding: .75vh .75vw .75vh .75vw;
+    border-radius: .5vw; 
+    border: none;
+    background-color: rgb(207, 207, 207);
+    ;
+  }
+  
+  .mytruck-link {
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1vw;
+    border-radius: .5vw;
+    border: none;
+    background: none;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  

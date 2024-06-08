@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import "../styles/NewTruckForm.css";
+import styles from "../styles/NewTruckForm.module.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
@@ -65,32 +65,32 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
 
     return(
         <div>
-        <div className="popupForm" style={{zIndex:'12'}}>
-        <div className="formHeader">
+        <div className={styles.popupForm} style={{zIndex:'12'}}>
+        <div className={styles.formHeader}>
             <h1>New Truck</h1>
-            <p onClick={onClose} className="closeBtn"> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
+            <p onClick={onClose} className={styles.closeBtn}> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
 
         </div>
-        <div className="form" >
+        <div className={styles.form} >
             <form onSubmit={submithandler}>
-                <div className="formbody1">
+                <div className={styles.formbody1}>
                     <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
                     <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
                 </div>
-                <div className="formbody2">
+                <div className={styles.formbody2}>
                     <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                     <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
                 </div> 
-                <div className="formbody3">
-                <div className="formbody3Left">
+                <div className={styles.formbody3}>
+                <div className={styles.formbody3Left}>
                     <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                     <input placeholder="notes"></input>
                 </div>
                 {/* <div className="dateReady">
                         <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
                 </div> */}
-                <div className="formbody3Right">
-                <div className="endorsements">
+                <div className={styles.formbody3Right}>
+                <div className={styles.endorsements}>
                     <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox">
                     </input>
 
@@ -105,7 +105,7 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
                         <label for="DT">Doubles/Triples</label>
                    
                     </div>
-                    <div className="tType">
+                    <div className={styles.tType}>
                 <div for="Ttype">Trailer Type</div>
                     <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className="tType-Select">
                         <option value={"R"}>R</option>
@@ -115,7 +115,7 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
                 </div>
                     </div>
                     </div>
-                    <button type="submit" className="buttonSubmit">Submit</button>         
+                    <button type="submit" className={styles.buttonSubmit}>Submit</button>         
                 </form>
           
                 </div>

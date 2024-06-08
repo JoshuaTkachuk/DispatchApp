@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios, { all } from "axios";
 import {Link} from "react-router-dom";
-import "../styles/MyTrucks.css";
+import styles from "../styles/MyTrucks.module.css";
 import NewTruckForm from "./NewTruckForm";
 import HeaderMyTrucks from "./HeaderMyTrucks"
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
@@ -234,26 +234,26 @@ const MyTrucks=()=>{
     return(
         <div>
         <HeaderMyTrucks/>
-        <div className={openForm === false ? "" : "overlay"}>
+        <div className={openForm === false ? "" : styles.overlay}>
         </div>
-        <div className="page" >
-        <div className="links">  
+        <div className={styles.page}>
+        <div className={styles.links}>  
         <div> 
           <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
         </div>
-       <div className="aboveList">
-        <div className="aboveList-left"> 
-            <div className="listSearch">
-                <SlMagnifier size={25}  onClick={() => searchClick ()} className="SlMagnifier" style={{cursor: 'pointer', color: searchVisible === "block" ? "rgb(0, 128, 0)": ""}}/>
+       <div className={styles.aboveList}>
+        <div className={styles["aboveList-left"]}> 
+            <div className={styles.listSearch}>
+                <SlMagnifier size={25}  onClick={() => searchClick ()} className={styles.SlMagnifier} style={{cursor: 'pointer', color: searchVisible === "block" ? "rgb(0, 128, 0)": ""}}/>
                 <p onClick={() => searchClick ()} style={{ display: searchVisible === "block" ? "none": "block", cursor: 'pointer'}}>Search</p>
                 <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)} style={{ display: searchVisible === "block" ? "block" : "none", marginLeft: '1vw'}}/>
             </div>
-            <div className="listFilter-icon"> 
+            <div className={styles["listFilter-icon"]}> 
                 <CiFilter size={30} onClick={() => filterClick ()} style={{cursor: 'pointer', marginLeft: '2vw', color: filterVisible === "block" ? "rgb(0, 128, 0)": ""}}/> 
                 <p onClick={() => filterClick ()} style={{ display: filterVisible === "block" ? "none" : "block", cursor:'pointer'}}>Filter</p>
             </div>
-            <div className="listFilter" style={{ display: filterVisible === "block" ? "block" : "none"}}> 
+            <div className={styles.listFilter} style={{ display: filterVisible === "block" ? "block" : "none"}}> 
                 <form onChange={(e)=>filterTrucks(e, document.getElementById("Ttype").value, document.getElementById("endorsements").value)}>
                 <label for="Ttype">Trailer Type</label>
                 <select defaultValue={"all"} name="Ttype" id="Ttype" >
@@ -272,34 +272,35 @@ const MyTrucks=()=>{
 
         </div>
         </div>
-        <div > 
-            <button onClick={() => setOpenForm(true)} className="openBtn" style={{}}>Add Truck</button>
-        </div>
+        <div className={styles["aboveList-Right"]}> 
+            <button onClick={() => setOpenForm(true)} className={styles.openBtn} style={{}}>Add Truck</button>
+        
             {
                 buttonsVisibile?
-                <div>
-                    <button onClick={(e)=>addToBoard(e)}>add to board</button>
-                    <button onClick={(e)=>deleteTrucks(e)} >delete</button>
+                <div style={{display:'flex'}}>
+                    <button onClick={(e)=>addToBoard(e)} className={styles.openBtn1}>Add To Board</button>
+                    <button onClick={(e)=>deleteTrucks(e)} className={styles.openBtn2}>Delete</button>
                 </div>
                 :<></>
             }
+         </div>
         <div> 
           <NewTruckForm open={openForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
         </div> 
         </div>
        </div>
-       <div className="list">
-       <div className="tableHeader">
-       <div onClick={(e) => selectAll(e)} className="selectAllBox">
+       <div className={styles.list}>
+       <div className={styles.tableHeader}>
+       <div onClick={(e) => selectAll(e)} className={styles.selectAllBox}>
                                         {
                                             checkVisible === "none"?
-                                            <MdCheckBoxOutlineBlank style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            <MdCheckBoxOutlineBlank size={20} style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
                                             :
-                                            <MdCheckBox style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                            <MdCheckBox size={20} style={{ display:"block", justifyContent: 'start', cursor: 'pointer'}}/>
                                         }
                                         
         </div> 
-        <div className="columnValues">
+        <div className={styles.columnValues}>
         <h3> Name </h3>
         <h3> Truck Number </h3>
         <h3> Trailer Number </h3>
@@ -309,24 +310,26 @@ const MyTrucks=()=>{
             {
                 trucks?
                     trucks.map((itm, idx)=>{
-                        return<div key={idx} className="list-items">
-                             <div onClick={(e) => handleClick(itm._id)} className="checkBox">
+                        return<div key={idx} className={styles["list-items"]}>
+                             <div onClick={(e) => handleClick(itm._id)} className={styles.checkBox}>
                                         {
                                             checkVisible === "none"?
                                             <div>
-                                                <MdCheckBoxOutlineBlank id={`${itm._id}blankBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
-                                                <MdCheckBox id={`${itm._id}checkBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBoxOutlineBlank size={20} id={`${itm._id}blankBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBox size={20} id={`${itm._id}checkBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
                                             </div>
                                             :
                                             <div>
-                                                <MdCheckBoxOutlineBlank id={`${itm._id}blankBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
-                                                <MdCheckBox id={`${itm._id}checkBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBoxOutlineBlank size={20}  id={`${itm._id}blankBox`} style={{ display: "none", justifyContent: 'start', cursor: 'pointer'}}/>
+                                                <MdCheckBox size={20} id={`${itm._id}checkBox`} style={{ display: "block", justifyContent: 'start', cursor: 'pointer'}}/>
                                             </div>
 
                                         }
                                     </div>
                    
-                                <div id={`${itm._id}truckData`} className="truckdata" onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseLeave={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
+
+                                <div id={`${itm._id}truckData`} className={styles.truckdata} onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseLeave={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
+
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
@@ -345,7 +348,7 @@ const MyTrucks=()=>{
                     :<></>
             }
         </div>
-        <div className="footer">
+        <div className={styles.footer}>
             <p>Load More</p>
         </div>
         

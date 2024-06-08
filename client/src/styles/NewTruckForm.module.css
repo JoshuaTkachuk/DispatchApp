@@ -166,6 +166,14 @@
     max-height: 2vh;
 }
 
+.endorsements input:focus + label {
+    color: blue; /* New color when the input is focused */
+}
+
+.endorsements input:not(:focus) + label {
+    color: rgb(136, 136, 136); /* Original color when the input is not focused */
+}
+
 .endorsements label {
     margin-left: 1vw;
     align-items: center;
