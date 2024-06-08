@@ -67,7 +67,7 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
         <div>
         <div className={styles.popupForm} style={{zIndex:'12'}}>
         <div className={styles.formHeader}>
-            <h1>New Truck</h1>
+            <h1>New Driver</h1>
             <p onClick={onClose} className={styles.closeBtn}> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
 
         </div>
