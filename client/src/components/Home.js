@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import Dnd from "./Dnd"
-import Header from "./Header"
 
 const Home=()=>{
   
@@ -10,7 +9,6 @@ const Home=()=>{
     
     return(
         <div>
-        <Header/>
             <Dnd/>
             {
                 // trucks.length > 0?

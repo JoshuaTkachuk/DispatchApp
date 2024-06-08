@@ -107,6 +107,15 @@ module.exports={
             console.log(err)
         })
     },
+    updateNotes:(req,res)=>{
+        Truck.findByIdAndUpdate({_id: req.body.truckId},{notes: req.body.notes})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    },
     findTrucksByUserId:(req,res)=>{
         if(req.jwtpayload.email !== req.params.email){
             User.findOne({email: req.params.email})

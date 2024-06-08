@@ -6,6 +6,7 @@ import "../styles/TopBox.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { SlArrowDown } from "react-icons/sl";
 import { SlArrowUp } from "react-icons/sl";
+import Header from "./Header"
 
 
 
@@ -427,7 +428,30 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
         console.log(err)
       })
     }
-    const handleNotes = (itemId) =>{
+    const handleNotes = (e, truckId, index, notes) =>{
+      e.preventDefault()
+
+      setDays(prevDays =>{
+        const newDays = [...prevDays]
+
+          newDays[index].trucks.forEach((truck, indx)=>{
+            if(truck._id === truckId){
+              truck.notes = document.getElementById(`${truckId}notesInput`).value
+            }
+          })
+
+
+        return newDays
+      })
+      
+      axios.put("http://localhost:8000/api/updateNotes", {truckId, notes})
+      .then((result)=>{
+        console.log(result)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+      
       
     }
 
@@ -462,44 +486,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     return (
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
-       <div className="topbox">
-        <div className="top-header">
-          <h1> TBD </h1>
-        </div>
-        <div className="items-container"> 
-          <Droppable droppableId="ROOT" type="group">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {trucks.map((truck, index) => (
-                  <Draggable
-                    draggableId={truck._id}
-                    index={index}
-                    key={truck._id}
-                  >
-                    {(provided) => (
-                      <div className="top-item-container"
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                      >
-                        <div className="top-item-header">
-                        <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
-                        <p className="top-popup">Remove From Board</p>
-                        </div>
-                        <div className="top-truck-data"> 
-                          <h3>{truck.driverName}</h3>
-                        </div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          </div>
-      </div> 
-
+        <Header trucks={trucks} removeFromBoard={removeFromBoard}/>
       <div className="box-container">
   {days.map((day, indx) => {
     return (    
@@ -560,17 +547,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           </div>
                           </div>
 
-                          <div >
-                            {
-                              item.notes ? 
-                              <div>
-                                <p className="notes"> Notes:</p>
-                                <p>{item.notes}</p>
-                              </div>
-                              :
-                              <></>
-                            }
-                              
+                          <div>    
                           </div>
 
                           <div onClick={(e) => handleClick(item._id)}>
@@ -591,7 +568,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               <p style={{marginLeft:'1vw',  width: 'auto'}}>{item.phoneNum}</p>  
                               <p style={{marginLeft:'1vw',  width: 'auto'}}>More Info</p>
                             </div>
-                            <input onChange={(e)=> handleNotes(item._id)}>{item.notes}</input>
+                            <input id={`${item._id}notesInput`} value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)}/>
                           </div>
                           </div>
                           )}
