@@ -1,17 +1,25 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import DndList from "./DndList"
 import Dnd from "./Dnd"
 import Header from "./Header"
 
 const Home=()=>{
-  
 
+    const [listVisible, setListVisible] = useState(true);
     
+    const toggleComponents = () => {
+        setListVisible(!listVisible);
+    };
+
     return(
         <div>
-        <Header/>
-            <Dnd/>
+            <Header/>
+            <button onClick={toggleComponents}>
+            Toggle Components
+            </button>
+            {listVisible ? <Dnd /> : <DndList/>} 
             {
                 // trucks.length > 0?
                 //     trucks.map((itm, idx)=>{

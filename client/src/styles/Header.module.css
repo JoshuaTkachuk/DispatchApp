@@ -2,8 +2,7 @@
   display: flex;
   font-size: 1.4vmax;
   border-bottom: solid 1px hsl(222, 15%, 23%);
-  max-height: 10vh;
-  min-height: 8vh;
+  height: 10vh;
   align-items: center;
 }
 
@@ -13,8 +12,7 @@
 }
 
 .mainHeader h1{
-  margin-left: 2vw;
-  color: rgb(32, 32, 119);
+  color: rgb(207, 207, 207);
 }
 
 .mainHeader h2 {
@@ -28,9 +26,9 @@
     border: 2px dashed hsl(226, 12%, 21%);
     position: absolute;
     left: 50%;
-    top: 4%;
+    top: 5%;
     width: 100%;
-    max-width: 10vw;
+    max-width: 20vw;
     transform: translate(-50%, -50%);
     padding: 5px;
 }
@@ -43,7 +41,7 @@
   color: rgba(217, 217, 217, 0.865);
 }
 
-.mainHeader-right {
+.mainHeaderright {
     display: flex;
     position: absolute;
     right:3vw;
@@ -59,7 +57,7 @@
   ;
 }
 
-.mytruck-link {
+.mytruckLink {
   align-items: center;
   cursor: pointer;
   margin-right: 1vw;
