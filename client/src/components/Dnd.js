@@ -14,7 +14,7 @@ import { MdOutlineOpenInNew } from "react-icons/md";
 
 function App(props) {
     const toggleComponents = props.toggleComponents;
-    const d = new Date();
+    let d = new Date();
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const [trucks, setTrucks] = useState([]);
     const [timeId, setTimeId] = useState('10:00')
@@ -73,15 +73,15 @@ function App(props) {
         setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
         const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
         console.log(weekTrucks, "week trucks");
-        weekTrucks.forEach((truck, idx)=>{
-          let tempTruckDate = new Date(truck.dateReady)
-          let tempDayDate = new Date(days[0].date)
+        // weekTrucks.forEach((truck, idx)=>{
+        //   let tempTruckDate = new Date(truck.dateReady)
+        //   let tempDayDate = new Date(days[0].date)
 
-          if(tempTruckDate < tempDayDate){
-            truck.dateReady = tempDayDate;
-          }
+        //   if(tempTruckDate < tempDayDate){
+        //     truck.dateReady = tempDayDate;
+        //   }
 
-        })
+        // })
 
         setDays(prevDays => {
           const newDays = [...prevDays];
@@ -123,7 +123,7 @@ function App(props) {
     .catch(err=>{
       console.log(err)
     })
-},[])
+},[days[0].date])
 const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
   .then((result)=>{
@@ -483,6 +483,79 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
       document.getElementById(`${itemId}status`).style.display = "none"
     }
    }
+   const loadMoreDays=()=>{
+    setDays(prevDays =>{
+      const newDays = [...prevDays]
+
+        newDays.forEach((day, indx)=>{
+          let tempDate = new Date(day.date)
+          day.date = new Date(tempDate.setDate(tempDate.getDate() + 5))
+          console.log(day.date)
+          let tempNum = Number(day.id) + 5
+          day.id = tempNum.toString();
+          day.name = weekday[day.date.getDay()]
+          
+        })
+
+
+      return newDays
+    })
+   }
+   const loadOneDay=()=>{
+    setDays(prevDays =>{
+      const newDays = [...prevDays]
+
+        newDays.forEach((day, indx)=>{
+          let tempDate = new Date(day.date)
+          day.date = new Date(tempDate.setDate(tempDate.getDate() + 1))
+          console.log(day.date)
+          let tempNum = Number(day.id) + 1
+          day.id = tempNum.toString();
+          day.name = weekday[day.date.getDay()]
+          
+        })
+
+
+      return newDays
+    })
+   }
+   const loadPreviousDays=()=>{
+    setDays(prevDays =>{
+      const newDays = [...prevDays]
+
+        newDays.forEach((day, indx)=>{
+          let tempDate = new Date(day.date)
+          day.date = new Date(tempDate.setDate(tempDate.getDate() - 5))
+          console.log(day.date)
+          let tempNum = Number(day.id) - 5
+          day.id = tempNum.toString();
+          day.name = weekday[day.date.getDay()]
+          
+        })
+
+
+      return newDays
+    })
+   }
+   const loadPreviousDay=()=>{
+    setDays(prevDays =>{
+      const newDays = [...prevDays]
+
+        newDays.forEach((day, indx)=>{
+          let tempDate = new Date(day.date)
+          day.date = new Date(tempDate.setDate(tempDate.getDate() - 1))
+          console.log(day.date)
+          let tempNum = Number(day.id) - 1
+          day.id = tempNum.toString();
+          day.name = weekday[day.date.getDay()]
+          
+        })
+
+
+      return newDays
+    })
+   }
+
 
     
 
@@ -491,6 +564,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
       <DragDropContext onDragEnd={handleDragDrop}>
         <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles.boxContainer}>
+      <buttton onClick={loadPreviousDays} style={{backgroundColor: "white"}}>load previos days</buttton>
+      <buttton onClick={loadPreviousDay} style={{backgroundColor: "white"}}>load previos day</buttton>
   {days.map((day, indx) => {
     return (    
         <div className={styles.card}>
@@ -606,11 +681,11 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     
      
   })}
-  
+<buttton onClick={loadOneDay} style={{backgroundColor: "white"}}>load one day</buttton>
+<buttton onClick={loadMoreDays} style={{backgroundColor: "white"}}>load more days</buttton>
 </div>
 
       </DragDropContext>
-
     </div>
     
   );
