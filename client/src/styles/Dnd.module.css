@@ -101,7 +101,7 @@
   border: none;
   font-size: calc(4px + .5vw);
   margin-right: .5vw;
-
+  outline: none;
 }
 
 .timeInput { 

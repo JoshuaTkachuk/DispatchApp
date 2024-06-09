@@ -4,9 +4,6 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styles from "../styles/DndList.module.css";
 import Header from "./Header"
 import { HiOutlineXMark } from "react-icons/hi2";
-import { SlArrowDown } from "react-icons/sl";
-import { SlArrowUp } from "react-icons/sl";
-import { MdPhoneEnabled } from "react-icons/md";
 import { MdOutlineOpenInNew } from "react-icons/md";
 
 
@@ -434,7 +431,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
            {
             day.trucks.length > 0 ?
             <div className={styles["card-header"]}> 
-                    <h4>location</h4>
+                    <h4>Location</h4>
                     <h4>Status</h4>
                     <h4>Trailer Type</h4>
                     <h4>Name</h4>
@@ -451,8 +448,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                     {
                       day.trucks.map((item, index) => (
                         <Draggable draggableId={item._id} index={index} key={item._id}>
-                          {(provided) => (
-                            
+                          {(provided) => ( 
                           <div className={styles["item-container"]}
                           {...provided.dragHandleProps}
                           {...provided.draggableProps}
@@ -488,16 +484,14 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                                 <p>{item.truckNum}</p>
                               </div >
                               <div  id={item._id} style={{display: 'flex', alignItems:'center', position: 'relative'}}>
-                                <p>{item.phoneNum}</p>  
-                                <div className={styles["more-info"]} style={{ display: 'flex'}}>                  
-                               <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/>
-                               </div>
+                                <p>{item.phoneNum}</p> 
+                                <div className={styles["iconInfo"]}>                  
+                               <button className={styles["button-delete"]}> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
                                <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark size={10} className={styles["icon-buttonDelete"]}/> </button>
                                 <p className={styles.popup}>Remove From Board</p>
-                          </div>  
-                        
-                          
-                          </div>
+                              </div>
+                              </div>  
+                              </div> 
                           <div className={styles.notes}>
                             <input placeholder="Notes"  value={item.notes} onChange={(e)=> handleNotes(item._id)} />
                             </div>
