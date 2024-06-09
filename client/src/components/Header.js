@@ -64,11 +64,15 @@ return(
             )}
           </Droppable>
     <div className={styles["mainHeader-right"]}>
-    <div className={styles.dropDown}> 
+    <div className={styles.dropdown}> 
         <button className={styles.settings}>Settings</button>
-        <button className={styles.toggleComponent} onClick={toggleComponents}>
-                Toggle Components
-        </button>
+            <div className={styles.options}> 
+                <div className={styles.toggleComponent}> 
+                <button  onClick={toggleComponents}>
+                    Change View
+                </button>
+                </div>       
+            </div> 
     </div> 
         <button className={styles["mytruck-link"]}>
 

@@ -19,7 +19,7 @@
   margin-left: 2vw;
   font-weight: 85;
   color: rgb(217,217,217);
-  font-size: 1.5vmax;
+  font-size: 3vh;
 }
 
 .topbox {
@@ -107,39 +107,55 @@
     align-items: center;
 }
 
-.dropDown {
-  float: left;
-  overflow: hidden;
+.dropdown {
+  position: relative;
 }
 
-.dropdown .settings {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
+.dropdown:hover .options {
+  display: block;
 }
 
 .settings {
   color: rgb(237, 237, 237);
   background: none;
   border: none;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+.options { 
+  display: none;
+  position: absolute;
+  background-color: hsl(227, 17%, 16%);
+  min-width: 5vw;
+  width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: .2vw;
 }
 
 .toggleComponent { 
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  margin: .2rem;
+  border-radius: .2vw;
 }
 
-.settings:hover .toggleComponent {
-  display: block;
+.toggleComponent:hover { 
+  background-color: hsl(227, 10%, 27%);;
 }
+
+.toggleComponent:hover { 
+  background-color: hsl(227, 10%, 27%);;
+}
+
+
+.toggleComponent button {
+  border: none;
+  width: 100%;
+  background: none;
+  cursor: pointer;
+  color: rgb(237, 237, 237);
+}
+
 
 .logout {
   cursor:pointer;
