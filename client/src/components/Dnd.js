@@ -8,7 +8,10 @@ import { SlArrowDown } from "react-icons/sl";
 import { SlArrowUp } from "react-icons/sl";
 import { MdPhoneEnabled } from "react-icons/md";
 import { MdOutlineOpenInNew } from "react-icons/md";
-
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 
 
@@ -21,6 +24,7 @@ function App(props) {
     const [truckVisible, setTruckVisible] = useState("none")
     const [upVisible, setUpVisible] = useState("none")
     const [scheduleVisilble, setScheduleVisible] = useState(true);
+    const [isDragging, setIsDragging] = useState(false);
     console.log(scheduleVisilble);
     const [days,setDays] = useState([
       {
@@ -161,9 +165,13 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     console.log(props.trucks);
 
-    const handleDragDrop = (results) => {
-        const {source, destination, type} = results;
+    const handleDragStart = () =>{
+      setIsDragging(true)
+    }
 
+    const handleDragDrop = (results) => {
+      setIsDragging(false)
+        const {source, destination, type} = results;
             if (!destination) return;
             if (source.droppableId === destination.droppableId && source.index === destination.index){
               return;
@@ -286,7 +294,6 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                   console.log(err)
                 })
               })
-
             }
 
 
@@ -497,7 +504,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
           
         })
 
-
+    
       return newDays
     })
    }
@@ -561,11 +568,19 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     return (
    <div className="body">
-      <DragDropContext onDragEnd={handleDragDrop}>
-        <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
+      <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragDrop}>
+        <Header isDragging={isDragging} trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
+        <div className={styles.loadDays}> 
+        <div className={styles.previousDays}> 
+          <buttton onClick={loadPreviousDays}><MdKeyboardDoubleArrowLeft className={styles.arrowLoad} size={20}/></buttton>
+          <buttton onClick={loadPreviousDay}><MdKeyboardArrowLeft size={20} className={styles.arrowLoad}/></buttton>
+        </div> 
+        <div className={styles.moreDays}>
+          <buttton onClick={loadOneDay}><MdKeyboardArrowRight className={styles.arrowLoad} size={20}/></buttton>
+          <buttton onClick={loadMoreDays}><MdKeyboardDoubleArrowRight className={styles.arrowLoad} size={20}/></buttton>
+        </div>
+        </div> 
       <div className={styles.boxContainer}>
-      <buttton onClick={loadPreviousDays} style={{backgroundColor: "white"}}>load previos days</buttton>
-      <buttton onClick={loadPreviousDay} style={{backgroundColor: "white"}}>load previos day</buttton>
   {days.map((day, indx) => {
     return (    
         <div className={styles.card}>
@@ -587,8 +602,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           {...provided.draggableProps}
                           ref={provided.innerRef}
                           style = {item.status === "READY" ? {...provided.draggableProps.style, borderLeftColor: "red"} : item.status === "TIME" ? {...provided.draggableProps.style, borderLeftColor: "yellow"} : item.status === "CONFIRM" ? {...provided.draggableProps.style, borderLeftColor: "green"} : {}}
-                          >
-                          
+                          >     
                           <div className={styles["truck-header"]}>
 
                           <div className={styles["truckHeader-row1"]}>
@@ -604,30 +618,26 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                             <select style = {item.status === "TIME" ? {display: "none"} : {display: "block"}} onBlur={(e)=>handleStatusBlur(`${item._id}status`,`${item._id}timeInput` )} name="status" id={`${item._id}status`} onChange={(e)=>handlestatus(e,item._id,indx)}>
                               {
                                 item.status === "READY" ?
-                                <option value="READY" selected>READY</option> :
-                                <option value="READY">READY</option>
+                                <option value="READY" selected>Ready</option> :
+                                <option value="READY">Ready</option>
                               }
                               {
                                 item.status === "CONFIRM" ?
-                                <option value="CONFIRM" selected>CONFIRM</option> :
-                                <option value="CONFIRM">CONFIRM</option>
+                                <option value="CONFIRM" selected>Confirm</option> :
+                                <option value="CONFIRM">Confirm</option>
                               }
                               {
                                 item.status !== "READY" && item.status !== "CONFIRM" ?
-                                <option value="TIME" selected>TIME</option> :
-                                <option value="TIME">TIME</option>
+                                <option value="TIME" selected>Time</option> :
+                                <option value="TIME">Time</option>
                               }
                             </select>
                             <div className={styles.timeInput} style={{display: "flex"}}>
                               <input placeholder="Time" id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
-                           <h4 className={styles["trailer-type"]} style={{fontWeight: '100'}}>{item.trailerType}</h4>
-                           <h4 className={styles["driver-name"]}style={{paddingLeft: '.5vw', fontWeight: '100', margin: '0', }}>{item.driverName}</h4>
-                          </div>
-                          </div>
-
-                          <div>    
+                           <p className={styles["trailer-type"]}>{item.trailerType}</p>
+                           <p className={styles["driver-name"]}style={{paddingLeft: '.5vw', margin: '0', }}>{item.driverName}</p>
                           </div>
 
                           <div onClick={(e) => handleClick(item._id)}>
@@ -638,32 +648,43 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               </div>
 
                           </div>
+                          </div>
 
 
                           <div id={item._id} className={styles["truck-body"]} style={{display: truckVisible, justifyContent: 'center'}}>
                             <span className={styles.line}></span>
                             <div className={styles["truck-body1"]}>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)',  overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent:'center'}}>
+                              <div style={{backgroundColor: ' hsl(0.0, 0.000%, 20.00%)',  overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent:'center'}}>
                                 <h4>TN</h4>
                                 <p style={{paddingLeft:'.2vw', width: 'auto', margin: '0'}}>{item.trailerNum}</p>
                               </div>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display:'flex', justifyContent:'center'}}>
+                              <div style={{backgroundColor: ' hsl(0.0, 0.000%, 20.00%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display:'flex', justifyContent:'center'}}>
                                 <h4>TR</h4>
                                 <p style={{paddingLeft:'.2vw', width: 'auto', margin: '0'}}>{item.truckNum}</p>
                               </div >
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
+                              <div style={{backgroundColor: 'hsl(0.0, 0.000%, 20.00%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
                                 <MdPhoneEnabled size={10} style={{paddingLeft:''}}/>
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>{item.phoneNum}</p>  
                               </div>
-                              <div style={{backgroundColor: 'hsl(226, 12%, 21%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
+                              <div className={styles.moreInfo} style={{overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', justifyContent: 'center'}}>
                                 <MdOutlineOpenInNew size={10} style={{paddingLeft:''}}/>
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>More Info</p>
+                                <div className={styles["moreInfo-popup"]}>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
+                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
+
+                                </div>
                               </div>
-                            </div>
+                              </div>
                             <div className={styles.notes}>
-                            <input placeholder = "Notes" id={`${item._id}notesInput`} value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)}/>
+                            <textarea  placeholder = "Notes" id={`${item._id}notesInput`} value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)}/>
                             </div>
                           </div>
+                           
                           </div>
                           )}
                         </Draggable>
@@ -674,6 +695,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                 </div>
             )}
             </Droppable>
+            
         </div>
 
      
@@ -681,11 +703,19 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     
      
   })}
-<buttton onClick={loadOneDay} style={{backgroundColor: "white"}}>load one day</buttton>
-<buttton onClick={loadMoreDays} style={{backgroundColor: "white"}}>load more days</buttton>
 </div>
 
       </DragDropContext>
+      <div className={styles.loadDays}> 
+        <div className={styles.previousDays}> 
+          <buttton onClick={loadPreviousDays}><MdKeyboardDoubleArrowLeft className={styles.arrowLoad} size={20}/></buttton>
+          <buttton onClick={loadPreviousDay}><MdKeyboardArrowLeft size={20} className={styles.arrowLoad}/></buttton>
+        </div> 
+        <div className={styles.moreDays}>
+          <buttton onClick={loadOneDay}><MdKeyboardArrowRight className={styles.arrowLoad} size={20}/></buttton>
+          <buttton onClick={loadMoreDays}><MdKeyboardDoubleArrowRight className={styles.arrowLoad} size={20}/></buttton>
+        </div>
+        </div> 
     </div>
     
   );

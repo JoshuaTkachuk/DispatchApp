@@ -29,7 +29,7 @@ return(
         <button className={styles["mytruck-link"]}>
                     <Link to={"/Home"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}>Home</Link>
         </button>
-        <button onClick={logout} className={styles.logout} >logout</button>
+        <button onClick={logout} className={styles.logout} >Logout</button>
     </div>
 
 </div>

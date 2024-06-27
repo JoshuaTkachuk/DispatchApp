@@ -1,7 +1,7 @@
 .mainHeader {
     display: flex;
     font-size: 1.4vmax;
-    border-bottom: solid 1px hsl(222, 15%, 23%);
+    border-bottom: solid 1px hsl(0.0, 0.000%, 20.00%);
     height: 10vh;
     align-items: center;
   }
@@ -17,7 +17,7 @@
   
   .mainHeader h2 {
     margin-left: 2vw;
-    font-weight: 85;
+    font-weight: 400;
     color: rgb(217,217,217);
     font-size: 3vh;
   }
@@ -35,7 +35,6 @@
     border-radius: .5vw; 
     border: none;
     background-color: rgb(207, 207, 207);
-    ;
   }
   
   .mytruck-link {

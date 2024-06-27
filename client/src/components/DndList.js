@@ -5,6 +5,11 @@ import styles from "../styles/DndList.module.css";
 import Header from "./Header"
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineOpenInNew } from "react-icons/md";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
+
 
 
 
@@ -557,12 +562,11 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
     
 
     return (
+   <div> 
    <div className="body">
       <DragDropContext onDragEnd={handleDragDrop}>
       <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles["box-container"]}>
-      <buttton onClick={loadPreviousDays} style={{backgroundColor: "white"}}>load previos days</buttton>
-      <buttton onClick={loadPreviousDay} style={{backgroundColor: "white"}}>load previos day</buttton>
   {days.map((day, indx) => {
     return ( 
 
@@ -578,7 +582,7 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
             <div className={styles["card-header"]}> 
                     <h4>Location</h4>
                     <h4>Status</h4>
-                    <h4>Trailer Type</h4>
+                    <h4>Trailer</h4>
                     <h4>Name</h4>
                     <h4>Trailer Number</h4>
                     <h4>Truck Number </h4>
@@ -631,10 +635,10 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
                           </form>
                           </div>
                           <div>
-                          <h4 className={styles["trailer-type"]} style={{fontWeight: '100'}}>{item.trailerType}</h4>
+                          <p className={styles["trailer-type"]}>{item.trailerType}</p>
                           </div>
                           <div>
-                          <h4 style={{ fontWeight: '100', margin: '0'}}>{item.driverName}</h4>
+                          <p style={{margin: '0'}}>{item.driverName}</p>
                           </div>
 
                               <div id={item._id}>
@@ -643,17 +647,27 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
                               <div  id={item._id}>
                                 <p>{item.truckNum}</p>
                               </div >
-                              <div  id={item._id} style={{display: 'flex', alignItems:'center', position: 'relative'}}>
+                              <div  id={item._id} className={styles.phoneNumber} style={{display: 'flex', alignItems:'center', position: 'relative'}}>
                                 <p>{item.phoneNum}</p> 
-                                <div className={styles["iconInfo"]}>                  
-                               <button className={styles["button-delete"]}> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
+                                <div className={styles["iconInfo"]}> 
+                              <div className={styles["button-delete"]}>               
+                               <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
                                <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark size={10} className={styles["icon-buttonDelete"]}/> </button>
+                               </div> 
                                 <p className={styles.popup}>Remove From Board</p>
+                              <div className={styles["icon-moreInfo-popup"]}>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
+                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
+                                </div>  
+                                </div>
                               </div>
-                              </div>  
                               </div> 
                           <div className={styles.notes}>
-                            <input placeholder="Notes"  value={item.notes} onChange={(e)=> handleNotes(item._id)} />
+                            <textarea placeholder="Notes"  value={item.notes} onChange={(e)=> handleNotes(item._id)} />
                             </div>
                           </div>
                           )}
@@ -669,11 +683,24 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
         </div>
     );
   })}
-  <buttton onClick={loadOneDay} style={{backgroundColor: "white"}}>load one day</buttton>
-<buttton onClick={loadMoreDays} style={{backgroundColor: "white"}}>load more days</buttton>
 </div>
       </DragDropContext>
+        
     </div>
+    <div className={styles.loadDays}> 
+          <div className={styles.previousDays}> 
+            <buttton onClick={loadPreviousDays}><MdKeyboardDoubleArrowLeft className={styles.arrowLoad} size={20}/></buttton>
+            <buttton onClick={loadPreviousDay}><MdKeyboardArrowLeft size={20} className={styles.arrowLoad}/></buttton>
+          </div> 
+          <div className={styles.moreDays}>
+            <buttton onClick={loadOneDay}><MdKeyboardArrowRight className={styles.arrowLoad} size={20}/></buttton>
+            <buttton onClick={loadMoreDays}><MdKeyboardDoubleArrowRight className={styles.arrowLoad} size={20}/></buttton>
+          </div>
+          </div> 
+
+
+    </div>   
+    
     
   );
 }
