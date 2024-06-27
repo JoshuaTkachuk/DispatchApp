@@ -69,52 +69,51 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
         <div className={styles.formHeader}>
             <h1>New Driver</h1>
             <p onClick={onClose} className={styles.closeBtn}> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
-
         </div>
+        <p className={styles.driverInfo}>Driver Information</p>
         <div className={styles.form} >
             <form onSubmit={submithandler}>
                 <div className={styles.formbody1}>
-                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
-                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                </div>
-                <div className={styles.formbody2}>
                     <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                     <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
                 </div> 
-                <div className={styles.formbody3}>
-                <div className={styles.formbody3Left}>
-                    <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
-                    <input placeholder="notes"></input>
+                <div className={styles.formbody2}>
+                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
+                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
                 </div>
-                {/* <div className="dateReady">
-                        <input type="date" id="date" onChange={(e)=> setDateReady(e.target.value)}/>
-                </div> */}
-                <div className={styles.formbody3Right}>
-                <div className={styles.endorsements}>
+                <div className={styles.formbody3}>
+                  <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                </div>
+                <div className={styles.formbody4}>
+                    <p> Additional Notes</p>
+                    <textarea></textarea>
+                </div>
+                <div className={styles.trailerTypes}>
+                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
                     <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox">
                     </input>
 
                         <label for="T">Tanker</label>
-
+                    </div>
+                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
                     <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
                     </input>
                         <label for="H">Hazmat</label>
-
+                    </div>
+                    <div style={{display: 'flex', justifyContent:'center',alignItems: 'center'}}> 
                     <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                         <label for="DT">Doubles/Triples</label>
-                   
-                    </div>
-                    <div className={styles.tType}>
+                    </div>   
+                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
                 <div for="Ttype">Trailer Type</div>
-                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className="tType-Select">
+                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className={styles["tType-Select"]}>
                         <option value={"R"}>R</option>
                         <option selected value={"V"}>V</option>
-                    </select>
-                    
+                    </select> 
+                    </div>   
                 </div>
-                    </div>
-                    </div>
+                
                     <button type="submit" className={styles.buttonSubmit}>Submit</button>         
                 </form>
           

@@ -6,16 +6,43 @@
   margin-top: 3vh;
  }
 
+ .loadDays { 
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1vh;
+  position: absolute;
+  bottom: 1%;
+  width: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+
+ .previousDays { 
+  display: flex; 
+ }
+
+ .previousDays button { 
+  background: none;
+ }
+
+ .moreDays { 
+    display: flex;
+ }
+
+ .arrowLoad {
+  color: rgb(177, 177, 177);
+  cursor: pointer;
+ }
+
 .card {
-  background-color: hsl(227, 17%, 16%);
+  background-color: hsl(0.0, 0.000%, 15.00%);
   border-radius: .4vw;
   justify-content: flex-start;
-  margin: .5rem;
   max-width: 100%;
   display: flex;
   flex-direction: column;
   height:fit-content;
-  border: solid 1px hsl(226, 10%, 25%);
+  border: solid 1px hsl(0.0, 0.000%, 20.00%);
 }
 
 .header {
@@ -40,19 +67,18 @@
 .items-container {
   display: flex;
   flex-direction: column;
-  min-width: 17vw;
+  min-width: 17.5vw;
 }
 
 .item-container {
   padding: 1px;
-  background-color:  hsl(226, 12%, 21%);
+  background-color:hsl(0.0, 0.000%, 20.00%);
   border-radius: .2vw;
   width: 18vw;
   margin-top: .3vh;
   border-left: 3px solid green; 
   border-bottom-left-radius: .4vw;
 }
-
 
 .truck-header {
   display: flex;
@@ -65,7 +91,7 @@
 .truckHeader-row1 {
   display: flex;
   width: 100%;
-  border-bottom: 1px solid hsl(226, 10%, 25%);
+  border-bottom: 1px solid hsl(0.0, 0.000%, 27.00%);
   height: 3vh;
   align-items: center;
 }
@@ -115,6 +141,7 @@
   border: none;
   color: rgb(217, 217, 217);
   outline: none;
+  font-size: calc(4px + .5vw);
   -webkit-appearance: none;
 }
 
@@ -122,8 +149,8 @@
   margin: 0;
   padding-left: .5vw;
   padding-right: .5vw;
-  border-left: 1px solid hsl(226, 10%, 25%);
-  border-right: 1px solid hsl(226, 10%, 25%);
+  border-left: 1px solid hsl(0.0, 0.000%, 27.00%);
+  border-right: 1px solid hsl(0.0, 0.000%, 27.00%);
   font-size: calc(4px + .5vw);
 }
 
@@ -131,10 +158,10 @@
   font-size: calc(4px + .5vw);
 }
 
-.item-container:hover .button-delete {
+.truck-header:hover .button-delete {
   visibility: visible;
   transition: visibility 0.3s ease;
-  transition-delay: .5s;
+  transition-delay: .75s;
  }
 
  .button-delete {
@@ -146,13 +173,14 @@
  
  
  .popup {
+  display: none;
   opacity: 0;
-  background-color: hsl(222, 17%, 11%);
+  background-color: hsl(0.0, 0.000%, 15.00%);
   border-radius: .1vw;
-  border: 1px solid hsl(220, 16%, 18%);
+  border: 1px solid hsl(0.0, 0.000%, 20.00%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 1px;
-  font-size: 1.2vh;
+  font-size: 2vh;
   color:rgb(217, 217, 217);
   position: absolute;
   min-width: fit-content;
@@ -173,12 +201,13 @@
   overflow: hidden; 
   display: flex;
   justify-content: center;
+  width: 17.9vw;
 }
 
-.item-container:hover .drop-down {
+.truck-header:hover .drop-down {
   max-height: 5vh; 
   transition: max-height .5s ease; 
-  transition-delay: .275s;
+  transition-delay: .75s;
 }
 
 .item-container:not(:hover) .drop-down {
@@ -187,25 +216,58 @@
 
 
 .item-container:not(:hover) .drop-down {
-  max-height: 0; 
+  height: 0; 
 }
 
 .drop-down:hover{
-  background-color: hsl(227, 10%, 27%);
+  background-color:hsl(0.0, 0.000%, 25.00%);
   border-bottom-left-radius: .2vw;
   border-bottom-right-radius: .2vw;
 }
 
 
 .truck-body {
+  position: relative;
 }
 
-/*.line{
-  border: 1px solid rgb(229, 228, 228);
-  display: block;
-  width: 17vw;
-  margin: 0 auto;
-}*/
+.moreInfo-popup { 
+  visibility: hidden; 
+  position: absolute;
+  top: 5.5vh;
+  right: 0vw;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  width: 18vw;
+  margin-top: 5px;
+  background-color: hsl(0.0, 0.000%, 25.00%);
+  border-radius: .3vw;
+}
+
+.moreInfo-popup p {
+  margin-left: .5vw;
+}
+
+.moreInfo-popup textarea { 
+  margin-left: .5vw;
+  margin-right: .5vw;
+  background-color:  hsl(0.0, 0.000%, 20.00%);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: .3vw;
+  overflow-wrap: wrap;
+}
+
+.moreInfo-popup textarea:focus {
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.moreInfo:hover .moreInfo-popup {
+  visibility: visible;
+  transition-delay: .5s;
+}
+
 
 .truck-body1{
   display: grid;
@@ -213,85 +275,38 @@
   grid-template-rows: 1fr 1fr;
   row-gap: 1px;
   column-gap: 1px;
-  background-color: hsl(226, 10%, 25%);
-  border-top: 1px solid hsl(226, 10%, 25%);
-  border-bottom: 1px solid hsl(226, 10%, 25%);
+  background-color: hsl(0.0, 0.000%, 27.00%);
+  border-top: 1px solid hsl(0.0, 0.000%, 27.00%);
+  border-bottom: 1px solid hsl(0.0, 0.000%, 27.00%);
   color: rgb(197, 197, 197);
   margin: 0;
   font-size: 85%;
 }
 
-
-
-.truck-bodyRow1 {
-  color: rgb(207, 207, 207);
-  border-bottom: 1px solid hsl(226, 10%, 25%);
-  margin-bottom: 2vh;
+.moreInfo {
+  background-color:hsl(0.0, 0.000%, 20.00%);
+  display: flex;
+  position: relative;
 }
 
-.truck-bodyRow2 {
-  border-bottom: 1px solid hsl(226, 10%, 25%);
+.moreInfo:hover { 
+  background-color:hsl(0.0, 0.000%, 23.00%);
 }
-
-
-/* .truck-body1 p{
-  color: rgb(207, 207, 207);
-  width: 50vw;
-  padding: .5vh .5vw .5vh .5vw;
-  border-bottom: 1px solid hsl(227, 13%, 28%);
-  margin-top: .2vh;
-  font-size: .8vmax;
-  justify-content: space-evenly;
-  margin: 0;
-} */
-
-/*.truck-body1 p{
-  border-radius: .2vw;
-  color: rgb(27, 27, 27);
-  width: 50vw;
-  padding: .5vh .5vw .5vh .5vw;
-  border-left: 1px solid rgb(164, 164, 164); 
-}*/
-
-/* .truck-body2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  padding-left: 1vw;
-  padding-right: 1vw;
-} */
-
-/* .truck-body2 p {
-  color: rgb(207, 207, 207);
-  width: 100%;
-  padding: .5vh .5vw .5vh .5vw;
-  border-bottom: 1px solid hsl(227, 13%, 28%);
-  margin-bottom: .2vh;
-  font-size: .8vmax;
-  justify-content: space-evenly;
-  margin: 0;
-  margin-bottom: .5vh;
-} */
-
-
-/*.truck-body2 p {
-  border-radius: .2vw;
-  color: rgb(27, 27, 27);
-  width: 50vw;
-  padding: .5vh .5vw .5vh .5vw;
-  border-left: 1px solid rgb(164, 164, 164); 
-}*/
-
 
 .notes {
   display: flex;
   justify-content: center;
+  margin-top: 1px;
+  max-height: 7vh;
+  overflow: auto; 
+  height: auto;
 }
-.notes input {
+
+.notes textarea {
   padding-bottom: .2vh;
   padding-top: .1vh;
-  background-color: hsl(224, 15%, 20%);
-  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
+  background-color:  hsl(0.0, 0.000%, 18.00%);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: .3vw;
   text-align: left;
@@ -305,6 +320,17 @@
   font-family: sans-serif, monospace;
   margin-top: 0;
   width: 97%;
+  max-height: 2vh;
+  -webkit-appearance: none;
+}
+
+.notes textarea:hover { 
+  max-height: 15vh;
+}
+
+.notes textarea:focus {
+  outline: none;
+  -webkit-appearance: none;
 }
 
 

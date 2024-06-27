@@ -1,18 +1,47 @@
 .box-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   position: relative;
   max-width: 100vw;
   margin-top: 3vh;
  }
 
+ .loadDays { 
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1vh;
+  position: absolute;
+  bottom: 1%;
+  width: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+
+ .previousDays { 
+  display: flex; 
+ }
+
+ .previousDays button { 
+  background: none;
+ }
+
+ .moreDays { 
+    display: flex;
+ }
+
+ .arrowLoad {
+  color: rgb(177, 177, 177);
+  cursor: pointer;
+ }
+
  .card-header { 
   color: rgb(167, 167, 167);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 15% 15% 8% 12% 15% 15% 20%;
   margin-bottom: 0;
-  border-left: 7px solid rgba(0, 0, 0, 0);
+  border-left: 4px solid rgba(0, 0, 0, 0);
   justify-content: flex-start;
   margin-bottom: 0;
  }
@@ -23,33 +52,31 @@
  }
 
 .card {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: hsl(227, 17%, 16%);
+  background-color: hsl(0.0, 0.000%, 15.00%);
   border-radius: .4vw;
-  margin: .5rem;
-  max-width: 100%;
+  width: 97%;
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
   height:fit-content;
-  border: solid 1px hsl(226, 10%, 25%);
+  border: solid 1px hsl(0.0, 0.0%, 20.00%);
   font-size: calc(4px + .5vw);
+  margin-bottom: .5vh;
 }
 
 .header {
   color: rgb(237, 237, 237);
-  font-size: calc(4px + .5vw);
   text-align: center;
   margin-bottom: .1vh;
 }
 
 .header h1 {
+  margin-top: .5vh;
   margin-bottom: 0;
 }
 
 .header p{
   margin-top: .1vh;
+  margin-bottom: .5vh;
   font-weight: bold;
   color:  hsl(225, 9%, 64%);
 }
@@ -68,6 +95,7 @@
   border-style: none;
   background: none;
   cursor: pointer;
+  position: relative;
  }
  
 .items-container {
@@ -79,19 +107,21 @@
   display:flex;
   flex-direction: column;
   padding: 1px;
-  background-color:  hsl(226, 12%, 21%);
+  background-color: hsl(0.0, 0.000%, 20.00%);
   border-radius: .2vw;
   margin-top: .3vh;
   border-left: 3px solid green; 
   border-bottom-left-radius: .4vw;
   color: rgb(207, 207, 207);
+  font-size: 2vh;
 }
 
 .truck-body {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 15% 15% 8% 12% 15% 15% 20%;
   width: 100%;
   align-items: center;
+  position: relative;
 }
 
 .truck-header {
@@ -102,7 +132,6 @@
 
 .truck-column1 {
   display: flex;
-  height: 3vh;
   align-items: center;
 }
 
@@ -112,7 +141,6 @@
   background: none;
   color: rgb(217, 217, 217);
   font-weight: bold;
-  font-size: 1vmax;
   margin-left: 3px;
   height: 2vh;
   align-items: center;
@@ -131,27 +159,32 @@
   color: rgb(217, 217, 217);
   background: none;
   border: none;
-  font-size: calc(4px + .5vw);
+  font-weight: 500;
 }
 
-input[type=time] {
-  border: none;
-  font-size: 1vmax;
-  font-family: sans-serif;
+.timeInput { 
+  width: 4vw;
+  margin-right: .5vw;
+}
+
+.timeInput input{
   background: none;
+  width: 4vw;
+  border: none;
   color: rgb(217, 217, 217);
-  font-weight: 100;
-  align-items: center;
-  border-right: 1px solid hsl(226, 10%, 25%);
-  height: 2vh;
-}
-
-input[type="time"]::-webkit-calendar-picker-indicator {
-  display: none;
+  outline: none;
+  -webkit-appearance: none;
 }
 
 .trailer-type{
   margin: 0;
+  font-weight: 500;
+
+}
+
+.phoneNumber { 
+  min-width: 5vw;
+  position: relative;
 }
 
 .icon-moreInfo {
@@ -161,10 +194,54 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   margin-left: .5vw;
 }
 
+.icon-moreInfo-popup { 
+  visibility: hidden;
+  position: absolute;
+  top: 4vh;
+  right: 0vw;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  width: 18vw;
+  margin-top: 5px;
+  background-color: hsl(0.0, 0.000%, 25.00%);
+  border-radius: .3vw;
+}
+
+
 .icon-moreInfo:hover {
   color: rgb(207, 207, 207);
   opacity: 1;
 }
+
+.icon-moreInfo:hover .icon-moreInfo-popup {
+  visibility: visibile;
+}
+
+.icon-moreInfo-popup textarea { 
+  margin-left: .5vw;
+  margin-right: .5vw;
+  background-color:  hsl(0.0, 0.000%, 20.00%);
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: .3vw;
+  overflow-wrap: wrap;
+}
+
+.icon-moreInfo-popup textarea:focus {
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.icon-moreInfo-popup p {
+  margin-left: .5vw;
+}
+
+.moreInfo:hover .moreInfo-popup {
+  visibility: visible;
+  transition-delay: .5s;
+}
+
 
 .icon-buttonDelete {
   color: rgb(237, 237, 237);
@@ -178,12 +255,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 
- .button-delete {
+ .button-delete button{
   margin-left: .5vw;
   border-style: none;
   background: none;
   cursor: pointer;
   padding: 0;
+  position: relative;
  }
 
  
@@ -201,9 +279,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   min-width: fit-content;
   width: auto;
   z-index: 1;
-  top: -50%;
+  top: 45%;
   right: 5%;
-  font-size: calc(4px + .5vw);
   text-wrap: nowrap;
 
 }
@@ -215,15 +292,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   transition: opacity 0.3s ease;
   z-index: 1;
 }
-
-
-
-.drop-down:hover{
-  background-color: hsl(227, 10%, 27%);
-  border-bottom-left-radius: .2vw;
-  border-bottom-right-radius: .2vw;
-}
-
 
 .truck-details {
   display: flex;
@@ -241,10 +309,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
 }
-.notes input {
+.notes textarea {
   padding-bottom: .2vh;
   padding-top: .1vh;
-  background-color: hsl(224, 15%, 20%);
+  background-color:  hsl(0.0, 0.000%, 18.00%);
   box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
   border: none;
   border-radius: .3vw;
@@ -252,7 +320,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   text-align: top;
   text-indent: .2vw; 
   color:  hsl(227, 8%, 66%);
-  font-size: .8vmax;
   margin-left: .1vw;
   margin-right: .1vw;
   margin-bottom: .1vh;

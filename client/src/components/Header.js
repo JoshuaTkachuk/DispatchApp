@@ -12,6 +12,7 @@ function Header(props){
     const toggleComponents = props.toggleComponents
  const trucks = props.trucks;
  const removeFromBoard = props.removeFromBoard;
+ const isDragging = props.isDragging;
 
     const navigate = useNavigate();
 
@@ -31,9 +32,16 @@ return(
 
 
 <div className={styles.mainHeader}> 
+    <div className={styles.headerLeft}> 
     <img src="images/UskoLogo.png"/>
-    <h2>Home</h2> 
-    <Droppable droppableId="ROOT" type="group">
+     <h2>Home</h2> 
+    </div>
+    <div className={styles.topbox}> 
+      
+    <p> Schedule </p>
+    {
+      isDragging && (
+        <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {trucks.map((truck, index) => (
@@ -49,11 +57,9 @@ return(
                         ref={provided.innerRef}
                       >
                         <div className={styles["top-item-header"]}>
-                        <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
-                        <p className={styles["top-popup"]}>Remove From Board</p>
-                        </div>
-                        <div className={styles["top-truck-data"]}> 
                           <h3>{truck.driverName}</h3>
+                          <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
+                          <p className={styles["top-popup"]}>Remove From Board</p>
                         </div>
                       </div>
                     )}
@@ -63,6 +69,9 @@ return(
               </div>
             )}
           </Droppable>
+      )
+    }
+          </div>
     <div className={styles["mainHeader-right"]}>
     <div className={styles.dropdown}> 
         <button className={styles.settings}>Settings</button>
@@ -78,7 +87,7 @@ return(
 
                     <Link to={"/myTrucks"} style={{textDecoration: 'none', color: 'rgb(237,237,237'}}> Truck List</Link>
         </button>
-        <button onClick={logout} className={styles["logout"]} >logout</button>
+        <button onClick={logout} className={styles["logout"]} >Logout</button>
     </div>
 
 </div>

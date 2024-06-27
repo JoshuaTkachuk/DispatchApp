@@ -1,41 +1,49 @@
 .mainHeader {
   display: flex;
   font-size: 1.4vmax;
-  border-bottom: solid 1px hsl(222, 15%, 23%);
+  border-bottom: solid 1px hsl(0.0, 0.000%, 20.00%);
   height: 10vh;
   align-items: center;
 }
 
-.mainHeader img {
-   height: 6vh;
-   margin-left: 2vh;
+.headerLeft{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  margin-left: 2vw;
 }
 
-.mainHeader h1{
-  color: rgb(207, 207, 207);
+.mainHeader img {
+   height: 6vh;
 }
 
 .mainHeader h2 {
-  margin-left: 2vw;
-  font-weight: 85;
+  font-weight: 400;
   color: rgb(217,217,217);
   font-size: 3vh;
+  margin-left: 2vw;
 }
 
 .topbox {
-  background-color: none;
+  border: dashed 1px rgb(177, 177, 177);
+  min-width: 9.5vw;
+  max-width: 10vw;
+  height: 7vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto;
+  margin: 0 auto;
   border-radius: .5vw;
   color: rgb(217, 217, 217);
-  align-items: center;
+  display: flex;
   justify-content: center;
-
+  position: relative;
 }
 
-.topbox h1 {
-  margin: 0;
-  margin-left: 0;
+.topbox p { 
+  position: absolute;
+  z-index: -1;
+  color: rgb(207, 207, 207);
+  font-size: 2vh;
+  align-self: center;
 }
 
 .topHeader {
@@ -50,31 +58,43 @@
 }
 
 .top-item-container {
-  padding: 1px;
-  background-color:  hsl(226, 12%, 21%);
-  border-radius: .2vw;
-  width: 100%;
+  background-color: hsl(0.0, 0.000%, 25.00%);
+  border-radius: .4vw;
   margin-bottom: .2vh;
   border-bottom-left-radius: .4vw;
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 6.5vh;
+  font-weight: 100;
+  font-size: 2vh;
+  width: 9.5vw;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: .25vh;
+  margin-bottom: .25vh;
  }
 
  .top-item-header { 
   display: flex;
   align-items: center;
   width: 100%;
+  position: relative;
  }
 
- .top-item-header h3 {
-  width: 100%;
-  color: rgb(217, 217, 217);
- }
-
- .top-item-button {
+ .top-item-header button { 
+  color: rgb(207, 207, 207);
   background: none;
+  position: absolute;
+  right: 3%;
   border: none;
   cursor: pointer;
-  margin: 0;
+ }
+
+ .top-item-header h3 { 
+  margin-left: .5vw;
+  font-size: 2vh;
+  font-weight: 500;
  }
 
  .top-popup {
@@ -102,7 +122,7 @@
 .mainHeader-right {
     display: flex;
     position: absolute;
-    right:3vw;
+    right: 3vw;
     font-size: calc(4px + .5vw);
     align-items: center;
 }
@@ -124,9 +144,10 @@
 }
 
 .options { 
+  margin-top: 1px;
   display: none;
   position: absolute;
-  background-color: hsl(227, 17%, 16%);
+  background-color:  hsl(0.0, 0.000%, 20.00%);
   min-width: 5vw;
   width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -140,13 +161,8 @@
 }
 
 .toggleComponent:hover { 
-  background-color: hsl(227, 10%, 27%);;
+  background-color:  hsl(0.0, 0.000%, 27.00%);
 }
-
-.toggleComponent:hover { 
-  background-color: hsl(227, 10%, 27%);;
-}
-
 
 .toggleComponent button {
   border: none;
@@ -163,7 +179,7 @@
   border-radius: .5vw; 
   border: none;
   background-color: rgb(207, 207, 207);
-  height: 4vh;
+  align-items: center;
 }
 
 .mytruck-link {
