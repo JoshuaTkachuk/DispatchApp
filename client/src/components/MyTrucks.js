@@ -3,6 +3,7 @@ import axios, { all } from "axios";
 import {Link} from "react-router-dom";
 import styles from "../styles/MyTrucks.module.css";
 import NewTruckForm from "./NewTruckForm";
+import EditTruck from "./EditTruck";
 import HeaderMyTrucks from "./HeaderMyTrucks"
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
@@ -19,6 +20,7 @@ const MyTrucks=()=>{
     
     const [trucks,setTrucks] = useState([]);
     const [openForm, setOpenForm] = useState(false);
+    const [editTruck, setEditTruck] = useState(null);
     const [checkVisible, setCheckVisible] = useState("none")
     const [selectedTrucks, setSelectedTrucks] = useState([]);
     const [buttonsVisibile, setButtonsVisible] = useState(false);
@@ -62,7 +64,7 @@ const MyTrucks=()=>{
         .catch(err=>{
             console.log(err)
         })
-    },[])
+    },[editTruck])
 
 
 
@@ -237,11 +239,6 @@ const MyTrucks=()=>{
         <div className={openForm === false ? "" : styles.overlay}>
         </div>
         <div className={styles.page}>
-        <div className={styles.links}>  
-        <div> 
-          <NewTruckForm open={openForm} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
-        </div> 
-        </div>
        <div className={styles.aboveList}>
         <div className={styles["aboveList-left"]}> 
             <div className={styles.listSearch}>
@@ -285,7 +282,7 @@ const MyTrucks=()=>{
             }
          </div>
         <div> 
-          <NewTruckForm open={openForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>  
+          <NewTruckForm open={openForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>
         </div> 
         </div>
        </div>
@@ -328,14 +325,15 @@ const MyTrucks=()=>{
                                     </div>
                    
 
-                                <div id={`${itm._id}truckData`} className={styles.truckdata} onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseLeave={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
+                                <div id={`${itm._id}truckData`} className={styles.truckdata} onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseOut={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
 
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
                                     <div style={{justifySelf:'start', display: 'flex'}}>
                                     {itm.dateReady}
-                                    <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} />
+                                    <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
+                                    <EditTruck setOpenForm={setOpenForm} editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
                                     </div>
                                 </div>
                          

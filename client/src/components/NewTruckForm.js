@@ -14,10 +14,13 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
     const [phoneNum,setPhoneNum] = useState("");
     const [homeLocation,setHomeLocation] = useState("");
     const [dateReady, setDateReady] = useState("");
-    const [tType, setTType] = useState("V");
+    const [tType, setTType] = useState("");
+    const [additionalInfo, setAdditionalInfo] = useState("");
 
     const submithandler=(e)=>{
         e.preventDefault();
+        let d = new Date(dateReady);
+            d = new Date(d.setDate(d.getDate()))
         let T = document.getElementById("T");
         let H = document.getElementById("H");
         let DT = document.getElementById("DT");
@@ -35,9 +38,17 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
             console.log(DT.value, "doubles/triples value")
             endorsements.push(DT.value)
         }
-        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady, trailerType: tType}, {withCredentials: true})
+        axios.post("http://localhost:8000/api/truck", {truckNum,trailerNum,driverName,phoneNum,endorsements,homeLocation,dateReady: d, trailerType: tType, additionalInfo}, {withCredentials: true})
             .then((result)=>{
                 console.log(result.data, "new truck made")
+                 d = new Date(d.setDate(d.getDate() + 1))
+                 if( result.data.dateReady === "NaN/NaN/NaN"){
+                    result.data.dateReady = "Confirm"
+                 }
+                 else{
+                    result.data.dateReady = `${(d.getMonth() + 1).toString().padStart(2, '0') + "/" +  (d.getDate() ) + "/" + d.getFullYear()}`
+                 }
+                
                 setTrucks([...trucks, result.data])
             })
             .catch(error =>{
@@ -57,6 +68,15 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
             endorsement.setAttribute("checked", "checked")
             console.log(endorsement, "adding checked attribute")
             
+        }
+
+    }
+    const handleRadio =(e)=>{
+        if(tType === e.target.value){
+            setTType("")
+        }
+        else{
+            setTType(e.target.value)
         }
 
     }
@@ -86,11 +106,11 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
                 </div>
                 <div className={styles.formbody4}>
                     <p> Additional Notes</p>
-                    <textarea></textarea>
+                    <textarea placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
                 </div>
                 <div className={styles.trailerTypes}>
                     <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                    <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox">
+                    <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")>
                     </input>
 
                         <label for="T">Tanker</label>
@@ -104,16 +124,31 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
                     <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                         <label for="DT">Doubles/Triples</label>
-                    </div>   
-                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                <div for="Ttype">Trailer Type</div>
-                    <select name="Ttype" id="Ttype" value={tType} onChange={(e)=> setTType(e.target.value)} className={styles["tType-Select"]}>
-                        <option value={"R"}>R</option>
-                        <option selected value={"V"}>V</option>
-                    </select> 
-                    </div>   
+                   
+                    </div>
+                    <div className={styles.tType}>
+                    <div for="Ttype">Trailer Type</div>
+                <label for="R">R</label>
+                <input checked={tType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
+                <label for="V">V</label>
+                <input checked={tType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
+                <label for="PO">PO</label>
+                <input checked={tType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
+                <label for="VT">VT</label>
+                <input checked={tType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
+                <label for="RT">RT</label>
+                <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
+                    
                 </div>
-                
+                <div className="dateReady">
+                        <input type="date" id="date" onChange={(e)=> setDateReady(() =>{
+                            let d = new Date(e.target.value)
+                            d = new Date(d.setDate(d.getDate()))
+                            return d
+                        })}/>
+                </div>
+                    </div>
+                    </div>
                     <button type="submit" className={styles.buttonSubmit}>Submit</button>         
                 </form>
           

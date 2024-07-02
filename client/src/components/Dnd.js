@@ -25,6 +25,7 @@ function App(props) {
     const [upVisible, setUpVisible] = useState("none")
     const [scheduleVisilble, setScheduleVisible] = useState(true);
     const [isDragging, setIsDragging] = useState(false);
+
     console.log(scheduleVisilble);
     const [days,setDays] = useState([
       {
@@ -77,15 +78,22 @@ function App(props) {
         setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
         const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
         console.log(weekTrucks, "week trucks");
-        // weekTrucks.forEach((truck, idx)=>{
-        //   let tempTruckDate = new Date(truck.dateReady)
-        //   let tempDayDate = new Date(days[0].date)
+        weekTrucks.forEach((truck, idx)=>{
+          let tempTruckDate = new Date(truck.dateReady)
+          let tempDayDate = new Date(days[0].date)
 
-        //   if(tempTruckDate < tempDayDate){
-        //     truck.dateReady = tempDayDate;
-        //   }
+          if(tempTruckDate < tempDayDate){
+            truck.dateReady = tempDayDate;
+            axios.put("http://localhost:8000/api/updateDate", {_id:truck._id, dateReady:truck.dateReady})
+            .then((result)=>{
+              console.log(result)
+            })
+            .catch(err=>{
+              console.log(err)
+            })
+          }
 
-        // })
+        })
 
         setDays(prevDays => {
           const newDays = [...prevDays];
@@ -165,10 +173,11 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     console.log(props.trucks);
 
+
     const handleDragStart = () =>{
       setIsDragging(true)
     }
-
+    
     const handleDragDrop = (results) => {
       setIsDragging(false)
         const {source, destination, type} = results;
@@ -282,6 +291,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                 console.log(err)
               })
             })
+            setIsDragging(false)
             }
             if(destination.droppableId !== "ROOT" || newDays[daySourceIndex] === newDays[dayDestinationIndex]){
               newDays[dayDestinationIndex].trucks.forEach((truck,idx2)=>{

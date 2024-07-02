@@ -33,6 +33,15 @@ module.exports={
                 res.json(err)
             })
     },
+    getTruckById:(req,res)=>{
+        Truck.find({_id: req.params._id})
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    },
     searchByDriverName:(req,res)=>{
         Truck.find({"driverName": new RegExp(req.params.driverName, "i")})
         .then((result)=>{
@@ -238,6 +247,15 @@ module.exports={
                 console.log(err)
             })
         }
+},
+editTruck:(req,res)=>{
+    Truck.findByIdAndUpdate({_id: req.params._id}, {truckNum: req.body.truckNum, trailerNum: req.body.trailerNum, driverName: req.body.driverName, phoneNum: req.body.phoneNum, homeLocation: req.body.homeLocation, dateReady: req.body.dateReady, trailerType: req.body.tType, endorsements: req.body.endorsements, additionalInfo: req.body.additionalInfo})
+    .then((result)=>{
+        res.json(result)
+    })
+    .catch(err=>{
+        res.json(err)
+    })
 },
 deleteTrucksById:(req,res)=>{
     Truck.findByIdAndDelete({_id: req.params.Id})
