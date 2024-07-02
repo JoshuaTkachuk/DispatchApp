@@ -242,12 +242,12 @@ const MyTrucks=()=>{
        <div className={styles.aboveList}>
         <div className={styles["aboveList-left"]}> 
             <div className={styles.listSearch}>
-                <SlMagnifier size={25}  onClick={() => searchClick ()} className={styles.SlMagnifier} style={{cursor: 'pointer', color: searchVisible === "block" ? "rgb(0, 128, 0)": ""}}/>
+                <SlMagnifier size={25}  onClick={() => searchClick ()} className={styles.SlMagnifier} style={{cursor: 'pointer', color: searchVisible === "block" ? "rgb(237, 237, 237)": ""}}/>
                 <p onClick={() => searchClick ()} style={{ display: searchVisible === "block" ? "none": "block", cursor: 'pointer'}}>Search</p>
                 <input type="search" placeholder="Search" onChange={(e)=>searchTrucks(e.target.value)} style={{ display: searchVisible === "block" ? "block" : "none", marginLeft: '1vw'}}/>
             </div>
             <div className={styles["listFilter-icon"]}> 
-                <CiFilter size={30} onClick={() => filterClick ()} style={{cursor: 'pointer', marginLeft: '2vw', color: filterVisible === "block" ? "rgb(0, 128, 0)": ""}}/> 
+                <CiFilter size={30} onClick={() => filterClick ()} style={{cursor: 'pointer', marginLeft: '2vw', color: filterVisible === "block" ? "rgb(237, 237, 237)": ""}}/> 
                 <p onClick={() => filterClick ()} style={{ display: filterVisible === "block" ? "none" : "block", cursor:'pointer'}}>Filter</p>
             </div>
             <div className={styles.listFilter} style={{ display: filterVisible === "block" ? "block" : "none"}}> 
@@ -348,7 +348,7 @@ const MyTrucks=()=>{
             }
         </div>
         <div className={styles.footer}>
-            <p>Load More</p>
+            {/* <p>Load More</p> */}
         </div>
         
         </div>

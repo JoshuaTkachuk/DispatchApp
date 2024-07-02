@@ -89,34 +89,38 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
         <div className={styles.formHeader}>
             <h1>New Driver</h1>
             <p onClick={onClose} className={styles.closeBtn}> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
-
         </div>
+        <p className={styles.driverInfo}>Driver Information</p>
         <div className={styles.form} >
             <form onSubmit={submithandler}>
                 <div className={styles.formbody1}>
-                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
-                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                </div>
-                <div className={styles.formbody2}>
                     <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                     <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
                 </div> 
-                <div className={styles.formbody3}>
-                <div className={styles.formbody3Left}>
-                    <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
-                    <input placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></input>
+                <div className={styles.formbody2}>
+                    <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
+                    <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
                 </div>
-                <div className={styles.formbody3Right}>
-                <div className={styles.endorsements}>
-                    <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}>
+                <div className={styles.formbody3}>
+                  <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                </div>
+                <div className={styles.formbody4}>
+                    <p> Additional Notes</p>
+                    <textarea placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
+                </div>
+                <div className={styles.trailerTypes}>
+                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
+                    <input /*style={{display: "none"}}*/ name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")>
                     </input>
 
                         <label for="T">Tanker</label>
-
+                    </div>
+                    <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
                     <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
                     </input>
                         <label for="H">Hazmat</label>
-
+                    </div>
+                    <div style={{display: 'flex', justifyContent:'center',alignItems: 'center'}}> 
                     <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}>
                     </input>
                         <label for="DT">Doubles/Triples</label>

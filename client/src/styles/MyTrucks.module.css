@@ -14,7 +14,6 @@
     width: 100vw;
     font-family: var(--fonts-primary);
     font-size: 22px;
-    color: rgb(217, 217, 217);
 }
 
 
@@ -33,7 +32,7 @@
 .tableHeader {
     display: flex;
     height: 5vh;
-    border-bottom: solid 1px hsl(223, 6%, 22%);
+    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);
 }
 
 .selectAllBox { 
@@ -63,6 +62,9 @@
     display: flex;
     width: 75%;
     margin: 0 auto;
+    margin-bottom: 1vh;
+    height: 53px;
+    color: rgb(187, 187, 187);
 }
 
 .aboveList-left { 
@@ -71,7 +73,6 @@
     margin: 0 auto;
     align-items: center;
     margin-left: 0;
-    margin-bottom: 1vh;
 }
 
 .aboveList-left form {
@@ -86,7 +87,7 @@
 .listFilter { 
     display: flex;
     align-items: center;
-    color: rgb(217, 217, 217);
+    color: rgb(187, 187, 187);
 }
 
 
@@ -109,6 +110,12 @@
     display: flex;
     align-items: center;
     font-size: 75%;
+    margin-bottom: 0;
+}
+
+.listSearch p { 
+    margin: 0;
+    margin-left: .2vw;
 }
 
 
@@ -156,7 +163,7 @@
 } */
 
 .listSearch:hover {
-    color: rgb(0,128,0);
+    color: rgb(237, 237, 237);
 }
 
 .listFilter-icon {
@@ -167,7 +174,7 @@
 }
 
 .listFilter-icon:hover {
-    color: rgb(0,128,0);
+    color: rgb(237, 237, 237);
 }
 
 .aboveList-Right {
@@ -178,9 +185,10 @@
 .list{
     width: 75vw;
     margin: 0 auto;
-    background-color:  hsl(227, 11%, 16%);
-    border-top-right-radius: .75vw;
-    border-top-left-radius: .75vw;
+    background-color:  hsl(0.0, 0.000%, 20.00%);
+    border-top-right-radius: .5vw;
+    border-top-left-radius: .5vw;
+    overflow: hidden;
 }
 
 .list-items{
@@ -191,11 +199,11 @@
     text-align: center;
     justify-content: center;
     width: 75vw;
-    border-bottom: solid 1px hsl(223, 6%, 22%);
+    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);;
 }
 
 .list-items:hover {
-    background:  hsl(228, 14%, 14%);
+    background:  hsl(0.0, 0.000%, 10.00%, 0.3);
 }
 
 /*.list-items:nth-child(odd){ background-color:rgb(68, 68, 68); }*/
@@ -249,7 +257,7 @@
 }
 
 .openBtn:hover {
-    background-color: hsl(228, 14%, 14%);
+    background-color: hsl(0.0, 0.000%, 20.00%, 0.3);
 }
 
 .openBtn1{
@@ -265,7 +273,7 @@
 }
 
 .openBtn1:hover {
-    background-color: hsl(228, 14%, 14%);
+    background-color: hsl(0.0, 0.000%, 20.00%, 0.3);
 }
 
 .openBtn2{
@@ -281,7 +289,7 @@
 }
 
 .openBtn2:hover {
-    background-color: hsl(228, 14%, 14%);
+    background-color: hsl(0.0, 0.000%, 20.00%, 0.3);
 }
 
 .icon-moreInfo { 
@@ -301,12 +309,14 @@
 .footer {
     position: relative;
     display: flex;
-    height: 7vh;
-    background:  hsl(227, 11%, 16%);
+    height: 3vh;
+    background:  hsl(0.0, 0.000%, 20.00%);
     width: 75vw;
     margin: 0 auto;
     margin-bottom: 5vh;
     align-items: center;
+    border-bottom-left-radius: .2vw;
+    border-bottom-right-radius: .2vw;
 }
 
 .footer p {

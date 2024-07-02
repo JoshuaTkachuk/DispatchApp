@@ -30,7 +30,7 @@ const Login=()=>{
             <form onSubmit={handleSubmit} className={styles.formOptions}>
                     <input type={"text"} placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
                     <input type={"password"} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
-                    <button type={"submit"} className="loginButton" style={{textDecoration:'none'}}>Login</button>
+                    <button type={"submit"} className={styles.loginButton} style={{textDecoration:'none'}}>Login</button>
             </form>
             <div className={styles.newUser}>
                 <p>Don't have an account?</p>

@@ -1,202 +1,147 @@
-
-
 .popupForm{
     max-width: 45vw;
-    width: 100%;
+    width: 70%;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-    background-color: hsl(227, 17%, 16%);
+    background-color:hsl(0.0, 0.000%, 15.00%);
     border-radius: .5vw;
-}
-
-.form{
-    color: rgb(207, 207, 207);
-    padding-bottom: 6vh;
-    display: column;
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
 }
 
 .formHeader {
+    font-size: 2vh;
     display: flex;
     justify-content: center;
     margin-top: 1vh;
 }
 
+.form{
+    color: rgb(207, 207, 207);
+    padding-bottom: 6vh;
+    min-width: 40vw;
+}
+
 .closeBtn {
     position: absolute;
     top: 1%;
-    right: 3%;
+    right: 5%;
     cursor: pointer;
 }
 
-
-.tType {
-    display: flex;
-    gap: 1vw;
-    width: 50%;
-    padding: 1vh;
-    color: rgb(136, 136, 136);
-    width: 100%;
-    align-items: center;
-    height: 2vh;
-    margin-left: 2vw;
-}
-
-.tType:hover + .tType select {
-    border-bottom: 1px solid black;
-}
-
-
-.tType select {
-    background: none;
-    border: none;
-    color: rgb(136, 136, 136);
+.driverInfo { 
+    margin-left: 1vw;
+    margin-bottom: 10px;;
+    margin-top: 0;
+    font-size: 1vw;
+    font-weight: 600;
+    color: rgb(207, 207, 207);
 }
 
 .formbody1{
-    display: flex; 
-    margin: 2rem;
-    margin-bottom: 2vh;
-    justify-content: space-between;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 .formbody1 input{
     padding: 3vh;
-    border-radius: 1vw;
-    border: 1px solid  hsl(225, 13%, 25%);
+    margin-bottom: 2vh;
+    border-radius: .3vw;
+    border: 1px solid  hsl(0.0, 0.000%, 10.00%);
     background: none;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    width: 50%;
     color: rgb(207, 207, 207);
-
+    background-color:hsl(0.0, 0.000%, 13.00%);
 }
 
 .formbody1 ::placeholder{
     color: rgb(136, 136, 136);
 }
 
-.formbody2{
-    display: flex; 
-    margin: 2rem;
-    justify-content: space-between;
-}
-
-.formbody2 input{
-    padding: 3vh;
-    border-radius: 1vw;
-    border: 1px solid  hsl(225, 13%, 25%);
-    background: none;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    width: 50%;
-    color: rgb(207, 207, 207);
-
-}
-
-.formbody2 ::placeholder{
-    color: rgb(136, 136, 136);
-}
-
-.formbody3{
-    display: flex;
-    margin: 2rem;   
-}
-
-.formbody3 ::placeholder{
-    color: rgb(136, 136, 136);
-}
-
-.formbody3Left { 
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
-.formbody3Left input{
-    padding: 3vh;
-    border-radius: 1vw;
-    border: 1px solid  hsl(225, 13%, 25%);
-    background: none;
-    font-weight: 100;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    width: 100%;
-    max-height: 2vh;
-    margin-bottom: 4vh;
-    color: rgb(207, 207, 207);
-}
-
-.formbody3Right {
-    width: 50%;
-    display: flex;  
-    flex-wrap: wrap;
-}
-/* 
-.dateReady input{
-    align-items: center;
-    padding: 3vh;
-    padding-bottom: 2vh;
-    border-radius: 1vw;
-    border: 1px solid  hsl(225, 13%, 25%);
-    background: none;
-    font-weight: 100;
-    margin-left: 2vw;
-
-} */
-
-.endorsements{
+.formbody2 {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    width: 50%;
-    color: rgb(136, 136, 136);
-    margin-left: 2vw;
-   
-}
-
-.endorsements input { 
-    margin-bottom: 2vh;
-    max-height: 2vh;
-}
-
-.endorsements input:focus + label {
-    color: blue; /* New color when the input is focused */
-}
-
-.endorsements input:not(:focus) + label {
-    color: rgb(136, 136, 136); /* Original color when the input is not focused */
-}
-
-.endorsements label {
+    grid-template-columns: 1fr 1fr ;
+    gap: 1vw;
     margin-left: 1vw;
-    align-items: center;
+    margin-right: 1vw;
 }
 
-/* input[type=checkbox]{
-    border-radius: .2vw;
-    border: 1px solid  hsl(225, 13%, 25%);
-    -webkit-appearance: none;
-    padding: .5vw;
-    background: none;
-    width: 1vw;
-    justify-content: end;
-    margin: 0;
-    margin-right: 3vw;
-} */
-
-
-
-.truckNotes { 
-    display: flex;
-    justify-content: center;
+.formbody2 input { 
+    padding: 3vh;
     margin-bottom: 2vh;
+    border-radius: .3vw;
+    border: 1px solid hsl(0.0, 0.000%, 10.00%);
+    background: none;
+    color: rgb(207, 207, 207);
+    background-color:hsl(0.0, 0.000%, 13.00%);
+}
+
+.formbody3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.formbody3 input { 
+    padding: 3vh;
+    margin-bottom: 1vh;
+    border-radius: .3vw;
+    border: 1px solid  hsl(0.0, 0.000%, 10.00%);
+    background: none;
+    color: rgb(207, 207, 207);
+    background-color:hsl(0.0, 0.000%, 13.00%);
+}
+
+.formbody4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.formbody4 p {
+    font-size: 1vw;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: rgb(207, 207, 207);
+}
+
+.formbody4 textarea { 
+    margin-bottom: 1vh;
+    border-radius: .3vw;
+    border: 1px solid  hsl(0.0, 0.000%, 10.00%);
+    background: none;
+    color: rgb(207, 207, 207);
+    background-color:hsl(0.0, 0.000%, 13.00%);
+    height: 10vh;
+}
+
+.trailerTypes { 
+    font-size: 1vw;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vw;
+    display: flex;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.tType-Select { 
+    margin-left: .5vw;
+    background: none;
+    border: none;
+    color: rgb(207, 207, 207);
 }
 
 .buttonSubmit{
@@ -210,9 +155,12 @@
     font-weight: bold;
     cursor: pointer;
     background-color: rgb(207, 207, 207);
+    margin-top: 4vh;
 }
 
 .buttonSubmit:hover {
     background-color: rgb(237, 237, 237);
 }
+
+
 
