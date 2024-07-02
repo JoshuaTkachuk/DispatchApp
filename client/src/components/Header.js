@@ -9,7 +9,7 @@ import styles from "../styles/Header.module.css";
 
 
 function Header(props){
-    const toggleComponents = props.toggleComponents
+  const toggleComponents = props.toggleComponents
  const trucks = props.trucks;
  const removeFromBoard = props.removeFromBoard;
  const isDragging = props.isDragging;
@@ -36,11 +36,10 @@ return(
     <img src="images/UskoLogo.png"/>
      <h2>Home</h2> 
     </div>
-    <div className={styles.topbox}> 
+    <div style={!isDragging ? {border: "none"} : {}} className={styles.topbox}> 
       
-    <p> Schedule </p>
-    {
-      isDragging && (
+    <p style={!isDragging ? {display: "none"} : {}}> Schedule </p>
+    
         <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -69,8 +68,6 @@ return(
               </div>
             )}
           </Droppable>
-      )
-    }
           </div>
     <div className={styles["mainHeader-right"]}>
     <div className={styles.dropdown}> 

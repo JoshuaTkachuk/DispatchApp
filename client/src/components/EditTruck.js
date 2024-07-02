@@ -108,8 +108,11 @@ const EditTruck =({ editTruck, trucks, editAdditionalInfo, editHomeLocation, edi
                 <div className={styles.formbody3}>
                 <div className={styles.formbody3Left}>
                     <input defaultValue={ !editTruck.homeLocation? "home location" :editTruck.homeLocation} onChange={(e)=>setHomeLocation(e.target.value)}></input>
-                    <input defaultValue={editTruck.additionalInfo} placeholder="additional info" onChange={(e)=> setAdditionalInfo(e.target.value)}></input>
                 </div>
+                <div className={styles.formbody4}>
+                            <p> Additional Notes</p>
+                            <textarea defaultValue={editTruck.additionalInfo} placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
+                        </div>
                 <div className={styles.formbody3Right}>
                 <div className={styles.endorsements}>
                     <input onChange={(e)=>setChecked("T")} defaultChecked={endorsements && endorsements.includes("Tanker")} name="endorsements" id="T" value="Tanker" type="checkbox" >

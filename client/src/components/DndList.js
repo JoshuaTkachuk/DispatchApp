@@ -24,7 +24,8 @@ function App(props) {
   const [truckVisible, setTruckVisible] = useState("none")
   const [upVisible, setUpVisible] = useState("none")
   const [scheduleVisilble, setScheduleVisible] = useState(true);
-  console.log(scheduleVisilble);
+  const [isDragging, setIsDragging] = useState(false);
+
   const [days,setDays] = useState([
     {
       date: new Date(d.setDate(d.getDate())),
@@ -161,10 +162,14 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
 
 
 }
+const handleDragStart = () =>{
+  setIsDragging(true)
+}
 
   console.log(props.trucks);
 
   const handleDragDrop = (results) => {
+      setIsDragging(false)
       const {source, destination, type} = results;
 
           if (!destination) return;
@@ -564,8 +569,8 @@ axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: d
     return (
    <div> 
    <div className="body">
-      <DragDropContext onDragEnd={handleDragDrop}>
-      <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
+      <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragDrop}>
+      <Header isDragging={isDragging} trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles["box-container"]}>
   {days.map((day, indx) => {
     return ( 
