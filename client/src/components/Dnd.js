@@ -291,7 +291,6 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                 console.log(err)
               })
             })
-            setIsDragging(false)
             }
             if(destination.droppableId !== "ROOT" || newDays[daySourceIndex] === newDays[dayDestinationIndex]){
               newDays[dayDestinationIndex].trucks.forEach((truck,idx2)=>{
