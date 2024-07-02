@@ -635,7 +635,7 @@ const handleDragStart = () =>{
                               }
                             </select>
                             <div className={styles.timeInput} style={{display: "flex"}}>
-                              <input id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
+                              <input placeholder="Time" id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
                           </div>
@@ -672,7 +672,7 @@ const handleDragStart = () =>{
                               </div>
                               </div> 
                           <div className={styles.notes}>
-                            <textarea placeholder="Notes"  value={item.notes} onChange={(e)=> handleNotes(item._id)} />
+                            <textarea placeholder="Notes" id={`${item._id}notesInput`}  value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)} />
                             </div>
                           </div>
                           )}
