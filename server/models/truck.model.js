@@ -23,6 +23,9 @@ const TruckSchema = new mongoose.Schema({
     homeLocation:{
         type:String
     },
+    additionalInfo:{
+        type:String
+    },
     notes:{
         type:String
     },

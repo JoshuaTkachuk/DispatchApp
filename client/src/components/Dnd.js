@@ -21,7 +21,7 @@ function App(props) {
     const [truckVisible, setTruckVisible] = useState("none")
     const [upVisible, setUpVisible] = useState("none")
     const [scheduleVisilble, setScheduleVisible] = useState(true);
-    console.log(scheduleVisilble);
+    const [isDragging, setIsDragging] = useState(false);
     const [days,setDays] = useState([
       {
         date: new Date(d.setDate(d.getDate())),
@@ -73,15 +73,22 @@ function App(props) {
         setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
         const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
         console.log(weekTrucks, "week trucks");
-        // weekTrucks.forEach((truck, idx)=>{
-        //   let tempTruckDate = new Date(truck.dateReady)
-        //   let tempDayDate = new Date(days[0].date)
+        weekTrucks.forEach((truck, idx)=>{
+          let tempTruckDate = new Date(truck.dateReady)
+          let tempDayDate = new Date(days[0].date)
 
-        //   if(tempTruckDate < tempDayDate){
-        //     truck.dateReady = tempDayDate;
-        //   }
+          if(tempTruckDate < tempDayDate){
+            truck.dateReady = tempDayDate;
+            axios.put("http://localhost:8000/api/updateDate", {_id:truck._id, dateReady:truck.dateReady})
+            .then((result)=>{
+              console.log(result)
+            })
+            .catch(err=>{
+              console.log(err)
+            })
+          }
 
-        // })
+        })
 
         setDays(prevDays => {
           const newDays = [...prevDays];
@@ -161,6 +168,11 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     console.log(props.trucks);
 
+
+    const handleDragStart = () =>{
+      setIsDragging(true)
+    }
+    
     const handleDragDrop = (results) => {
         const {source, destination, type} = results;
 
@@ -274,6 +286,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                 console.log(err)
               })
             })
+            setIsDragging(false)
             }
             if(destination.droppableId !== "ROOT" || newDays[daySourceIndex] === newDays[dayDestinationIndex]){
               newDays[dayDestinationIndex].trucks.forEach((truck,idx2)=>{
@@ -561,8 +574,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
     return (
    <div className="body">
-      <DragDropContext onDragEnd={handleDragDrop}>
-        <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
+      <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragDrop}>
+        <Header trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents} isDragging={isDragging}/>
       <div className={styles.boxContainer}>
       <buttton onClick={loadPreviousDays} style={{backgroundColor: "white"}}>load previos days</buttton>
       <buttton onClick={loadPreviousDay} style={{backgroundColor: "white"}}>load previos day</buttton>

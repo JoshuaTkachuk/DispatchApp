@@ -12,6 +12,7 @@ function Header(props){
     const toggleComponents = props.toggleComponents
  const trucks = props.trucks;
  const removeFromBoard = props.removeFromBoard;
+ const isDragging = props.isDragging;
 
     const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ return(
 <div className={styles.mainHeader}> 
     <img src="images/UskoLogo.png"/>
     <h2>Home</h2> 
-    <Droppable droppableId="ROOT" type="group">
+      <Droppable droppableId="ROOT" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {trucks.map((truck, index) => (
