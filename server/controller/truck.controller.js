@@ -81,7 +81,7 @@ module.exports={
         })
     },
     updateTruckDate:(req,res)=>{
-        Truck.findByIdAndUpdate({_id: req.body.truckId}, {dateReady: req.body.dateReady})
+        Truck.findByIdAndUpdate({_id: req.body._id}, {dateReady: req.body.dateReady})
         .then((result)=>{
             res.json(result)
         })

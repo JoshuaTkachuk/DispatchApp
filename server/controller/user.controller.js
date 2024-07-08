@@ -81,9 +81,6 @@ module.exports ={
         res.json({msg: "logout successful"})
     },
     getLoggedUser: (req,res) =>{
-        // const decodedJWT = jwt.decode(req.cookies.userToken,{
-        //     complete: true
-        // })
         User.findOne({_id: req.jwtpayload.id})
             .then(result =>{
                 res.json(result);
@@ -114,6 +111,15 @@ module.exports ={
     },
     deleteAllUsers:(req,res)=>{
         User.deleteMany({})
+        .then(result=>{
+            res.json(result)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    },
+    editDefaultView:(req,res)=>{
+        User.findByIdAndUpdate({_id: req.jwtpayload.id}, {defaultView: req.body.defaultView})
         .then(result=>{
             res.json(result)
         })

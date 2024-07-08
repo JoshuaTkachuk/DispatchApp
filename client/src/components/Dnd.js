@@ -80,13 +80,13 @@ function App(props) {
         console.log(weekTrucks, "week trucks");
         weekTrucks.forEach((truck, idx)=>{
           let tempTruckDate = new Date(truck.dateReady)
-          let tempDayDate = new Date(days[0].date)
+          let tempDayDate = new Date()
 
           if(tempTruckDate < tempDayDate){
             truck.dateReady = tempDayDate;
             axios.put("http://localhost:8000/api/updateDate", {_id:truck._id, dateReady:truck.dateReady})
             .then((result)=>{
-              console.log(result)
+              console.log(result, "dates are behind")
             })
             .catch(err=>{
               console.log(err)
@@ -159,7 +159,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     days[dayIndex].trucks.splice(indx,1)
     console.log(days, "days after truck deleted")
   }
-  axios.put("http://localhost:8000/api/updateDate",{truckId: truckId, dateReady: dateReady})
+  axios.put("http://localhost:8000/api/updateDate",{_id: truckId, dateReady: dateReady})
     .then((result)=>{
       console.log(result)
       console.log(dateReady, "dateReady in backend")
@@ -311,7 +311,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
             if(destination.droppableId !== "ROOT"){
               dateReady = days[dayDestinationIndex].date
             }
-            axios.put("http://localhost:8000/api/updateDate",{truckId: deletedTruck._id, dateReady: dateReady})
+            axios.put("http://localhost:8000/api/updateDate",{_id: deletedTruck._id, dateReady: dateReady})
             .then((result)=>{
               console.log(result)
               console.log(dateReady, "dateReady in backend")

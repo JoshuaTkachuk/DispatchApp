@@ -232,6 +232,28 @@ const MyTrucks=()=>{
         setSelectedTrucks([]);
     }
 
+    const handleNotes = (e, truckId, notes)=>{
+        e.preventDefault()
+
+        setTrucks(prevTrucks =>{
+            const newTrucks = [...prevTrucks]
+
+            newTrucks.forEach((itm, idx)=>{
+                if(truckId === itm._id){
+                    itm.notes = document.getElementById(`${truckId}notesInput`).value
+                }
+            })
+            return newTrucks
+        })
+    axios.put("http://localhost:8000/api/updateNotes", {truckId, notes})
+      .then((result)=>{
+        console.log(result)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+
 
     return(
         <div>
@@ -307,7 +329,8 @@ const MyTrucks=()=>{
             {
                 trucks?
                     trucks.map((itm, idx)=>{
-                        return<div key={idx} className={styles["list-items"]}>
+                        return<div>
+                            <div key={idx} className={styles["list-items"]}>
                              <div onClick={(e) => handleClick(itm._id)} className={styles.checkBox}>
                                         {
                                             checkVisible === "none"?
@@ -330,10 +353,9 @@ const MyTrucks=()=>{
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
-                                    <div style={{justifySelf:'start', display: 'flex'}}>
-                                    {itm.dateReady}
-                                    <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
-                                    <EditTruck setOpenForm={setOpenForm} editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
+                                    <div style={{justifySelf:'start', display: "flex"}}>{itm.dateReady}
+                                        <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
+                                        <EditTruck setOpenForm={setOpenForm} editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
                                     </div>
                                 </div>
                          
@@ -342,6 +364,10 @@ const MyTrucks=()=>{
                             
 
                 
+                        </div>
+                        <div className={styles.notes}>
+                            <textarea placeholder="Notes" id={`${itm._id}notesInput`}  value={itm.notes} onChange={(e)=> handleNotes(e,itm._id, e.target.value)} />
+                        </div>
                         </div>
                     })
                     :<></>
