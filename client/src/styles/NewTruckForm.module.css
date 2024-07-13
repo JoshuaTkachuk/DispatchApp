@@ -1,15 +1,14 @@
 .popupForm{
     max-width: 45vw;
     width: 70%;
+    top: 500px;
     position: absolute;
-    top: 700%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
     background-color:hsl(0.0, 0.000%, 15.00%);
     border-radius: .5vw;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    height: 1000px;
 }
 
 .formHeader {
@@ -24,6 +23,7 @@
     padding-bottom: 6vh;
     min-width: 40vw;
     position: relative;
+    height: inherit;
 }
 
 .closeBtn {
