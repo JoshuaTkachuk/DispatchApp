@@ -104,44 +104,52 @@ const NewTruckForm=({ open, onClose, trucks, setTrucks })=>{
                         <div className={styles.formbody3}>
                             <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                         </div>
-                        <div className={styles.formbody4}>
-                            <p> Additional Notes</p>
-                            <textarea placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
-                        </div>
-                        
-                        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                                <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}/>
-                                <label for="T">Tanker</label>
-                        </div>
-                        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                            <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
-                            </input>
-                            <label for="H">Hazmat</label>
-                        </div>
-                        <div style={{display: 'flex', justifyContent:'center',alignItems: 'center'}}> 
-                            <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}/>
-                            <label for="DT">Doubles/Triples</label>
-                        </div>
-                        <div className={styles.tType}>
-                            <div for="Ttype">Trailer Type</div>
-                            <label for="R">R</label>
-                            <input checked={tType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
-                            <label for="V">V</label>
-                            <input checked={tType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
-                            <label for="PO">PO</label>
-                            <input checked={tType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
-                            <label for="VT">VT</label>
-                            <input checked={tType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
-                            <label for="RT">RT</label>
-                            <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
-                        </div>
-                        <div className="dateReady">
+                        <div className={styles.dateReady}>
                                 <input type="date" id="date" onChange={(e)=> setDateReady(() =>{
                                     let d = new Date(e.target.value)
                                     d = new Date(d.setDate(d.getDate()))
                                     return d
                                 })}/>
                         </div>
+                        <div className={styles.formbody4}>
+                            <p> Additional Notes</p>
+                            <textarea style={{fontFamily:'arial', paddingLeft: '.5vw', paddingTop: '1vh'}} placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
+                        </div>
+                        <div className={styles.tType}>
+                            <div for="Ttype" className={styles["tType-header"]}>
+                                <p>Trailer Type</p>
+                            </div>
+                            <div className={styles["tType-options"]}> 
+                                <label for="R">R</label>
+                                <input checked={tType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
+                                <label for="V">V</label>
+                                <input checked={tType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
+                                <label for="PO">PO</label>
+                                <input checked={tType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
+                                <label for="VT">VT</label>
+                                <input checked={tType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
+                                <label for="RT">RT</label>
+                                <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
+                            </div>
+                        </div>
+                        <div className={styles.endorsements}>
+                        <p> Endorsements </p> 
+                        <div className={styles.endorsementsFlex}> 
+                            <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
+                                    <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}/>
+                                    <label for="T">Tanker</label>
+                            </div>
+                            <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
+                                <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
+                                </input>
+                                <label for="H">Hazmat</label>
+                            </div>
+                            <div style={{display: 'flex', justifyContent:'center',alignItems: 'center'}}> 
+                                <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}/>
+                                <label for="DT">Doubles/Triples</label>
+                            </div>
+                        </div>
+                        </div> 
                             <button type="submit" className={styles.buttonSubmit}>Submit</button>         
                     </form>
                 </div>

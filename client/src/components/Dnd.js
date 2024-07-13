@@ -671,7 +671,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                                 <h4>TR</h4>
                                 <p style={{paddingLeft:'.2vw', width: 'auto', margin: '0'}}>{item.truckNum}</p>
                               </div >
-                              <div style={{backgroundColor: 'hsl(0.0, 0.000%, 20.00%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
+                              <div className={styles.truckbodyPhone} style={{backgroundColor: 'hsl(0.0, 0.000%, 20.00%)', overflowWrap:'break-word', maxHeight: '3vh', alignItems:'center', display: 'flex', justifyContent: 'center'}}>
                                 <MdPhoneEnabled size={10} style={{paddingLeft:''}}/>
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>{item.phoneNum}</p>  
                               </div>

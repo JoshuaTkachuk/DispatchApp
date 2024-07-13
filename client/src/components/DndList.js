@@ -575,13 +575,20 @@ const handleDragStart = () =>{
   {days.map((day, indx) => {
     return ( 
 
-        
-        <div className={styles.card}>
-          <div className={styles.header}>
+        <div style={{width: '98%', display: 'flex', display: 'flex-direction', margin: '0 auto'}}> 
+        <div className={styles.headerOutline}> 
+        <div style={{backgroundColor: 'hsl(0.0, 0.000%, 10.00%)'}}> 
+        <div className={styles.header}>
        
-           <h1>{day.name}</h1>
-           <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
-           </div>
+       <h1>{day.name}</h1>
+       <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
+      
+       </div>
+       </div> 
+       <div className={styles.borderbox}> </div>
+       </div> 
+
+        <div className={styles.card}>
            {
             day.trucks.length > 0 ?
             <div className={styles["card-header"]}> 
@@ -655,12 +662,10 @@ const handleDragStart = () =>{
                               <div  id={item._id} className={styles.phoneNumber} style={{display: 'flex', alignItems:'center', position: 'relative'}}>
                                 <p>{item.phoneNum}</p> 
                                 <div className={styles["iconInfo"]}> 
-                              <div className={styles["button-delete"]}>               
-                               <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
-                               <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark size={10} className={styles["icon-buttonDelete"]}/> </button>
-                               </div> 
-                                <p className={styles.popup}>Remove From Board</p>
-                              <div className={styles["icon-moreInfo-popup"]}>
+                              <div className={styles["button-delete"]}>
+                                <div className={styles["moreInfo-popup"]}>               
+                                  <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
+                                  <div className={styles["icon-moreInfopopup"]}>
                                    <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
                                       <textarea/>
                                    <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
@@ -668,6 +673,13 @@ const handleDragStart = () =>{
                                    <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
                                 </div>  
+                                </div>      
+                                <div className={styles["buttonDelete-popup"]}>
+                                  <button onClick={(e)=> removeFromBoard(item._id, day.id, index)}> <HiOutlineXMark size={10} className={styles["icon-buttonDelete"]}/> </button>
+                                  <p className={styles["popup"]}>Remove From Board</p>
+                                </div>
+              
+                              </div>
                                 </div>
                               </div>
                               </div> 
@@ -685,6 +697,7 @@ const handleDragStart = () =>{
                 </div>
             )}
             </Droppable>
+        </div>
         </div>
     );
   })}
