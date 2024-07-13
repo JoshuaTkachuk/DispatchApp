@@ -142,39 +142,6 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                             <p> Additional Notes</p>
                             <textarea placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
                         </div>
-                        
-                        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                                <input name="endorsements" id="T" value="Tanker" type="checkbox" onChange={(e)=>setChecked("T")}/>
-                                <label for="T">Tanker</label>
-                        </div>
-                        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}> 
-                            <input name="endorsements" id="H" value="Hazmat" type="checkbox" onChange={(e)=>setChecked("H")}>
-                            </input>
-                            <label for="H">Hazmat</label>
-                        </div>
-                        <div style={{display: 'flex', justifyContent:'center',alignItems: 'center'}}> 
-                            <input name="endorsements" id="DT" value="DT" type="checkbox" onChange={(e)=>setChecked("DT")}/>
-                            <label for="DT">Doubles/Triples</label>
-                        </div>
-                        <div className={styles.tType}>
-                            <div for="Ttype">Trailer Type</div>
-                            <label for="R">R</label>
-                            <input checked={tType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
-                            <label for="V">V</label>
-                            <input checked={tType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
-                            <label for="PO">PO</label>
-                            <input checked={tType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
-                            <label for="VT">VT</label>
-                            <input checked={tType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
-                            <label for="RT">RT</label>
-                            <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
-                        </div>
-                        {
-                                errors.trailerType?
-                                <p>{errors.trailerType.message}</p>
-                                :
-                                <></>
-                            }
                         <div className={styles.dateReady}>
                                 <input type="date" id="date" onChange={(e)=> setDateReady(() =>{
                                     let d = new Date(e.target.value)
@@ -202,6 +169,12 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                                 <label for="RT">RT</label>
                                 <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
                             </div>
+                            {
+                                errors.trailerType?
+                                <p>{errors.trailerType.message}</p>
+                                :
+                                <></>
+                            }
                         </div>
                         <div className={styles.endorsements}>
                         <p> Endorsements </p> 
