@@ -680,7 +680,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>More Info</p>
                                 <div className={styles["moreInfo-popup"]}>
                                    <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
-                                      <textarea/>
+                                      <textarea value={item.additionalInfo}/>
                                    <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
                                       <textarea/>
                                    <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>

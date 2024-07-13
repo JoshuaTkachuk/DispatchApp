@@ -39,7 +39,7 @@ const MyTrucks=()=>{
                 const rawTrucks = result.data
                 let newTrucks = []
                 rawTrucks.forEach((item, idx)=>{
-                    if(item.dateReady !== null){
+                    if(item.dateReady !== "Confirm"){
                         const d = new Date(item.dateReady)
                         console.log(d, "this is the date object being made everytime truck list loops")
                         newTrucks.push({
@@ -304,7 +304,7 @@ const MyTrucks=()=>{
             }
          </div>
         <div> 
-          <NewTruckForm open={openForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>
+          <NewTruckForm open={openForm} setOpenForm={setOpenForm} trucks={trucks} setTrucks={setTrucks} onClose={()=> setOpenForm(false)} style={{zIndex:'12'}}/>
         </div> 
         </div>
        </div>
@@ -355,7 +355,7 @@ const MyTrucks=()=>{
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
                                     <div style={{justifySelf:'start', display: "flex"}}>{itm.dateReady}
                                         <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
-                                        <EditTruck setOpenForm={setOpenForm} editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
+                                        <EditTruck  editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
                                     </div>
                                 </div>
                          

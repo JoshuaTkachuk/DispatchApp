@@ -18,7 +18,8 @@ const Login=()=>{
                 navigate(`/home`);
             })
             .catch((err)=>{
-                console.log(err)
+                console.log(err.response.data.error, "error from backend")
+                setErrors(err.response.data.error)
             })
     }
 
@@ -29,6 +30,13 @@ const Login=()=>{
             </div>
             <form onSubmit={handleSubmit} className={styles.formOptions}>
                     <input type={"text"} placeholder="Email" onChange={(e)=>setEmail(e.target.value)}/>
+                    {
+                        errors?
+                        <p>{errors}</p>
+                        :
+                        <></>
+                
+                    }
                     <input type={"password"} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}/>
                     <button type={"submit"} className={styles.loginButton} style={{textDecoration:'none'}}>Login</button>
             </form>
