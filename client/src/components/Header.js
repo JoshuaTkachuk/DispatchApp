@@ -40,9 +40,9 @@ return(
       
     <p style={!isDragging ? {display: "none"} : {}}> Schedule </p>
     
-        <Droppable droppableId="ROOT" type="group">
+        <Droppable droppableId="ROOT" type="group" direction="horizontal">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div {...provided.droppableProps} ref={provided.innerRef} style={{display: 'flex'}}>
                 {trucks.map((truck, index) => (
                   <Draggable
                     draggableId={truck._id}
@@ -54,6 +54,7 @@ return(
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
+                        
                       >
                         <div className={styles["top-item-header"]}>
                           <h3>{truck.driverName}</h3>

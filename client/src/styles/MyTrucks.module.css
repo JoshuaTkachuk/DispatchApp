@@ -198,7 +198,6 @@
     text-align: center;
     justify-content: center;
     width: 75vw;
-    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);;
 }
 
 .list-items:hover {
@@ -324,4 +323,27 @@
     margin: 0 auto;
     cursor: pointer;
 }
+.notes {
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);
+  }
+  .notes textarea {
+    padding-bottom: .2vh;
+    padding-top: .1vh;
+    background-color:  hsl(0.0, 0.000%, 18.00%);
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: .3vw;
+    text-align: left;
+    text-align: top;
+    text-indent: .2vw; 
+    color:  hsl(227, 8%, 66%);
+    margin-left: .1vw;
+    margin-right: .1vw;
+    margin-bottom: .1vh;
+    font-family: sans-serif, monospace;
+    margin-top: 0;
+    width: 100%;
+  }
 

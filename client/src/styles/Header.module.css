@@ -27,7 +27,6 @@
 .topbox {
   border: dashed 1px rgb(177, 177, 177);
   min-width: 9.5vw;
-  max-width: 10vw;
   height: 7vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
@@ -59,7 +58,7 @@
 
 .top-item-container {
   background-color: hsl(0.0, 0.000%, 25.00%);
-  border-radius: .4vw;
+  border-radius: .4vw;  
   margin-bottom: .2vh;
   border-bottom-left-radius: .4vw;
   display: flex;
@@ -69,7 +68,7 @@
   font-weight: 100;
   font-size: 2vh;
   width: 9.5vw;
-  margin-left: 2px;
+  margin-left: -22px;
   margin-right: 2px;
   margin-top: .25vh;
   margin-bottom: .25vh;

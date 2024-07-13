@@ -2,7 +2,7 @@ const Truck = require("../models/truck.model");
 const User = require("../models/user.model")
 module.exports={
     CreateTruck:(req,res)=>{
-        if(req.body.dateReady){
+        if(req.body.dateReady !== "Confirm"){
             let date = new Date(req.body.dateReady)
             console.log(req.body.dateReady, "date ready")
             console.log(date.setDate(date.getDate() + 1))
@@ -10,7 +10,7 @@ module.exports={
             req.body.dateReady = date;
         }
         else{
-            req.body.dateReady = null;
+            req.body.dateReady = "Confirm";
         }
         const newTruck = new Truck(req.body);
         newTruck.createdBy = req.jwtpayload.id;
@@ -81,7 +81,7 @@ module.exports={
         })
     },
     updateTruckDate:(req,res)=>{
-        Truck.findByIdAndUpdate({_id: req.body.truckId}, {dateReady: req.body.dateReady})
+        Truck.findByIdAndUpdate({_id: req.body._id}, {dateReady: req.body.dateReady})
         .then((result)=>{
             res.json(result)
         })
