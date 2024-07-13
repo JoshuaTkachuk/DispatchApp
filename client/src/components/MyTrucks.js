@@ -258,7 +258,7 @@ const MyTrucks=()=>{
     return(
         <div>
         <HeaderMyTrucks/>
-        <div className={openForm === false ? "" : styles.overlay}>
+        <div className={openForm === false && editTruck === null ? "" : styles.overlay}>
         </div>
         <div className={styles.page}>
        <div className={styles.aboveList}>
