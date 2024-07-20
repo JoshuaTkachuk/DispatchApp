@@ -9,10 +9,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
-
-
-
-
+import { io } from "socket.io-client"
 
 
 function App(props) {
@@ -25,6 +22,7 @@ function App(props) {
   const [upVisible, setUpVisible] = useState("none")
   const [scheduleVisilble, setScheduleVisible] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [socket, setSocket] = useState();
 
   const [days,setDays] = useState([
     {
@@ -64,6 +62,14 @@ function App(props) {
   
   ]);
 
+  useEffect(()=>{
+    const s = io("http://localhost:8000")
+    setSocket(s)
+
+    return () =>{
+      s.disconnect()
+    }
+  },[])
 
 useEffect(()=>{
   console.log(days, "logging days when useEffect runs")
@@ -74,8 +80,8 @@ useEffect(()=>{
     axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
     .then((result)=>{
       console.log(result.data)
-      setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
-      const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
+      setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === "Confirm"));
+      const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== "Confirm");
       console.log(weekTrucks, "week trucks");
       weekTrucks.forEach((truck, idx)=>{
         let tempTruckDate = new Date(truck.dateReady)
@@ -122,7 +128,6 @@ useEffect(()=>{
             trucks: dayTrucks,
           };
         });
-
         return newDays;
       });
   })
@@ -134,7 +139,10 @@ useEffect(()=>{
   .catch(err=>{
     console.log(err)
   })
+
 },[days[0].date])
+
+
 const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
   axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
 .then((result)=>{
@@ -247,7 +255,7 @@ const handleDragStart = () =>{
           // IF THE TRUCK IS MOVING TO "ROOT" ID, SET THE DATE TO NULL
           if(destination.droppableId === "ROOT"){
             console.log("deleting date")
-            deletedTruck.date = null;
+            deletedTruck.date = "Confirm";
             console.log(deletedTruck);
           }
           console.log(deletedTruck, "deleted truck moving to a null poistion")
@@ -306,7 +314,7 @@ const handleDragStart = () =>{
 
 
           // updating date in the backend
-          let dateReady = null;
+          let dateReady = "Confirm";
           if(destination.droppableId !== "ROOT"){
             dateReady = days[dayDestinationIndex].date
           }

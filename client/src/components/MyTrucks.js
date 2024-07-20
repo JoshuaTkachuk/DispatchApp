@@ -64,7 +64,7 @@ const MyTrucks=()=>{
         .catch(err=>{
             console.log(err)
         })
-    },[editTruck])
+    },[editTruck,selectedTrucks])
 
 
 
@@ -324,6 +324,7 @@ const MyTrucks=()=>{
         <h3> Truck Number </h3>
         <h3> Trailer Number </h3>
         <h3> Date Ready </h3>
+        <h3> On Board </h3>
        </div>
        </div>
             {
@@ -354,7 +355,8 @@ const MyTrucks=()=>{
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
-                                    <div style={{justifySelf:'start', display: "flex"}}>{itm.dateReady}
+                                    <div style={{justifySelf:'start'}}>{itm.dateReady}</div>
+                                    <div style={{justifySelf:'start', display: "flex"}}>{itm.onBoard.toString()}
                                         <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
                                         <EditTruck  editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
                                     </div>

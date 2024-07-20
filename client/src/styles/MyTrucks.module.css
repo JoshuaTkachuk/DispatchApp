@@ -44,7 +44,7 @@
 .columnValues { 
     color: rgb(217, 217, 217);
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 5 equal columns */
+    grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
     grid-gap: 1vw;
     align-items: center;
     font-size: calc(8px + .5vw);
@@ -209,7 +209,7 @@
 .truckdata{
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 5 equal columns */
+    grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
     grid-gap: 1vw;
     width: 65vw;
     align-items: center;

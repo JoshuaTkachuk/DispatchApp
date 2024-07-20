@@ -75,8 +75,8 @@ function App(props) {
       axios.get(`http://localhost:8000/api/TrucksByUserID/${email}`,{withCredentials: true})
       .then((result)=>{
         console.log(result.data)
-        setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === null));
-        const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== null);
+        setTrucks(result.data.filter(truck => truck.onBoard === true && truck.dateReady === "Confirm"));
+        const weekTrucks = result.data.filter(truck => truck.onBoard === true && truck.dateReady !== "Confirm");
         console.log(weekTrucks, "week trucks");
         weekTrucks.forEach((truck, idx)=>{
           let tempTruckDate = new Date(truck.dateReady)
@@ -249,7 +249,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
             // IF THE TRUCK IS MOVING TO "ROOT" ID, SET THE DATE TO NULL
             if(destination.droppableId === "ROOT"){
               console.log("deleting date")
-              deletedTruck.date = null;
+              deletedTruck.date = "Confirm";
               console.log(deletedTruck);
             }
             console.log(deletedTruck, "deleted truck moving to a null poistion")
@@ -307,7 +307,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
 
             // updating date in the backend
-            let dateReady = null;
+            let dateReady = "Confirm";
             if(destination.droppableId !== "ROOT"){
               dateReady = days[dayDestinationIndex].date
             }
