@@ -72,6 +72,10 @@
   margin-right: 2px;
   margin-top: .25vh;
   margin-bottom: .25vh;
+  transition: transform 450ms;
+ }
+ .top-item-container:hover{
+  transform: scale(1.08);
  }
 
  .top-item-header { 
@@ -124,6 +128,7 @@
     right: 3vw;
     font-size: calc(4px + .5vw);
     align-items: center;
+    z-index: 2000;
 }
 
 .dropdown {

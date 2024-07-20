@@ -149,10 +149,6 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                                     return d
                                 })}/>
                         </div>
-                        <div className={styles.formbody4}>
-                            <p> Additional Notes</p>
-                            <textarea style={{fontFamily:'arial', paddingLeft: '.5vw', paddingTop: '1vh'}} placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
-                        </div>
                         <div className={styles.tType}>
                             <div for="Ttype" className={styles["tType-header"]}>
                                 <p>Trailer Type</p>
