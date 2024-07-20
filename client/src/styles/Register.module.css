@@ -1,6 +1,6 @@
 .loginForm {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60vw;
@@ -33,6 +33,8 @@
     padding: 1.5vh;
     border-radius: .3vw;
     color: rgb(217,217,217);
+    outline: none;
+    -webkit-appearance: none;
 }
 
 .formOptions label {

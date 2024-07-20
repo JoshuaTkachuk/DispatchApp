@@ -231,7 +231,7 @@
 }
 
 .moreInfo-popup { 
-  visibility: hidden; 
+  visibility: hidden;
   position: absolute;
   top: 5.5vh;
   right: 0vw;
@@ -242,26 +242,30 @@
   margin-top: 5px;
   background-color: hsl(0.0, 0.000%, 25.00%);
   border-radius: .3vw;
+  padding-bottom: .5vh;
 }
 
 .moreInfo-popup p {
   margin-left: .5vw;
-}
-
-.moreInfo-popup textarea { 
-  margin-left: .5vw;
+  background-color:  hsl(0.0, 0.000%, 18.00%);
   margin-right: .5vw;
-  background-color:  hsl(0.0, 0.000%, 20.00%);
-  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.15);
-  border: none;
-  border-radius: .3vw;
-  overflow-wrap: wrap;
+  border-radius: .2vw;
+  padding-top: .2vh;
+  padding-bottom: .2vh;
+  padding-left: .2vw;
+  padding-right: .2vw;
+  margin-bottom: .2vh;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  min-height: 1vh;
+  font-size: calc(4px + .5vw);
 }
 
-.moreInfo-popup textarea:focus {
-  outline: none;
-  -webkit-appearance: none;
+.moreInfo-popup h3 {
+  margin-left: .5vw;
+  margin-top: .5vh;
+  font-size: 2vh;
 }
+
 
 .moreInfo:hover .moreInfo-popup {
   visibility: visible;
@@ -338,6 +342,8 @@
 
 .notes textarea:hover { 
   max-height: 15vh;
+  transition: 2s ease;
+  transition-delay: .2s;
 }
 
 .notes textarea:focus {

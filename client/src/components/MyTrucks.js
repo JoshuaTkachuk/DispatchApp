@@ -330,6 +330,7 @@ const MyTrucks=()=>{
                 trucks?
                     trucks.map((itm, idx)=>{
                         return<div>
+                            <div className={styles["list-itemsContainer"]}> 
                             <div key={idx} className={styles["list-items"]}>
                              <div onClick={(e) => handleClick(itm._id)} className={styles.checkBox}>
                                         {
@@ -361,12 +362,12 @@ const MyTrucks=()=>{
                          
                         
                     
-                            
-
+                    
                 
                         </div>
-                        <div className={styles.notes}>
-                            <textarea placeholder="Notes" id={`${itm._id}notesInput`}  value={itm.notes} onChange={(e)=> handleNotes(e,itm._id, e.target.value)} />
+                            <div className={styles.notes}>
+                                <textarea placeholder="Notes" id={`${itm._id}notesInput`}  value={itm.notes} onChange={(e)=> handleNotes(e,itm._id, e.target.value)} />
+                            </div>
                         </div>
                         </div>
                     })
