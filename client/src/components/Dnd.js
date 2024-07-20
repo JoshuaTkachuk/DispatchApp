@@ -679,11 +679,11 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                                 <MdOutlineOpenInNew size={10} style={{paddingLeft:''}}/>
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>More Info</p>
                                 <div className={styles["moreInfo-popup"]}>
-                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
-                                      <textarea value={item.additionalInfo}/>
-                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
-                                      <textarea/>
-                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
+                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </h3>
+                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.additionalInfo}</p> 
+                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </h3>  
+                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.homeLocation}</p> 
+                                   <h3 style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </h3>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
 
                                 </div>

@@ -3,26 +3,26 @@ const mongoose = require("mongoose");
 const TruckSchema = new mongoose.Schema({
     driverName:{
         type:String,
-        required: [ true, "driver name is required"],
+        required: [ true, "*driver name is required"],
         maxlength:[20, "Max character length exceeded"]
     },
     truckNum:{
         type:String,
-        required: [true, "truck number is required"],
+        required: [true, "*truck number is required"],
         maxlength:[10, "Max character length exceeded"]
     },
     trailerNum:{
         type:String,
-        required: [true, "trailer number is required"],
+        required: [true, "*trailer number is required"],
         maxlength:[10, "Max character length exceeded"]
     },
     trailerType:{
         type:String,
-        required: [true, "trailer type is required"]
+        required: [true, "*trailer type is required"]
     },
     phoneNum:{
         type:String,
-        required: [true, "phone number is required"],
+        required: [true, "*phone number is required"],
         maxlength: [20, "Max character length exceeded"]
     },
     endorsements:{
@@ -30,7 +30,7 @@ const TruckSchema = new mongoose.Schema({
     },
     homeLocation:{
         type:String,
-        required: [true, "home location is required"],
+        required: [true, "*home location is required"],
         maxlength: [50, "Max character length exceeded"]
     },
     additionalInfo:{

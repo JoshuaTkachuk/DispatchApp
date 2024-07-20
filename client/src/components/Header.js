@@ -13,6 +13,15 @@ function Header(props){
  const trucks = props.trucks;
  const removeFromBoard = props.removeFromBoard;
  const isDragging = props.isDragging;
+ const [isHovered, setIsHovered] = useState(false);
+
+ const handleMouseOver = () => {
+  setIsHovered(true);
+  };
+
+  const handleMouseOut = () => {
+  setIsHovered(false);
+  };
 
     const navigate = useNavigate();
 
@@ -54,12 +63,19 @@ return(
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
+                        // onMouseOver={handleMouseOver}
+                        // onMouseOut={handleMouseOut}
+                        // style={
+                        //   // backgroundColor: isHovered ? 'lightcoral' : 'lightblue',
+                        //   isHovered ? {...provided.draggableProps.style, zIndex: 999, position: "relative"} : {...provided.draggableProps.style, zIndex: 1,  position: "relative"}
+                        // }
+                      
+        style={ isDragging ? {...provided.draggableProps.style, zIndex: 1000}: {...provided.draggableProps.style, zIndex: trucks.length - index}} > 
                         
-                      >
                         <div className={styles["top-item-header"]}>
                           <h3>{truck.driverName}</h3>
                           <button onClick={(e)=> removeFromBoard(truck._id)} className="top-item-button"><HiOutlineXMark style={{ fontSize:'1.3vh'}}/></button>
-                          <p className={styles["top-popup"]}>Remove From Board</p>
+                          {/* <p className={styles["top-popup"]}>Remove From Board</p> */}
                         </div>
                       </div>
                     )}
@@ -78,7 +94,12 @@ return(
                 <button  onClick={toggleComponents}>
                     Change View
                 </button>
-                </div>       
+                </div>  
+                <div className={styles.profileComponent}>   
+                  <button>
+                   Profile
+                  </button>  
+                </div> 
             </div> 
     </div> 
         <button className={styles["mytruck-link"]}>
