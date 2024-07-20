@@ -1,15 +1,19 @@
 .popupForm{
     max-width: 45vw;
     width: 70%;
-    top: 420px;
+    top: 550px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
     background-color:hsl(0.0, 0.000%, 15.00%);
     border-radius: .5vw;
-    max-height: 150vh;
-    height: 120vh;
+    height: 125vh;
+}
+
+.popupForm p {
+    justify-content: left;
+    display: flex;
 }
 
 .formHeader {
@@ -19,16 +23,28 @@
     margin-top: 1vh;
 }
 
+.formName { 
+    display: flex;
+    flex-direction: column;
+}
+
+.formName h1 {
+    margin-bottom: 1vh;
+    padding: 0;
+    margin-top: .5vh;
+}
+
+.formName h4 {
+    margin-bottom: 0;
+    margin-top: 1vh;
+}
+
 .form{
     color: rgb(207, 207, 207);
     padding-bottom: 6vh;
+    min-width: 40vw;
     position: relative;
     height: inherit;
-}
-
-.form textarea:focus {
-    outline: none;
-    -webkit-appearance: none;
 }
 
 .closeBtn {
@@ -55,13 +71,6 @@
     margin-right: 1vw;
 }
 
-.formbody1 p {
-    color: red;
-    padding-bottom: 3px;
-    margin: 0;
-    font-size: calc(4px + .5vw);
-}
-
 .formbody1 input{
     padding: 3vh;
     margin-bottom: 2vh;
@@ -80,33 +89,11 @@
 
 .formbody2 {
     display: grid;
-    grid-template-rows: 500px 500px;
+    grid-template-rows: 50px 50px;
     display: flex;
-    width: 100%;
-}
-
-.form2a {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    gap: 15px;
     margin-left: 1vw;
-    margin-right: .5vw;
-}
-
-.form2b {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: .5vw;
     margin-right: 1vw;
-}
-
-.formbody2 p {
-    color: red;
-    margin-bottom: 2px;
-    margin: 0;
-    padding-bottom: 3px;
-    font-size: calc(4px + .5vw);
 }
 
 .formbody2 input { 
@@ -117,6 +104,7 @@
     background: none;
     color: rgb(207, 207, 207);
     background-color:hsl(0.0, 0.000%, 13.00%);
+    width: 100%;
     outline: none;
     -webkit-appearance: none;
 }
@@ -125,16 +113,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 1vw;
+    margin-left: 1vw; 
     margin-right: 1vw;
-}
-
-.formbody3 p {
-    color: red;
-    margin-bottom: 2px;
-    margin: 0;
-    padding-bottom: 3px;
-    font-size: calc(4px + .5vw);
 }
 
 .formbody3 input { 
@@ -229,15 +209,6 @@
     margin-bottom: 10px;
     font-weight: 600;
     color: rgb(207, 207, 207);
-}
-
-.trailerError p { 
-    color: red;
-    margin-bottom: 2px;
-    margin: 0;
-    padding-bottom: 3px;
-    font-size: calc(4px + .5vw);
-    font-weight: 400;
 }
 
 .tType-options { 

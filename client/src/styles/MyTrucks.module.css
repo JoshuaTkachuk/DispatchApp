@@ -200,7 +200,7 @@
     width: 75vw;
 }
 
-.list-items:hover {
+.list-itemsContainer:hover {
     background:  hsl(0.0, 0.000%, 10.00%, 0.3);
 }
 
@@ -327,11 +327,15 @@
     display: flex;
     justify-content: center;
     border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);
-  }
+    margin: 0 auto;
+    justify-items: center;
+    padding-bottom: 5px;
+}
+
   .notes textarea {
     padding-bottom: .2vh;
     padding-top: .1vh;
-    background-color:  hsl(0.0, 0.000%, 18.00%);
+    background-color: hsl(0.0, 0.000%, 19.50%);
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: .3vw;
@@ -344,6 +348,11 @@
     margin-bottom: .1vh;
     font-family: sans-serif, monospace;
     margin-top: 0;
-    width: 100%;
+    width: 99%;
+  }
+
+  .notes textarea:focus {
+    outline: none;
+    -webkit-appearance: none;
   }
 

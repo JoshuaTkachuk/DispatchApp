@@ -14,6 +14,15 @@ const toggleComponents = props.toggleComponents
  const trucks = props.trucks;
  const removeFromBoard = props.removeFromBoard;
  const isDragging = props.isDragging;
+ const [isHovered, setIsHovered] = useState(false);
+
+ const handleMouseOver = () => {
+  setIsHovered(true);
+  };
+
+  const handleMouseOut = () => {
+  setIsHovered(false);
+  };
 
     const navigate = useNavigate();
 
@@ -86,7 +95,12 @@ return(
                 <button  onClick={toggleComponents}>
                     Change View
                 </button>
-                </div>       
+                </div>  
+                <div className={styles.profileComponent}>   
+                  <button>
+                   Profile
+                  </button>  
+                </div> 
             </div> 
     </div> 
         <button className={styles["mytruck-link"]}>

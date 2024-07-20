@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import styles from "../styles/NewTruckForm.module.css";
+import styles from "../styles/EditTruck.module.css";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
@@ -105,30 +105,56 @@ const EditTruck =({ editTruck, setTrucks, setEditTruck}) =>{
             <div>
             <div className={styles.popupForm} style={{zIndex:'12'}}>
             <div className={styles.formHeader}>
-                <h1>Edit Driver {editTruck.driverName}</h1>
+                <div className={styles.formName}> 
+                    <h4> Edit Driver </h4> 
+                    <h1> {editTruck.driverName}</h1>
+                </div>
                 <p onClick={onClose} className={styles.closeBtn}> <HiOutlineXMark style={{ fontSize:'4vh'}}/> </p>
-    
             </div>
+            <p className={styles.driverInfo}>Driver Information</p>
             <div className={styles.form} >
                 <form onSubmit={submithandler}>
                     <div className={styles.formbody1}>
-                        <input defaultValue={editTruck.truckNum} onChange={(e)=>setTruckNum(e.target.value)}></input>
-                        <input defaultValue={editTruck.trailerNum} onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                    </div>
-                    <div className={styles.formbody2}>
                         <input defaultValue={editTruck.driverName} onChange={(e)=>setDriverName(e.target.value)}></input>
                         <input defaultValue={editTruck.phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} ></input>
+                    </div>
+                    <div className={styles.formbody2}>
+                        <input defaultValue={editTruck.truckNum} onChange={(e)=>setTruckNum(e.target.value)}></input>
+                        <input defaultValue={editTruck.trailerNum} onChange={(e)=>setTrailerNum(e.target.value)}></input>
                     </div> 
                     <div className={styles.formbody3}>
-                    <div className={styles.formbody3Left}>
-                        <input defaultValue={editTruck.homeLocation} onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                        <input placeholder="home address" defaultValue={editTruck.homeLocation} onChange={(e)=>setHomeLocation(e.target.value)}></input>
+                    </div>
+                    <div className={styles.dateReady}>
+                            <input placeholder={editTruck.dateReady} type="date" id="date" onChange={(e)=> setDateReady(() =>{
+                                let d = new Date(e.target.value)
+                                d = new Date(d.setDate(d.getDate() + 1))
+                                return d
+                            })}/>
                     </div>
                     <div className={styles.formbody4}>
                                 <p> Additional Notes</p>
                                 <textarea defaultValue={editTruck.additionalInfo} placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
                             </div>
-                    <div className={styles.formbody3Right}>
+                    <div className={styles.tType}>
+                            <div for="Ttype" className={styles["tType-header"]}>
+                                <p>Trailer Type</p>
+                            </div>
+                            <div className={styles["tType-options"]}> 
+                    <label for="R">R</label>
+                    <input defaultChecked={editTruck.trailerType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
+                    <label for="V">V</label>
+                    <input defaultChecked={editTruck.trailerType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
+                    <label for="PO">PO</label>
+                    <input defaultChecked={editTruck.trailerType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
+                    <label for="VT">VT</label>
+                    <input defaultChecked={editTruck.trailerType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
+                    <label for="RT">RT</label>
+                    <input defaultChecked={editTruck.trailerType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
+                    </div>  
                     <div className={styles.endorsements}>
+                        <p> Endorsements </p> 
+                    <div className={styles.endorsementsFlex}>
                         <input onChange={(e)=>setChecked("T")} defaultChecked={editTruck.endorsements && editTruck.endorsements.includes("Tanker")} name="endorsements" id="T" value="Tanker" type="checkbox" >
                         </input>
     
@@ -143,30 +169,8 @@ const EditTruck =({ editTruck, setTrucks, setEditTruck}) =>{
                             <label for="DT">Doubles/Triples</label>
                        
                         </div>
-                        <div className={styles.tType}>
-                    <div for="Ttype">Trailer Type</div>
-                    <label for="R">R</label>
-                    <input defaultChecked={editTruck.trailerType === "R"} type="radio" id="R" name="Ttype" value="R" onClick={(e)=> handleRadio(e)}/>
-                    <label for="V">V</label>
-                    <input defaultChecked={editTruck.trailerType === "V"} type="radio" id="V" name="Ttype" value="V" onClick={(e)=> handleRadio(e)}/>
-                    <label for="PO">PO</label>
-                    <input defaultChecked={editTruck.trailerType === "PO"} type="radio" id="PO" name="Ttype" value="PO" onClick={(e)=> handleRadio(e)}/>
-                    <label for="VT">VT</label>
-                    <input defaultChecked={editTruck.trailerType === "VT"} type="radio" id="VT" name="Ttype" value="VT" onClick={(e)=> handleRadio(e)}/>
-                    <label for="RT">RT</label>
-                    <input defaultChecked={editTruck.trailerType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
-                        
                     </div>
-    
-                    <div className="dateReady">
-                            <input placeholder={editTruck.dateReady} type="date" id="date" onChange={(e)=> setDateReady(() =>{
-                                let d = new Date(e.target.value)
-                                d = new Date(d.setDate(d.getDate() + 1))
-                                return d
-                            })}/>
                     </div>
-                        </div>
-                        </div>
                         <button type="submit" className={styles.buttonSubmit} >Submit</button>         
                     </form>
               

@@ -50,6 +50,7 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                  }
                 
                 setTrucks([...trucks, result.data])
+                setErrors([])
                 onClose()
             })
             .catch(error =>{
@@ -98,49 +99,49 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                 <div className={styles.form} >
                     <form onSubmit={submithandler}>
                         <div className={styles.formbody1}>
-                            <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                             {
                                 errors.driverName?
                                 <p>{errors.driverName.message}</p>
                                 :
                                 <></>
                             }
-                            <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
+                            <input placeholder="name" onChange={(e)=>setDriverName(e.target.value)}></input>
                             {
                                 errors.phoneNum?
                                 <p>{errors.phoneNum.message}</p>
                                 :
                                 <></>
                             }
+                            <input placeholder="phone number" onChange={(e)=>setPhoneNum(e.target.value)} ></input>
                         </div> 
                         <div className={styles.formbody2}>
-                            <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
-                            {
-                                errors.truckNum?
-                                <p>{errors.truckNum.message}</p>
-                                :
-                                <></>
-                            }
-                            <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
-                            {
-                                errors.trailerNum?
-                                <p>{errors.trailerNum.message}</p>
-                                :
-                                <></>
-                            }
+                            <div className={styles.form2a}> 
+                                {
+                                    errors.truckNum?
+                                    <p>{errors.truckNum.message}</p>
+                                    :
+                                    <></>
+                                }
+                                <input placeholder="truck number" onChange={(e)=>setTruckNum(e.target.value)}></input>
+                             </div>
+                             <div className={styles.form2b}> 
+                                {
+                                    errors.trailerNum?
+                                    <p>{errors.trailerNum.message}</p>
+                                    :
+                                    <></>
+                                }
+                                <input placeholder="trailer number" onChange={(e)=>setTrailerNum(e.target.value)}></input>
+                            </div>
                         </div>
                         <div className={styles.formbody3}>
-                            <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                             {
                                 errors.homeLocation?
                                 <p>{errors.homeLocation.message}</p>
                                 :
                                 <></>
                             }
-                        </div>
-                        <div className={styles.formbody4}>
-                            <p> Additional Notes</p>
-                            <textarea placeholder="additional info" onChange={(e)=>setAdditionalInfo(e.target.value)}></textarea>
+                             <input placeholder="home address" onChange={(e)=>setHomeLocation(e.target.value)}></input>
                         </div>
                         <div className={styles.dateReady}>
                                 <input type="date" id="date" onChange={(e)=> setDateReady(() =>{
@@ -152,6 +153,14 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                         <div className={styles.tType}>
                             <div for="Ttype" className={styles["tType-header"]}>
                                 <p>Trailer Type</p>
+                            <div className={styles.trailerError}> 
+                                {
+                                    errors.trailerType?
+                                    <p>{errors.trailerType.message}</p>
+                                    :
+                                    <></>
+                                }
+                            </div> 
                             </div>
                             <div className={styles["tType-options"]}> 
                                 <label for="R">R</label>
@@ -165,12 +174,6 @@ const NewTruckForm=({ open, setOpenForm, onClose, trucks, setTrucks })=>{
                                 <label for="RT">RT</label>
                                 <input checked={tType === "RT"} type="radio" id="RT" name="Ttype" value="RT" onClick={(e)=> handleRadio(e)}/>
                             </div>
-                            {
-                                errors.trailerType?
-                                <p>{errors.trailerType.message}</p>
-                                :
-                                <></>
-                            }
                         </div>
                         <div className={styles.endorsements}>
                         <p> Endorsements </p> 

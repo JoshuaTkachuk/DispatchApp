@@ -68,7 +68,7 @@
   font-weight: 100;
   font-size: 2vh;
   width: 9.5vw;
-  margin-left: -22px;
+  margin-left: -27px;
   margin-right: 2px;
   margin-top: .25vh;
   margin-bottom: .25vh;
@@ -83,6 +83,11 @@
   align-items: center;
   width: 100%;
   position: relative;
+ }
+
+ .top-item-header:hover {
+  z-index: 1005 !important;
+  background-color: red;
  }
 
  .top-item-header button { 
@@ -159,6 +164,7 @@
   border-radius: .2vw;
 }
 
+
 .toggleComponent { 
   margin: .2rem;
   border-radius: .2vw;
@@ -174,6 +180,23 @@
   background: none;
   cursor: pointer;
   color: rgb(237, 237, 237);
+}
+
+.profileComponent {
+  margin: .2rem;
+  border-radius: .2vw;
+}
+
+.profileComponent button { 
+  border: none;
+  width: 100%;
+  background: none;
+  cursor: pointer;
+  color: rgb(237, 237, 237);
+}
+
+.profileComponent:hover { 
+  background-color:  hsl(0.0, 0.000%, 27.00%);
 }
 
 
