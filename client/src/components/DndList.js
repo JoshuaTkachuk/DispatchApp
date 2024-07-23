@@ -281,7 +281,16 @@ const handleDragStart = () =>{
               trucks: newSourceTrucks,
             };
           }
-          setDays(newDays);
+          console.log(newDays, "newDays sending to server")
+          //setDays(newDays);
+          socket.emit('newDays', newDays)
+          socket.on('newDays', (newDays) =>{
+            newDays.forEach((day)=>{
+              day.date = new Date(day.date)
+            })
+            setDays(newDays)
+            console.log(newDays, "days received from server")
+          })
           
           
           
@@ -681,11 +690,11 @@ const handleDragStart = () =>{
                                 <div className={styles["moreInfo-popup"]}>               
                                   <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
                                   <div className={styles["icon-moreInfopopup"]}>
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </h3>
-                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.additionalInfo}</p>
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </h3>  
-                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.homeLocation}</p>
-                                   <h3 style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </h3>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
                                 </div>  
                                 </div>      
