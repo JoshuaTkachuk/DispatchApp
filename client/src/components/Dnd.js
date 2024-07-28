@@ -200,7 +200,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     .catch(err =>{
       console.log(err)
     })
-
+    setDaysChanged(!daysChanged)
 
 }
 
@@ -453,7 +453,7 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
         console.log(err)
       })
 
-
+      setDaysChanged(!daysChanged)
     }
     const handleTime=(e, truckId, index)=>{
       e.preventDefault();
@@ -513,18 +513,20 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
       if(e && e.keyCode == 13) {
         document.getElementById(statusId).style.display = "none"
         document.getElementById(timeId).blur();
-     }
-   }
-   const handleStatusBlur = (statusId, timeId) =>{
+        setDaysChanged(!daysChanged)
+      }
+}
+    const handleStatusBlur = (statusId, timeId) =>{
     if(document.getElementById(statusId).value === "TIME"){
       document.getElementById(statusId).style.display = "none"
     }
 
-   }
-   const handleBlur = (statusId)=>{
+}
+    const handleBlur = (statusId)=>{
     document.getElementById(statusId).focus()
-   }
-   const handleClickTimeInput = (e,itemId) =>{
+    setDaysChanged(!daysChanged)
+}
+    const handleClickTimeInput = (e,itemId) =>{
     e.preventDefault()
 
     if(document.getElementById(`${itemId}status`).style.display === "none"){
@@ -533,8 +535,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     else{
       document.getElementById(`${itemId}status`).style.display = "none"
     }
-   }
-   const loadMoreDays=()=>{
+}
+    const loadMoreDays=()=>{
     setDays(prevDays =>{
       const newDays = [...prevDays]
 
@@ -551,8 +553,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     
       return newDays
     })
-   }
-   const loadOneDay=()=>{
+  }
+  const loadOneDay=()=>{
     setDays(prevDays =>{
       const newDays = [...prevDays]
 
@@ -569,8 +571,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
       return newDays
     })
-   }
-   const loadPreviousDays=()=>{
+  }
+  const loadPreviousDays=()=>{
     setDays(prevDays =>{
       const newDays = [...prevDays]
 
@@ -587,8 +589,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
       return newDays
     })
-   }
-   const loadPreviousDay=()=>{
+  }
+  const loadPreviousDay=()=>{
     setDays(prevDays =>{
       const newDays = [...prevDays]
 
@@ -605,13 +607,13 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
 
       return newDays
     })
-   }
+  }
 
 
     
 
     return (
-   <div className="body">
+  <div className="body">
       <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragDrop}>
         <Header isDragging={isDragging} trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
         <div className={styles.loadDays}> 
@@ -629,9 +631,9 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     return (    
         <div className={styles.card}>
           <div className={styles.header}>
-           <h1>{day.name}</h1>
-           <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
-           </div>
+          <h1>{day.name}</h1>
+          <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
+          </div>
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -650,7 +652,10 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                           <div className={styles["truck-header"]}>
 
                           <div className={styles["truckHeader-row1"]}>
-                          <input  id={`${item._id}Location`} onChange={(e) => handleLocation(e,item._id,e.target.value,indx)} value={item.emptyLocation}/>
+                          <input  id={`${item._id}Location`} onChange={(e) => handleLocation(e,item._id,e.target.value,indx)} value={item.emptyLocation} onBlur={(e) => {
+                                e.preventDefault();
+                                setDaysChanged(!daysChanged)
+                              }}/>
                           <div style={{width: 'auto', display: 'flex', justifyContent: 'right'}}>
                             <button onClick={(e)=> removeFromBoard(item._id, day.id, index)} className={styles["button-delete"]}> <HiOutlineXMark style={{ fontSize:'1.3vh'}}/> </button>
                             <p className={styles["popup"]} >Remove From Board</p>
@@ -680,8 +685,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                               <input placeholder="Time" id={`${item._id}timeInput`} style={item.status === "TIME" ? {display: "block"} : {display: "none"}} onClick={(e)=>handleClickTimeInput(e,item._id)} value={item.timeReady} onBlur={(e)=>handleBlur(`${item._id}status`)}  onKeyDown={(e)=>checkSubmit(e, `${item._id}timeInput`, `${item._id}status`)} onChange={(e) => handleTime(e,item._id, indx)}></input>
                             </div>
                           </form>
-                           <p className={styles["trailer-type"]}>{item.trailerType}</p>
-                           <p className={styles["driver-name"]}style={{paddingLeft: '.5vw', margin: '0', }}>{item.driverName}</p>
+                            <p className={styles["trailer-type"]}>{item.trailerType}</p>
+                            <p className={styles["driver-name"]}style={{paddingLeft: '.5vw', margin: '0', }}>{item.driverName}</p>
                           </div>
 
                           <div onClick={(e) => handleClick(item._id)}>
@@ -714,21 +719,24 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
                                 <MdOutlineOpenInNew size={10} style={{paddingLeft:''}}/>
                                 <p style={{paddingLeft: '.3vw',  width: 'auto', margin: '0'}}>More Info</p>
                                 <div className={styles["moreInfo-popup"]}>
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </h3>
+                                  <h3 style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </h3>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.additionalInfo}</p> 
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </h3>  
+                                  <h3 style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </h3>  
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.homeLocation}</p> 
-                                   <h3 style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </h3>
+                                  <h3 style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </h3>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
 
                                 </div>
                               </div>
                               </div>
                             <div className={styles.notes}>
-                            <textarea  placeholder = "Notes" id={`${item._id}notesInput`} value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)}/>
+                            <textarea  placeholder = "Notes" id={`${item._id}notesInput`} value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)} onBlur={(e)=>{
+                              e.preventDefault();
+                              setDaysChanged(!daysChanged) 
+                            }}/>
                             </div>
                           </div>
-                           
+
                           </div>
                           )}
                         </Draggable>
@@ -742,10 +750,10 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
             
         </div>
 
-     
+
     );
     
-     
+
   })}
 </div>
 

@@ -197,7 +197,7 @@ axios.put("http://localhost:8000/api/updateDate",{_id: truckId, dateReady: dateR
   .catch(err =>{
     console.log(err)
   })
-setDaysChanged(!daysChanged)
+  setDaysChanged(!daysChanged)
 
 }
 const handleDragStart = () =>{
@@ -517,19 +517,19 @@ const handleDragStart = () =>{
       document.getElementById(statusId).style.display = "none"
       document.getElementById(timeId).blur();
       setDaysChanged(!daysChanged)
-   }
- }
- const handleStatusBlur = (statusId, timeId) =>{
+    }
+}
+  const handleStatusBlur = (statusId, timeId) =>{
   if(document.getElementById(statusId).value === "TIME"){
     document.getElementById(statusId).style.display = "none"
   }
 
- }
- const handleBlur = (statusId)=>{
+  }
+  const handleBlur = (statusId)=>{
   document.getElementById(statusId).focus()
   setDaysChanged(!daysChanged)
- }
- const handleClickTimeInput = (e,itemId) =>{
+  }
+  const handleClickTimeInput = (e,itemId) =>{
   e.preventDefault()
 
   if(document.getElementById(`${itemId}status`).style.display === "none"){
@@ -538,8 +538,8 @@ const handleDragStart = () =>{
   else{
     document.getElementById(`${itemId}status`).style.display = "none"
   }
- }
- const loadMoreDays=()=>{
+  }
+  const loadMoreDays=()=>{
   setDays(prevDays =>{
     const newDays = [...prevDays]
 
@@ -556,8 +556,8 @@ const handleDragStart = () =>{
 
     return newDays
   })
- }
- const loadOneDay=()=>{
+  }
+  const loadOneDay=()=>{
   setDays(prevDays =>{
     const newDays = [...prevDays]
 
@@ -573,8 +573,8 @@ const handleDragStart = () =>{
 
     return newDays
   })
- }
- const loadPreviousDays=()=>{
+  }
+  const loadPreviousDays=()=>{
   setDays(prevDays =>{
     const newDays = [...prevDays]
 
@@ -591,8 +591,8 @@ const handleDragStart = () =>{
 
     return newDays
   })
- }
- const loadPreviousDay=()=>{
+  }
+  const loadPreviousDay=()=>{
   setDays(prevDays =>{
     const newDays = [...prevDays]
 
@@ -609,13 +609,13 @@ const handleDragStart = () =>{
 
     return newDays
   })
- }
+  }
 
     
 
     return (
-   <div> 
-   <div className="body">
+    <div> 
+    <div className="body">
       <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragDrop}>
       <Header isDragging={isDragging} trucks={trucks} removeFromBoard={removeFromBoard} toggleComponents={toggleComponents}/>
       <div className={styles["box-container"]}>
@@ -626,17 +626,17 @@ const handleDragStart = () =>{
         <div className={styles.headerOutline}> 
         <div style={{backgroundColor: 'hsl(0.0, 0.000%, 10.00%)'}}> 
         <div className={styles.header}>
-       
-       <h1>{day.name}</h1>
-       <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
+
+      <h1>{day.name}</h1>
+      <p> {day.date.getMonth() + 1}/{day.date.getDate()}/{day.date.getFullYear()}</p>
       
-       </div>
-       </div> 
-       <div className={styles.borderbox}> </div>
-       </div> 
+      </div>
+      </div> 
+      <div className={styles.borderbox}> </div>
+      </div> 
 
         <div className={styles.card}>
-           {
+          {
             day.trucks.length > 0 ?
             <div className={styles["card-header"]}> 
                     <h4>Location</h4>
@@ -648,7 +648,7 @@ const handleDragStart = () =>{
                     <h4>Phone Number</h4>         
                   </div> 
                   :<></>
-           }
+          }
             <Droppable droppableId={day.id} type="group" key={day.id}>
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -719,12 +719,12 @@ const handleDragStart = () =>{
                                 <div className={styles["moreInfo-popup"]}>               
                                   <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
                                   <div className={styles["icon-moreInfopopup"]}>
-                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
+                                    <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
                                       <textarea/>
-                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
+                                    <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
                                       <textarea/>
-                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
-                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
+                                    <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
+                                    <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
                                 </div>  
                                 </div>      
                                 <div className={styles["buttonDelete-popup"]}>
