@@ -40,7 +40,7 @@ const EditTruck =({ editTruck, setTrucks, setEditTruck}) =>{
         
         let d = new Date(dateReady);
         let realDate = new Date(d.setDate(d.getDate()))
-         
+
         axios.put(`http://localhost:8000/api/editTruck/${editTruck._id}`, {
                 truckNum,
                 trailerNum,
@@ -57,7 +57,7 @@ const EditTruck =({ editTruck, setTrucks, setEditTruck}) =>{
                 setTrucks(prevTrucks=>{
                     prevTrucks.map((truck,idx)=>{
                         if(truck._id === editTruck._id){
-                             truck = result.data
+                            truck = result.data
                         }
                     })
                     return prevTrucks
@@ -167,13 +167,13 @@ const EditTruck =({ editTruck, setTrucks, setEditTruck}) =>{
                         <input onChange={(e)=>setChecked("DT")} defaultChecked={editTruck.endorsements && editTruck.endorsements.includes("DT")} name="endorsements" id="DT" value="DT" type="checkbox" >
                         </input>
                             <label for="DT">Doubles/Triples</label>
-                       
+
                         </div>
                     </div>
                     </div>
                         <button type="submit" className={styles.buttonSubmit} >Submit</button>         
                     </form>
-              
+
                     </div>
                 </div>
             </div>

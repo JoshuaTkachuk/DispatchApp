@@ -10,6 +10,7 @@ import { MdCheckBox } from "react-icons/md";
 import { SlMagnifier } from "react-icons/sl";
 import { CiFilter } from "react-icons/ci";
 import { MdOutlineOpenInNew } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -26,6 +27,7 @@ const MyTrucks=()=>{
     const [buttonsVisibile, setButtonsVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState("none")
     const [filterVisible, setFilterVisible] = useState("none")
+    const navigate = useNavigate();
 
 
 
@@ -62,6 +64,7 @@ const MyTrucks=()=>{
 
         })
         .catch(err=>{
+            navigate("/")
             console.log(err)
         })
     },[editTruck,selectedTrucks])

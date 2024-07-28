@@ -10,6 +10,7 @@ import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { io } from "socket.io-client"
+import { useNavigate } from "react-router-dom";
 
 
 function App(props) {
@@ -25,6 +26,7 @@ function App(props) {
   const [socket, setSocket] = useState();
   const [daysChanged, setDaysChanged] = useState(false);
   const [location, setLocation] = useState("");
+  const navigate = useNavigate();
 
   const [days,setDays] = useState([
     {
@@ -139,6 +141,7 @@ useEffect(()=>{
 
   })
   .catch(err=>{
+    navigate("/")
     console.log(err)
   })
 

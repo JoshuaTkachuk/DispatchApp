@@ -13,6 +13,7 @@ import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { io } from "socket.io-client"
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -28,6 +29,7 @@ function App(props) {
     const [isDragging, setIsDragging] = useState(false);
     const [socket, setSocket] = useState();
     const [daysChanged, setDaysChanged] = useState(false)
+    const navigate = useNavigate();
 
     console.log(scheduleVisilble);
     const [days,setDays] = useState([
@@ -145,8 +147,10 @@ function App(props) {
 
     })
     .catch(err=>{
+      navigate("/")
       console.log(err)
     })
+
 },[days[0].date])
 
 useEffect(()=>{
