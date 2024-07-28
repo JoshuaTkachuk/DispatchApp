@@ -23,6 +23,8 @@ function App(props) {
   const [scheduleVisilble, setScheduleVisible] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [socket, setSocket] = useState();
+  const [daysChanged, setDaysChanged] = useState(false);
+  const [location, setLocation] = useState("");
 
   const [days,setDays] = useState([
     {
@@ -143,6 +145,27 @@ useEffect(()=>{
 },[days[0].date])
 
 
+useEffect(()=>{
+  if (socket == null) return
+
+  socket.emit("newDays", days)
+}, [socket, daysChanged])
+
+
+useEffect(()=>{
+  if (socket == null) return
+
+  socket.on('newDays', (newDays) =>{
+      newDays.forEach((day)=>{
+        day.date = new Date(day.date)
+      })
+      setDays(newDays)
+      console.log(newDays, "days received from server")
+    })
+}, [socket, daysChanged])
+
+
+
 const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
   axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
 .then((result)=>{
@@ -174,7 +197,7 @@ axios.put("http://localhost:8000/api/updateDate",{_id: truckId, dateReady: dateR
   .catch(err =>{
     console.log(err)
   })
-
+setDaysChanged(!daysChanged)
 
 }
 const handleDragStart = () =>{
@@ -282,6 +305,14 @@ const handleDragStart = () =>{
             };
           }
           setDays(newDays);
+          //socket.emit('newDays', newDays)
+          // socket.on('newDays', (newDays) =>{
+          //   newDays.forEach((day)=>{
+          //     day.date = new Date(day.date)
+          //   })
+          //   setDays(newDays)
+          //   console.log(newDays, "days received from server")
+          // })
           
           
           
@@ -327,7 +358,7 @@ const handleDragStart = () =>{
             console.log(err)
           })
           
-
+          setDaysChanged(!daysChanged)
     
           
   };
@@ -377,7 +408,7 @@ const handleDragStart = () =>{
     .catch(err=>{
       console.log(err)
     })
-
+    
   }
   const handlestatus=(e,itemId, dayIndex)=>{
     e.preventDefault();
@@ -425,7 +456,7 @@ const handleDragStart = () =>{
       console.log(err)
     })
 
-
+    setDaysChanged(!daysChanged)
   }
   const handleTime=(e, truckId, index)=>{
     e.preventDefault();
@@ -453,6 +484,7 @@ const handleDragStart = () =>{
     .catch(err=>{
       console.log(err)
     })
+    
   }
   const handleNotes = (e, truckId, index, notes) =>{
     e.preventDefault()
@@ -478,13 +510,13 @@ const handleDragStart = () =>{
       console.log(err)
     })
     
-    
   }
 
   function checkSubmit(e, timeId, statusId) {
     if(e && e.keyCode == 13) {
       document.getElementById(statusId).style.display = "none"
       document.getElementById(timeId).blur();
+      setDaysChanged(!daysChanged)
    }
  }
  const handleStatusBlur = (statusId, timeId) =>{
@@ -495,6 +527,7 @@ const handleDragStart = () =>{
  }
  const handleBlur = (statusId)=>{
   document.getElementById(statusId).focus()
+  setDaysChanged(!daysChanged)
  }
  const handleClickTimeInput = (e,itemId) =>{
   e.preventDefault()
@@ -531,7 +564,6 @@ const handleDragStart = () =>{
       newDays.forEach((day, indx)=>{
         let tempDate = new Date(day.date)
         day.date = new Date(tempDate.setDate(tempDate.getDate() + 1))
-        console.log(day.date)
         let tempNum = Number(day.id) + 1
         day.id = tempNum.toString();
         day.name = weekday[day.date.getDay()]
@@ -635,7 +667,13 @@ const handleDragStart = () =>{
                             >
                           <div className={styles["truck-body"]}>
                           <div className={styles["truck-column1"]}>
-                          <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} onChange={(e) => handleLocation(e,item._id, e.target.value, indx)} type="text"/>
+
+
+                              <input placeholder="location" id = {`${item._id}Location`} value={item.emptyLocation} type="text" onChange={(e)=> handleLocation(e,item._id, e.target.value, indx)} onBlur={(e) => {
+                                e.preventDefault();
+                                setDaysChanged(!daysChanged)
+                              }}/>
+                          
                           </div>
                           <div className={styles["truck-column2"]}> 
                           <form>
@@ -681,11 +719,11 @@ const handleDragStart = () =>{
                                 <div className={styles["moreInfo-popup"]}>               
                                   <button> <MdOutlineOpenInNew size={10} className={styles["icon-moreInfo"]}/> </button>
                                   <div className={styles["icon-moreInfopopup"]}>
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </h3>
-                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.additionalInfo}</p>
-                                   <h3 style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </h3>  
-                                      <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.homeLocation}</p>
-                                   <h3 style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </h3>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}>  Additional Notes </p>
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '1px'}}> Home Address </p>  
+                                      <textarea/>
+                                   <p style={{fontWeight: '600', marginBottom: '0'}}> Endorsements </p>
                                       <p style={{marginTop: '0', paddingLeft: '.5vw'}}> {item.endorsements}</p>
                                 </div>  
                                 </div>      
@@ -699,7 +737,10 @@ const handleDragStart = () =>{
                               </div>
                               </div> 
                           <div className={styles.notes}>
-                            <textarea placeholder="Notes" id={`${item._id}notesInput`}  value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)} />
+                            <textarea placeholder="Notes" id={`${item._id}notesInput`}  value={item.notes} onChange={(e)=> handleNotes(e,item._id, indx, e.target.value)} onBlur={(e)=>{
+                              e.preventDefault();
+                              setDaysChanged(!daysChanged) 
+                            }} />
                             </div>
                           </div>
                           )}

@@ -85,10 +85,6 @@
   position: relative;
  }
 
- .top-item-header:hover {
-  z-index: 1005 !important;
-  background-color: red;
- }
 
  .top-item-header button { 
   color: rgb(207, 207, 207);
