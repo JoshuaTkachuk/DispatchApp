@@ -12,6 +12,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { io } from "socket.io-client"
 
 
 
@@ -25,6 +26,8 @@ function App(props) {
     const [upVisible, setUpVisible] = useState("none")
     const [scheduleVisilble, setScheduleVisible] = useState(true);
     const [isDragging, setIsDragging] = useState(false);
+    const [socket, setSocket] = useState();
+    const [daysChanged, setDaysChanged] = useState(false)
 
     console.log(scheduleVisilble);
     const [days,setDays] = useState([
@@ -64,6 +67,15 @@ function App(props) {
       },
     
     ]);
+
+    useEffect(()=>{
+      const s = io("http://localhost:8000")
+      setSocket(s)
+  
+      return () =>{
+        s.disconnect()
+      }
+    },[])
   
 
   useEffect(()=>{
@@ -136,6 +148,27 @@ function App(props) {
       console.log(err)
     })
 },[days[0].date])
+
+useEffect(()=>{
+  if (socket == null) return
+
+  socket.emit("newDays", days)
+}, [socket, daysChanged])
+
+
+useEffect(()=>{
+  if (socket == null) return
+
+  socket.on('newDays', (newDays) =>{
+      newDays.forEach((day)=>{
+        day.date = new Date(day.date)
+      })
+      setDays(newDays)
+      console.log(newDays, "days received from server")
+    })
+}, [socket, daysChanged])
+
+
 const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
     axios.put("http://localhost:8000/api/removeFromBoard",{truckId})
   .then((result)=>{
@@ -319,6 +352,8 @@ const removeFromBoard = (truckId, dayId, indx, dateReady)=>{
             .catch(err =>{
               console.log(err)
             })
+
+            setDaysChanged(!daysChanged)
             
 
       
