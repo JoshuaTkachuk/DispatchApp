@@ -351,28 +351,32 @@ const MyTrucks=()=>{
 
                                         }
                                     </div>
-                   
-
-                                <div id={`${itm._id}truckData`} className={styles.truckdata} onMouseOver={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "block"} onMouseOut={(e)=>document.getElementById(`${itm._id}editButton`).style.display = "none"} >
+                            <div className={styles.dataNotes}>  
+                                <div id={`${itm._id}truckData`} className={styles.truckdata}>
 
                                     <div style={{justifySelf:'start'}}>{itm.driverName}</div>
                                     <div style={{justifySelf:'start'}} >{itm.truckNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.trailerNum}</div>
                                     <div style={{justifySelf:'start'}}>{itm.dateReady}</div>
-                                    <div style={{justifySelf:'start', display: "flex"}}>{itm.onBoard.toString()}
-                                        <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/>
-                                        <EditTruck  editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
-                                    </div>
+                                    <div style={{justifySelf:'start', display: "flex"}}>{itm.onBoard.toString()}</div>
+                                       
+                                    
                                 </div>
-                         
-                        
-                    
-                    
-                
-                        </div>
+            
                             <div className={styles.notes}>
                                 <textarea placeholder="Notes" id={`${itm._id}notesInput`}  value={itm.notes} onChange={(e)=> handleNotes(e,itm._id, e.target.value)} />
                             </div>
+                        </div>
+                            <div className={styles.editTruck}>
+                            <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: ""}} onClick={(e) => setEditTruck(itm)}/>
+                            <EditTruck  editTruck={editTruck} trailerType={itm.trailerType} editAdditionalInfo={itm.additionalInfo} setEditTruck={setEditTruck} editHomeLocation={itm.homeLocation} editPhoneNum={itm.phoneNum} editDriverName={itm.driverName} editTrailerNum={itm.trailerNum} editTruckNum={itm.truckNum} editDateReady={itm.dateReady} editEndorsements={itm.endorsements} trucks={trucks} setTrucks={setTrucks}/>
+                
+                            </div>
+                        <div>
+                        {/* <MdOutlineOpenInNew id={`${itm._id}editButton`} className={styles["icon-moreInfo"]} style={{display: "none"}} onClick={(e) => setEditTruck(itm)}/> */}
+
+                            </div>
+                        </div>
                         </div>
                         </div>
                     })

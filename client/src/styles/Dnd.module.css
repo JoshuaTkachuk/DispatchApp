@@ -337,7 +337,7 @@
   margin-top: 0;
   width: 97%;
   max-height: 2vh;
-  -webkit-appearance: none;
+  resize: none;
 }
 
 .notes textarea:hover { 
