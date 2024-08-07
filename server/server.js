@@ -36,7 +36,9 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) =>{
     console.log("socket connected")
-    
+    socket.on('newDays', (newDays)=>{
+        io.emit('newDays', newDays)
+    })
 })
 
 httpServer.listen(8000, ()=> {console.log("listening on 8000")});
