@@ -49,7 +49,9 @@
     align-items: center;
     font-size: calc(8px + .5vw);
     margin: 0 auto;
-    width: 65vw;
+    width: 70vw;
+    margin-left: 2vw;
+    margin-right: 5vw;
 }
 
 .columnValues h3 {
@@ -191,35 +193,64 @@
 }
 
 .list-items{
-    height: 10vh;
     display: flex;
     color: rgb(237, 237, 237); 
     background: none;
     text-align: center;
-    justify-content: center;
-    width: 75vw;
+    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);
 }
 
 .list-itemsContainer:hover {
     background:  hsl(0.0, 0.000%, 10.00%, 0.3);
 }
 
+.list-items:hover .editTruck svg {
+    visibility: visible;
+    transition: opacity 0.3s ease-in;
+}
+
+.editTruck {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5vw;
+}
+
+.editTruck svg {
+    visibility: hidden;
+    margin: 0;
+}
+
 /*.list-items:nth-child(odd){ background-color:rgb(68, 68, 68); }*/
+
+.dataNotes {
+    display: column;
+    margin: 0 auto;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 70vw;
+    margin-left: 2vw;
+}
 
 .truckdata{
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
     grid-gap: 1vw;
-    width: 65vw;
+    width: 70vw;
+    width: 100%;
     align-items: center;
     font-size: 2vh;
+    padding-bottom: 5px;
 }
 
 .checkBox { 
-    margin-left: 2vw;
     display: flex;
     align-items: center;
+    margin-left: 2vw;
+
 }
 
 .iconCheck {
@@ -325,15 +356,11 @@
 }
 .notes {
     display: flex;
-    justify-content: center;
-    border-bottom: solid 1px hsl(0.0, 0.000%, 25.00%);
-    margin: 0 auto;
+    justify-content: flex-start;
     justify-items: center;
-    padding-bottom: 5px;
 }
 
-  .notes textarea {
-    padding-bottom: .2vh;
+.notes textarea {
     padding-top: .1vh;
     background-color: hsl(0.0, 0.000%, 19.50%);
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
@@ -343,13 +370,13 @@
     text-align: top;
     text-indent: .2vw; 
     color:  hsl(227, 8%, 66%);
-    margin-left: .1vw;
-    margin-right: .1vw;
     margin-bottom: .1vh;
     font-family: sans-serif, monospace;
     margin-top: 0;
-    width: 99%;
-  }
+    resize: none;
+    width: 62vw;
+    display: flex;
+}
 
   .notes textarea:focus {
     outline: none;

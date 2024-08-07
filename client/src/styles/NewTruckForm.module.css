@@ -9,7 +9,7 @@
     background-color:hsl(0.0, 0.000%, 15.00%);
     border-radius: .5vw;
     max-height: 150vh;
-    height: 120vh;
+    height: 115vh;
 }
 
 .formHeader {
@@ -21,8 +21,6 @@
 
 .form{
     color: rgb(207, 207, 207);
-    padding-bottom: 6vh;
-    position: relative;
     height: inherit;
 }
 
