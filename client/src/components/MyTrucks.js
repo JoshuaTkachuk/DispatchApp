@@ -67,7 +67,7 @@ const MyTrucks=()=>{
             navigate("/")
             console.log(err)
         })
-    },[editTruck,selectedTrucks])
+    },[editTruck])
 
 
 
@@ -202,6 +202,15 @@ const MyTrucks=()=>{
             axios.put("http://localhost:8000/api/addToBoard",{truck})
             .then((result)=>{
                 console.log(result)
+                setTrucks(prevTrucks=>{
+                    const tempTrucks = [...prevTrucks]
+                    tempTrucks.forEach((truck, idx)=>{
+                        if(truck._id === result.data._id){
+                            truck.onBoard = "true"
+                        }
+                    })
+                    return tempTrucks
+                })
             })
             .catch(err=>{
                 console.log(err)
